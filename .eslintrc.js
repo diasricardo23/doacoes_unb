@@ -7,7 +7,7 @@ module.exports = {
         "plugin:vue/essential"
     ],
     "parserOptions": {
-        "ecmaVersion": 12,
+        "ecmaVersion": 7,
         "sourceType": "module"
     },
     "plugins": [

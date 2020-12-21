@@ -3,9 +3,16 @@
     <div class="containerImg">
         <img alt="Vue logo" src="../assets/logo.png" />
     </div>
-    <div class="containerButtons">
-        <v-btn class="secondary white--text loginBtn mb-4" to="/login">Entrar</v-btn>
-        <v-btn class="secondary white--text loginBtn" to="/about">Sobre a Ação</v-btn>
+    <div class="containerLogin">
+        <div class="containerInput">
+            <input type="text" class="form-control white emailInput" placeholder="E-mail" />
+            <input type="text" class="form-control white emailInput" placeholder="Senha" />
+        </div>
+        <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
+        <div class="white--text mb-2">
+            Não tem uma conta? 
+            <v-btn text class="white--text pa-0" to="/signup"><b>Cadastre-se aqui.</b></v-btn>
+        </div>
     </div>
   </div>
 </template>
@@ -34,12 +41,13 @@
         justify-content: center;
     }
 
-    .containerButtons {
+    .containerLogin {
         width: 100%;
         display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
     }
 
     .containerInput {
