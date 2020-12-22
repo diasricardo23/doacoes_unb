@@ -1,6 +1,6 @@
    <template>
     <div class="encapsulate">
-    <div class="primary containerDrawer dark" >
+    <div class="primary containerDrawerElement dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
 
@@ -57,7 +57,7 @@ export default {
 
 </script>
 <style>
-    .containerDrawer {
+    .containerDrawerElement {
         width: 100%;
         height: 100%!important;
         display: flex;
@@ -77,6 +77,6 @@ export default {
     }
     .encapsulate{
         width: 100%;
-        height: 7%;
+        height: 40px;
     }
 </style>

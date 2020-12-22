@@ -5,6 +5,11 @@ import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ADMDashboard from "../views/adm/Dashboard.vue";
+import HistoryDonations from "../views/adm/History.vue";
+import BeneficiariosList from "../views/adm/BeneficiariosList.vue";
+import CadastroBeneficio from "../views/adm/CadastroBeneficiario.vue";
+import Donators from "../views/adm/Donator.vue";
+import Payments from "../views/adm/Payments.vue";
 import AboutProject from "../views/AboutProject.vue";
 import Profile from "../views/Profile.vue";
 import Donation from "../views/Donation.vue";
@@ -57,7 +62,33 @@ const routes = [
     path: "/admin/dashboard",
     name: "ADMDashboard",
     component: ADMDashboard
+  },
+  {
+    path: "/admin/payment",
+    name: "Payments",
+    component: Payments
+  },
+  {
+    path: "/admin/doadores",
+    name: "Donators",
+    component: Donators
+  },
+  {
+    path: "/admin/history",
+    name: "HistoryDonations",
+    component: HistoryDonations
+  },
+  {
+    path: "/admin/listabeneficiarios",
+    name: "BeneficiariosList",
+    component: BeneficiariosList
+  },
+  {
+    path: "/admin/cadastro",
+    name: "CadastroBeneficio",
+    component: CadastroBeneficio
   }
+
 ];
 
 const router = new VueRouter({
