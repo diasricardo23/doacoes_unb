@@ -1,5 +1,5 @@
-<template>
-  <div class="container">
+   <template>
+    <div class="encapsulate">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
@@ -36,42 +36,13 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
-    <div class="containerDashboard">
-        
-        <v-card class="infobox donations">
-            Pagina de Doação
-        </v-card>
-        
     </div>
-    
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
+    </template>
 
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
-  </div>
-</template>
-
-<script>
+    <script>
 // @ is an alias to /src
 export default {
+    name:'sidebar',
     data: () => ({
       drawer: false,
       group: null,
@@ -85,20 +56,10 @@ export default {
   }
 
 </script>
-
 <style>
-    .container {
-        background-color: #DADADA;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
     .containerDrawer {
         width: 100%;
-        height: 7%;
+        height: 100%!important;
         display: flex;
         align-items: center;
         border-bottom-left-radius: 8px;
@@ -114,33 +75,8 @@ export default {
         padding-bottom: 30px;
         padding-top: 10px;
     }
-
-    .containerMenu {
-        width: 85%;
-        display: flex;
-        justify-content: space-between;
+    .encapsulate{
+        width: 100%;
+        height: 7%;
     }
-
-    .infobox {
-        background-color: white;
-        color: #485550;
-        padding: 10px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-    .donations {
-        width: 88%;
-    }
-
-    .menu {
-        width: 45%;
-        text-align: center;
-    }
-  .menuIcon{
-    color: white;
-  }
-  
-
 </style>

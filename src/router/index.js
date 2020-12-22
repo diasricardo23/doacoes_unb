@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import Dashboard from "../views/Dashboard.vue";
+import ADMDashboard from "../views/adm/Dashboard.vue";
 import AboutProject from "../views/AboutProject.vue";
 import Profile from "../views/Profile.vue";
 import Donation from "../views/Donation.vue";
@@ -51,6 +52,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/admin/dashboard",
+    name: "ADMDashboard",
+    component: ADMDashboard
   }
 ];
 

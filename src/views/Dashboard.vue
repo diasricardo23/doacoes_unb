@@ -60,11 +60,11 @@
         <div class="containerMenu">
             <v-card class="infobox menu">
                 Nova Doação
-                <img alt="Vue logo" src="../assets/logo.png" width="58" />
+                <div class="imglink"><img alt="Vue logo" src="../assets/logo.png" width="58" /></div>
             </v-card>
             <v-card class="infobox menu">
                 Sobre o Projeto
-                <img alt="Vue logo" src="../assets/logo.png" width="58" />
+                <div class="imglink"><img alt="Vue logo" src="../assets/logo.png" width="58" /></div>
             </v-card>
         </div>
         
@@ -162,6 +162,10 @@ export default {
     .menu {
         width: 45%;
         text-align: center;
+    }
+
+    .imglink{
+      width:100%;
     }
 
 </style>

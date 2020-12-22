@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="primary containerDrawer dark" >
+      <Sidebar/>
+ <!-- <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
 
@@ -35,14 +36,33 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> --> 
     
     <div class="containerDashboard">
-        
-        <v-card class="infobox donations">
-            Pagina de Doação
+        <div class="donations mt-2">
+            <b>Olá, Fulano de Tal!</b>
+        </div>
+
+        <v-card color="#C4C4C4" class="infobox total" >
+            <b>TOTAL ARRECADADO</b>
+            <v-row>
+                <v-col offset-md="5"><h1>R$<span>0000,00</span></h1></v-col>
+            </v-row>
         </v-card>
-        
+        <div class="containerMenu">
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+                Nova Doação
+                <div>
+                    <h1>7</h1>
+                </div>
+            </v-card>
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+                Sobre o Projeto
+                <div>
+                   <h1> 7</h1>
+                </div>
+            </v-card>
+        </div>
     </div>
     
     <v-bottom-navigation v-model="value">
@@ -70,8 +90,12 @@
 </template>
 
 <script>
+    import Sidebar from '../../components/Sidebar.vue'
 // @ is an alias to /src
 export default {
+    components:{
+        Sidebar
+    },
     data: () => ({
       drawer: false,
       group: null,
@@ -94,15 +118,6 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-    }
-
-    .containerDrawer {
-        width: 100%;
-        height: 7%;
-        display: flex;
-        align-items: center;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
     }
 
     .containerDashboard {
@@ -130,12 +145,18 @@ export default {
         margin-top: 20px;
     }
 
-    .donations {
+    .total{
         width: 88%;
     }
 
-    .menu {
-        width: 45%;
+    .totalCard{
+        background-color: #717171;
+    }
+
+    
+
+    .infoNumbers {
+        width: 40%;
         text-align: center;
     }
   .menuIcon{
