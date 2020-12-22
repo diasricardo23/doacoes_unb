@@ -70,7 +70,7 @@
         
     </div>
     
-    <v-bottom-navigation v-model="value">
+    <v-bottom-navigation absolute hide-on-scroll v-model="value">
         <v-btn to="/dashboard">
             <span>Home</span>
             <v-icon>mdi-home</v-icon>
