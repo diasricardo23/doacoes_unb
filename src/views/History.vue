@@ -2,7 +2,10 @@
   <div class="container">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
+         <p class = "header">
+            Pagina de Doação
+        </p>
+    </div>   
 
     <v-navigation-drawer
       v-model="drawer"
@@ -38,10 +41,27 @@
     </v-navigation-drawer>
     
     <div class="containerDashboard">
-        
+        <div class="donations mt-2">
+            <b>Olá, Fulano de Tal!</b>
+        </div>
+
+        <!-- <v-card class="infobox donations">
+            Você não tem nenhuma doação agendada no momento.
+        </v-card> -->
+
         <v-card class="infobox donations">
-            Página de Histórico
+          <h3> XX/XX/2021 </h3>
+          <h4> Beneficiário: </h4>
+          <h4> Valor: </h4>
         </v-card>
+
+        <v-card class="infobox donations">
+          <h3> XX/XX/2021 </h3>
+          <h4> Beneficiário: </h4>
+          <h4> Valor: </h4>
+        </v-card>
+
+       
         
     </div>
     
@@ -96,6 +116,17 @@ export default {
         width: 100%;
     }
 
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        margin-top: 15px;
+        justify-content: center;
+
+    }
+
     .containerDrawer {
         width: 100%;
         height: 7%;
@@ -137,6 +168,10 @@ export default {
     .menu {
         width: 45%;
         text-align: center;
+    }
+
+    .imglink{
+      width:100%;
     }
 
 </style>
