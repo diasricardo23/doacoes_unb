@@ -2,6 +2,35 @@
   <div class="container">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+         <p class = "header">
+            Pagina de Doação
+        </p>
+    </div>       
+        
+     <div class="containerInfos">
+        
+        <div class="containerInput">
+            <input type="text" class="form-control white emailInput" placeholder="Valor a ser doado (multiplo de 50)" />
+            <input type="text" class="form-control white emailInput" placeholder=" Data prevista para doação" />
+        </div>
+         
+        <p class="text">
+           Ao clicar em SALVAR, você terá registrado a sua doação.
+
+            Você receberá uma mensagem com os dados bancários para realizar a transferência no dia xx/xx/xx.
+
+            Após realizar a transferência, favor enviar comprovante para:
+        </p>
+
+        <div class="icon">
+          <img  alt="icon Whatsapp" src="../assets/whatsapp.png" />
+          <h4> (61) xxxx-xxxx </h4> 
+          <img alt="icon arroba" src="../assets/arroba.png" />
+          <h4 > xxxxxxxx@xxxx.com </h4>
+        </div>
+
+        <v-btn class="secondary white--text loginBtn" to="/dashboard"> SALVAR </v-btn>
+       
     </div>
 
     <v-navigation-drawer
@@ -36,14 +65,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
-    <div class="containerDashboard">
-        
-        <v-card class="infobox donations">
-            Pagina de Doação
-        </v-card>
-        
-    </div>
     
     <v-bottom-navigation v-model="value">
         <v-btn to="/dashboard">
@@ -94,53 +115,65 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
+      
     }
 
-    .containerDrawer {
-        width: 100%;
-        height: 7%;
+    .header {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+        color: #fff;
+        margin-top: 15px;
+
     }
 
-    .containerDashboard {
-        width: 100% !important;
+
+    .containerInfos {
+        width: 100%;
         display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 30px;
-        padding-top: 10px;
+       
     }
 
-    .containerMenu {
-        width: 85%;
+    .containerInput {
+        width: 100%;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+        
     }
 
-    .infobox {
-        background-color: white;
-        color: #485550;
-        padding: 10px;
+    .text {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #000;
+        margin-top: 15px;   
+    }
+
+    .icon {
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+      margin-top: 15px;
+      grid-row-gap: 1em;
+      margin-right: 55%;
+
+
+    }
+
+    .secondary {
+        width: 80%;
         border-radius: 10px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-    .donations {
-        width: 88%;
+        top: 30%;
     }
 
     .menu {
         width: 45%;
         text-align: center;
     }
-  .menuIcon{
-    color: white;
-  }
-  
 
 </style>
