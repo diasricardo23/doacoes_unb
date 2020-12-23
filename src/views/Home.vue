@@ -1,11 +1,11 @@
 <template>
   <div class="container1">
     <div class="containerImg">
-        <img alt="Vue logo" src="../assets/logo.png" />
+        <v-img alt="Logo UnB" src="../assets/logo.png" max-width="200" max-height="150" contain />
     </div>
     <div class="containerButtons">
-        <v-btn class="secondary white--text loginBtn mb-4" to="/login">Entrar</v-btn>
-        <v-btn class="secondary white--text loginBtn" to="/about">Sobre a Ação</v-btn>
+        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/login">Entrar</v-btn>
+        <v-btn rounded class="secondary white--text loginBtn" to="/about">Sobre a Ação</v-btn>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@
 
 <style>
     .container1 {
-        background-color: #1D2D50;
+        background-color: rgb(19, 62, 121);
         display: flex;
         flex: 1;
         flex-direction: column;

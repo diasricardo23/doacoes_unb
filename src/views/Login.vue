@@ -1,7 +1,7 @@
 <template>
   <div class="container1">
     <div class="containerImg">
-        <img alt="Vue logo" src="../assets/logo.png" />
+        <v-img alt="Logo UnB" src="../assets/logo.png" max-width="200" max-height="150" contain />
     </div>
     <div class="containerLogin">
         <div class="containerInput">
@@ -11,7 +11,7 @@
         <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
         <div class="white--text mb-2">
             Não tem uma conta? 
-            <v-btn text class="white--text pa-0" to="/signup"><b>Cadastre-se aqui.</b></v-btn>
+            <v-btn outlined class="white--text cadastro" to="/signup">Cadastre-se aqui.</v-btn>
         </div>
     </div>
   </div>
@@ -67,5 +67,13 @@
 
     .loginBtn {
         width: 60%;
+    }
+
+    .cadastro {
+        font-weight: normal !important;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+        padding: 0.2em !important;
+        margin-left: 0.5em;
     }
 </style>
