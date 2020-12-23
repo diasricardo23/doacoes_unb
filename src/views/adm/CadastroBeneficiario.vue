@@ -1,46 +1,65 @@
 <template>
   <div class="container">
       <Sidebar/>
- <!-- <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer> --> 
     
     <div class="containerDashboard">
         <div class="formSection">
-            <h2 class="divider">  <span class="titleDivider">DADOS PESSOAIS</span>  </h2>
+            <h3 class="divider">  <span class="titleDivider">DADOS PESSOAIS</span>  </h3>
+        </div>
+        <div class="formFields">
+        <v-form>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="fullname" :rules="nameRules"    label="Nome completo" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+            <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="email" :rules="emailRules" label="Email" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+                      <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="phone" :rules="phoneRules" label="Telefone" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="cpf" :rules="cpfRules" label="CPF" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </v-form>
+        </div>
+        <div class="formSection">
+            <h3 class="divider">  <span class="titleDivider">DADOS BANCÁRIOS</span>  </h3>
+        </div>
+
+                <div class="formFields">
+        <v-form>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="bank" :rules="bankRules"    label="Banco" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+            <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="agencia" :rules="agencyRules" label="Agencia" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+                      <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="account" :rules="accountRules" label="Conta Corrente" solo>
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </v-form>
         </div>
 
   
@@ -160,10 +179,35 @@ export default {
         padding: 0 2%;
     }
 
+    .formFields{
+      display:grid;
+      margin-top: 15%;
+      height:100%;
+
+    }
+    .v-input__slot{
+      background:white;
+      box-shadow: none!important;
+    }
+
+
     .infoNumbers {
         width: 40%;
         text-align: center;
     }
+
+    
+  .formFields .col-12 {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .formFields .theme--light.v-input {
+    padding-top: 0;
+  }
+  .formFields .v-input__slot {
+    margin-bottom: 0;
+  }
+
   .menuIcon{
     color: white;
   }

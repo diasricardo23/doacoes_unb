@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.0fa2ad97c6eeddedafeb19314aae9d9e.js"
+  "/precache-manifest.5634f128d6a36ce87cf6ab45054a00cc.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "doacoes_unb"});
