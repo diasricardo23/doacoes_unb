@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ADMDashboard from "../views/adm/Dashboard.vue";
+import ADMBeneficiario from "../views/adm/Adm_beneficiario";
 import HistoryDonations from "../views/adm/History.vue";
 import BeneficiariosList from "../views/adm/BeneficiariosList.vue";
 import CadastroBeneficio from "../views/adm/CadastroBeneficiario.vue";
@@ -87,6 +88,11 @@ const routes = [
     path: "/admin/cadastro",
     name: "CadastroBeneficio",
     component: CadastroBeneficio
+  },
+  {
+    path: "/admin/beneficio",
+    name: "ADMBeneficiario",
+    component: ADMBeneficiario
   }
 
 ];

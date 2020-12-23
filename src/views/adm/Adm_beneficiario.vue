@@ -4,65 +4,12 @@
 
     
     <div class="containerDashboard">
-        <div class="formSection">
-            <h3 class="divider">  <span class="titleDivider">DADOS PESSOAIS</span>  </h3>
+        <div class="buttonDiv">
+        <v-btn class="buttonAdm" to="/admin/cadastro">Cadastrar Beneficiário</v-btn>
         </div>
-        <div class="formFields">
-        <v-form>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="fullname" :rules="nameRules"    label="Nome completo" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-            <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="email" :rules="emailRules" label="Email" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-                      <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="phone" :rules="phoneRules" label="Telefone" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="cpf" :rules="cpfRules" label="CPF" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-        </v-form>
+          <div class="buttonDiv">
+        <v-btn class="buttonAdm" to="/admin/listabeneficiarios">Ver Beneficiários</v-btn>
         </div>
-        <div class="formSection">
-            <h3 class="divider">  <span class="titleDivider">DADOS BANCÁRIOS</span>  </h3>
-        </div>
-
-                <div class="formFields">
-        <v-form>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="bank" :rules="bankRules"    label="Banco" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-            <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="agencia" :rules="agencyRules" label="Agencia" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-                      <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="account" :rules="accountRules" label="Conta Corrente" solo>
-              </v-text-field>
-            </v-col>
-          </v-row>
-        </v-form>
-        </div>
-
-  
     </div>
     
     <v-bottom-navigation v-model="value">
@@ -181,7 +128,7 @@ export default {
 
     .formFields{
       display:grid;
-      margin-top: 5%;
+      margin-top: 15%;
       height:100%;
 
     }
@@ -195,19 +142,15 @@ export default {
         width: 40%;
         text-align: center;
     }
-
-    
-  .formFields .col-12 {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .formFields .theme--light.v-input {
-    padding-top: 0;
-  }
-  .formFields .v-input__slot {
-    margin-bottom: 0;
-  }
-
+    .buttonDiv{
+        width: 80%;
+        margin-top:5%;
+    }
+    .buttonAdm{
+        background-color:#1E546C!important;
+        color: white!important;
+        width:100%; 
+    }
   .menuIcon{
     color: white;
   }
