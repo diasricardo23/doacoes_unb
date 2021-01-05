@@ -8,6 +8,7 @@ import AboutProject from "../views/AboutProject.vue";
 import Profile from "../views/Profile.vue";
 import Donation from "../views/Donation.vue";
 import History from "../views/History.vue"; 
+import doDonation from "../views/doDonation.vue";
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/doDonation",
+    name: "doDonation",
+    component: doDonation
   }
 ];
 

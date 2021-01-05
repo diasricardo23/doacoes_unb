@@ -38,14 +38,62 @@
     </v-navigation-drawer>
     
     <div class="containerDashboard">
-        
-        <v-card class="infobox donations" align="center" justify="center">
-            <h3>Você não tem doações registradas. Deseja agendar uma doação ?</h3>
-            <br>
-            <v-btn rounded class="secondary white--text loginBtn mb-4" to="/doDonation">Doar</v-btn>
-        </v-card>
-        
+        <div>
+            <v-row>
+                <v-col cols="5">
+                    <v-subheader light>Doação (valores multiplos de 50)</v-subheader>
+                </v-col>
+                <v-col cols="7">
+                    <v-text-field
+                    label="Valor"
+                    value="10.00"
+                    prefix="R$"
+                    ></v-text-field>
+                </v-col>
+            </v-row>
+        </div>
+    
+        <div class="date">
+            <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+            >
+                <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                    v-model="date"
+                    label="Data da doação"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                ></v-text-field>
+                </template>
+                <v-date-picker
+                ref="picker"
+                v-model="date"
+                :max="new Date().toISOString().substr(0, 10)"
+                min="1950-01-01"
+                @change="save"
+                ></v-date-picker>
+            </v-menu>
+        </div>
+
+        <v-card
+        elevation="2"
+        class="aviso"
+        >Ao clicar em SALVAR, você terá registrado a sua doação.
+        <br>Você receberá uma mensagem com os dados bancários para realizar a transferência no dia XX/XX/XXXX.
+        Após realizar a transferência, favor enviar comprovante para:
+        <br><br>
+        <v-icon></v-icon>(61) X XXXX-XXXX <br>
+        <v-icon></v-icon> xxxxxxxxxxxxxxx@xxxxx.com</v-card>
     </div>
+
+    <v-btn rounded class="secondary white--text loginBtn mb-4" to="/doDonation">Doar</v-btn>
     
     <v-bottom-navigation v-model="value">
         <v-btn to="/dashboard">
@@ -77,14 +125,27 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
+      date: null,
+      menu: false,
     }),
+    
+    methods: {
+      save (date) {
+        this.$refs.menu.save(date)
+      },
+    },
 
     watch: {
       group () {
         this.drawer = false
       },
+       menu (val) {
+        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      },
     },
   }
+
+
 
 </script>
 
@@ -96,7 +157,6 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        padding: 0 !important;
     }
 
     .containerDrawer {
@@ -114,7 +174,7 @@ export default {
         flex: 1;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 30px;
+        padding-bottom: 10px;
         padding-top: 10px;
     }
 
@@ -131,7 +191,6 @@ export default {
         border-radius: 10px;
         margin-bottom: 20px;
         margin-top: 20px;
-        vertical-align: 0%;
     }
 
     .donations {
@@ -141,6 +200,16 @@ export default {
     .menu {
         width: 45%;
         text-align: center;
+    }
+
+    .date {
+        margin-left: 2rem;
+    }
+
+    .aviso {
+        padding: 1rem;
+        margin: 0 50px 0 50px;
+        font-weight: bold;
     }
 
 </style>
