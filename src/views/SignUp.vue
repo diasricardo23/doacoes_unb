@@ -3,7 +3,7 @@
     <div class="containerUserData">
         <div class="containerLogo">
             <img alt="Vue logo" src="../assets/logo.png" width="58" />
-            <b class="white--text">CADASTRO DE DOADOR</b>
+            <b class="white--text mt-2">Cadastro do Doador</b>
         </div>
         <div class="containerInput">
             <input type="text" class="form-control white emailInput" placeholder="Nome Completo" />
@@ -15,7 +15,7 @@
     <div class="containerPaymentData">
         <div class="containerTitle">
             <div class="pipe" />
-            <b class="white--text">DADOS PARA DOAÇÃO</b>
+            <b class="white--text">Dados para Doação</b>
             <div class="pipe" />
         </div>
         <div class="containerInput">
@@ -26,7 +26,7 @@
         <v-btn class="secondary white--text loginBtn" to="/dashboard">Cadastre-se</v-btn>
         <div class="white--text mb-2">
             Já tem uma conta? 
-            <v-btn text class="white--text pa-0" to="/"><b>Entre aqui.</b></v-btn>
+            <v-btn outlined class="white--text cadastro" to="/login">Entre aqui.</v-btn>
         </div>
     </div>
   </div>
@@ -65,8 +65,8 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 30px;
-        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-top: 15px;
     }
 
     .containerPaymentData {
@@ -90,6 +90,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-bottom: 10px;
     }
 
     .emailInput {
@@ -102,6 +103,7 @@ export default {
 
     .loginBtn {
         width: 60%;
+        margin-bottom: 1.5em;
     }
 
     .pipe{
@@ -117,4 +119,12 @@ export default {
     .v-text-field__details{
         display: none;
     }
+
+    .cadastro {
+        font-weight: normal !important;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+        padding: 0.2em !important;
+        margin-left: 0.5em;
+    } 
 </style>
