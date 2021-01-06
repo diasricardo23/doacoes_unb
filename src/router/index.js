@@ -14,6 +14,7 @@ import AboutProject from "../views/AboutProject.vue";
 import Profile from "../views/Profile.vue";
 import Donation from "../views/Donation.vue";
 import History from "../views/History.vue"; 
+import doDonation from "../views/doDonation.vue";
 
 Vue.use(VueRouter);
 
@@ -87,8 +88,6 @@ const routes = [
     path: "/admin/cadastro",
     name: "CadastroBeneficio",
     component: CadastroBeneficio
-  }
-
 ];
 
 const router = new VueRouter({

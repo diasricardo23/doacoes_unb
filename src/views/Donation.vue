@@ -115,7 +115,6 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-      
     }
 
     .header {
@@ -161,8 +160,16 @@ export default {
       margin-top: 15px;
       grid-row-gap: 1em;
       margin-right: 55%;
-
-
+    }
+    
+    .infobox {
+        background-color: white;
+        color: #485550;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        vertical-align: 0%;
     }
 
     .secondary {
