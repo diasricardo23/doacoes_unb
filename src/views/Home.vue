@@ -15,7 +15,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .container1 {
         background-color: rgb(19, 62, 121);
         display: flex;

@@ -6,7 +6,7 @@
     <div class="containerLogin">
         <div class="containerInput">
             <input type="text" class="form-control white emailInput" placeholder="E-mail" />
-            <input type="text" class="form-control white senhaInput" placeholder="Senha" />
+            <input type="text" class="form-control white emailInput" placeholder="Senha" />
             <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
         </div>
         <div class="white--text mb-2">
@@ -22,7 +22,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .container1 {
         background-color: #1D2D50;
         display: flex;
@@ -66,14 +66,8 @@
         padding: 5px;
     }
 
-    .senhaInput {
-        border-radius: 8px;
-        width: 80%;
-        height: 36px;
-        padding: 5px;
-    }
-
     .loginBtn {
+        margin-top: 3em;
         width: 60%;
     }
 
