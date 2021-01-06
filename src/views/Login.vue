@@ -6,9 +6,9 @@
     <div class="containerLogin">
         <div class="containerInput">
             <input type="text" class="form-control white emailInput" placeholder="E-mail" />
-            <input type="text" class="form-control white emailInput" placeholder="Senha" />
+            <input type="text" class="form-control white senhaInput" placeholder="Senha" />
+            <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
         </div>
-        <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
         <div class="white--text mb-2">
             Não tem uma conta? 
             <v-btn outlined class="white--text cadastro" to="/signup">Cadastre-se aqui.</v-btn>
@@ -55,6 +55,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 5em;
     }
 
     .emailInput {
@@ -62,6 +63,13 @@
         width: 80%;
         height: 36px;
         margin-bottom: 5px;
+        padding: 5px;
+    }
+
+    .senhaInput {
+        border-radius: 8px;
+        width: 80%;
+        height: 36px;
         padding: 5px;
     }
 
