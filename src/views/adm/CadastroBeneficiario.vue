@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="primary containerDrawer dark" >
+      <Sidebar/>
+ <!-- <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
 
@@ -35,42 +36,17 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> --> 
     
     <div class="containerDashboard">
-        <div class="donations mt-2">
-            <b>Olá, Fulano de Tal!</b>
+        <div class="formSection">
+            <h2 class="divider">  <span class="titleDivider">DADOS PESSOAIS</span>  </h2>
         </div>
 
-        <!-- <v-card class="infobox donations">
-            Você não tem nenhuma doação agendada no momento.
-        </v-card> -->
-
-        <v-card class="infobox donations">
-            Sua próxima doação será na data xx/xx/xx no valor de R$: 0,00
-        </v-card>
-
-        <v-card class="infobox donations">
-            Você receberá uma mensagem com os dados para doação. <br/>
-            Ao realizá-la, enviar o comprovante para: <br/>
-            (61) xxxx-xxxx <br/>
-            xxxxxxxx@xxxx.com <br/>
-        </v-card>
-
-        <div class="containerMenu">
-            <v-card class="infobox menu">
-                Nova Doação
-                <div class="imglink"><img alt="Vue logo" src="../assets/logo.png" width="58" /></div>
-            </v-card>
-            <v-card class="infobox menu">
-                Sobre o Projeto
-                <div class="imglink"><img alt="Vue logo" src="../assets/logo.png" width="58" /></div>
-            </v-card>
-        </div>
-        
+  
     </div>
     
-    <v-bottom-navigation absolute hide-on-scroll v-model="value">
+    <v-bottom-navigation v-model="value">
         <v-btn to="/dashboard">
             <span>Home</span>
             <v-icon>mdi-home</v-icon>
@@ -95,8 +71,12 @@
 </template>
 
 <script>
+    import Sidebar from '../../components/Sidebar.vue'
 // @ is an alias to /src
 export default {
+    components:{
+        Sidebar
+    },
     data: () => ({
       drawer: false,
       group: null,
@@ -119,15 +99,6 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-    }
-
-    .containerDrawer {
-        width: 100%;
-        height: 7%;
-        display: flex;
-        align-items: center;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
     }
 
     .containerDashboard {
@@ -155,17 +126,47 @@ export default {
         margin-top: 20px;
     }
 
-    .donations {
+    .total{
         width: 88%;
     }
 
-    .menu {
-        width: 45%;
-        text-align: center;
+    .totalCard{
+        background-color: #717171;
     }
 
-    .imglink{
-      width:100%;
+    .formSection{
+        text-align: center;
+        color: #1D2D50;
+        display:flex;
+        width:100%;
+        justify-content: center;
     }
+    .divider{
+        border-bottom: #1D2D50 2px solid;
+        line-height: 0.1em;
+        margin-top: 5%;
+        width:80%;
+    }
+    .side1{
+        width: 20%;
+        color: rgb(37, 59, 105);
+        margin-top:1%;
+    }
+    .formSection::before{
+        content:" "
+    }
+    .titleDivider{
+        background:#dadada;
+        padding: 0 2%;
+    }
+
+    .infoNumbers {
+        width: 40%;
+        text-align: center;
+    }
+  .menuIcon{
+    color: white;
+  }
+  
 
 </style>
