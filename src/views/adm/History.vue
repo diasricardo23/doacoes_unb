@@ -1,9 +1,12 @@
 <template>
-  <div class="container listview">
+  <div class="containerPage listview">
     <Sidebar />
 
     <div class="containerDashboard">
-      <div class="listScroll">
+      <vue-scroll-snap>
+        <div v-for="bene in beneficiarios">{{bene.beneficiario}}</div>
+      </vue-scroll-snap>
+      <!-- <div class="listScroll">
         <div class="listStyle">
           <v-card class="infobox months">
             <div>
@@ -34,40 +37,33 @@
             </div>
           </v-card>
         </div>
-      </div>
+      </div> -->
     </div>
 
-    <v-bottom-navigation v-model="value">
-      <v-btn to="/dashboard">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/donation">
-        <span>Doar</span>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn to="/history">
-        <span>Histórico</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn to="/profile">
-        <span>Perfil</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
+    <AdminBottomTabs />
   </div>
 </template>
 
 <script>
+import VueScrollSnap from "vue-scroll-snap";
 import Sidebar from "../../components/Sidebar.vue";
+import AdminBottomTabs from "../../components/AdminBottomTabs.vue";
+import MY_JSON from '../../static/data.json';
 // @ is an alias to /src
 
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    AdminBottomTabs,
+    VueScrollSnap
+  },
+  myJson: MY_JSON,
+  computed: {
+    beneficiarios() {
+      return MY_JSON.history.map((item) => {
+        return item;
+      })
+    }
   },
   data: () => ({
     drawer: false,
@@ -83,72 +79,84 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  background-color: #dadada;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
+  .containerPage {
+    background-color: #dadada;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
-.listStyle {
-  margin-top: 10%;
+  .listStyle {
+    margin-top: 10%;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-.listScroll {
-    width:80%;
-  height: 60%;
-  display: block;
-  overflow-y: scroll;
-  position: fixed;
-  margin-top: 5%;
-}
-.containerDashboard {
-  width: 100% !important;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 30px;
-  padding-top: 10px;
-}
+  .listScroll {
+      width:80%;
+    height: 60%;
+    display: block;
+    overflow-y: scroll;
+    position: fixed;
+    margin-top: 5%;
+  }
 
-.containerMenu {
-  width: 85%;
-  display: flex;
-  justify-content: space-between;
-}
+  .containerDashboard {
+    width: 100% !important;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 10px;
+  }
 
-.infobox {
-  background-color: white;
-  color: #485550;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
+  .containerMenu {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+  }
 
-.months {
-  width: 80%;
-}
+  .infobox {
+    background-color: white;
+    color: #485550;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
 
-.totalCard {
-  background-color: #717171;
-}
-.listview {
-  overflow: none;
-}
+  .months {
+    width: 80%;
+  }
 
-.infoNumbers {
-  width: 40%;
-  text-align: center;
-}
-.menuIcon {
-  color: white;
-}
+  .totalCard {
+    background-color: #717171;
+  }
+  .listview {
+    overflow: none;
+  }
+
+  .infoNumbers {
+    width: 40%;
+    text-align: center;
+  }
+
+  .menuIcon {
+    color: white;
+  }
+
+  .item {
+    /* Set the minimum height of the items to be the same as the height of the scroll-snap-container.*/
+    min-height: 500px;
+  }
+
+  .scroll-snap-container {
+    height: 500px;
+    width: 500px;
+  }
 </style>

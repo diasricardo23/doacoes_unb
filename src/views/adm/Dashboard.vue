@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
       <Sidebar/>
  <!-- <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -36,8 +36,8 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-    </v-navigation-drawer> --> 
-    
+    </v-navigation-drawer> -->
+
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, Fulano de Tal!</b>
@@ -64,37 +64,19 @@
             </v-card>
         </div>
     </div>
-    
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
 
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
+    <AdminBottomTabs />
   </div>
 </template>
 
 <script>
-    import Sidebar from '../../components/Sidebar.vue'
-// @ is an alias to /src
-export default {
+  import Sidebar from '../../components/Sidebar.vue'
+  import AdminBottomTabs from '../../components/AdminBottomTabs.vue'
+  // @ is an alias to /src
+  export default {
     components:{
-        Sidebar
+        Sidebar,
+        AdminBottomTabs
     },
     data: () => ({
       drawer: false,
@@ -111,7 +93,7 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -153,7 +135,7 @@ export default {
         background-color: #717171;
     }
 
-    
+
 
     .infoNumbers {
         width: 40%;
@@ -162,6 +144,6 @@ export default {
   .menuIcon{
     color: white;
   }
-  
+
 
 </style>

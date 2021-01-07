@@ -1,19 +1,19 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
          <p class = "header">
             Pagina de Doação
         </p>
-    </div>       
-        
+    </div>
+
      <div class="containerInfos">
-        
+
         <div class="containerInput">
             <input type="text" class="form-control white emailInput" placeholder="Valor a ser doado (multiplo de 50)" />
             <input type="text" class="form-control white emailInput" placeholder=" Data prevista para doação" />
         </div>
-         
+
         <p class="text">
            Ao clicar em SALVAR, você terá registrado a sua doação.
 
@@ -24,13 +24,13 @@
 
         <div class="icon">
           <img  alt="icon Whatsapp" src="../assets/whatsapp.png" />
-          <h4> (61) xxxx-xxxx </h4> 
+          <h4> (61) xxxx-xxxx </h4>
           <img alt="icon arroba" src="../assets/arroba.png" />
           <h4 > xxxxxxxx@xxxx.com </h4>
         </div>
 
         <v-btn class="secondary white--text loginBtn" to="/dashboard"> SALVAR </v-btn>
-       
+
     </div>
 
     <v-navigation-drawer
@@ -65,7 +65,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
+
     <v-bottom-navigation v-model="value">
         <v-btn to="/dashboard">
             <span>Home</span>
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -133,7 +133,7 @@ export default {
         flex: 1;
         flex-direction: column;
         align-items: center;
-       
+
     }
 
     .containerInput {
@@ -142,7 +142,7 @@ export default {
         flex-direction: column;
         align-items: center;
         margin-top: 30px;
-        
+
     }
 
     .text {
@@ -151,7 +151,7 @@ export default {
         flex-direction: column;
         align-items: center;
         color: #000;
-        margin-top: 15px;   
+        margin-top: 15px;
     }
 
     .icon {
@@ -161,7 +161,7 @@ export default {
       grid-row-gap: 1em;
       margin-right: 55%;
     }
-    
+
     .infobox {
         background-color: white;
         color: #485550;

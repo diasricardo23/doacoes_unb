@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
@@ -36,15 +36,15 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
+
     <div class="containerDashboard">
-        
+
         <v-card class="infobox donations">
             Página de Perfil
         </v-card>
-        
+
     </div>
-    
+
     <v-bottom-navigation v-model="value">
         <v-btn to="/dashboard">
             <span>Home</span>
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;

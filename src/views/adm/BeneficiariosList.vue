@@ -1,5 +1,5 @@
 <template>
-  <div class="container listview">
+  <div class="containerPage listview">
     <Sidebar />
 
     <div class="containerDashboard">
@@ -37,7 +37,7 @@
                         <span><a>Apagar</a></span>
                     </v-col>
                 </v-row>
-                 
+
             </div>
           </v-card>
 
@@ -45,37 +45,19 @@
       </div>
     </div>
 
-    <v-bottom-navigation v-model="value">
-      <v-btn to="/dashboard">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/donation">
-        <span>Doar</span>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn to="/history">
-        <span>Histórico</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn to="/profile">
-        <span>Perfil</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
+    <AdminBottomTabs />
   </div>
 </template>
 
 <script>
 import Sidebar from "../../components/Sidebar.vue";
+import AdminBottomTabs from "../../components/AdminBottomTabs.vue";
 // @ is an alias to /src
 
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    AdminBottomTabs
   },
   data: () => ({
     drawer: false,
@@ -91,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.containerPage {
   background-color: #dadada;
   display: flex;
   flex: 1;
