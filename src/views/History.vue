@@ -48,7 +48,7 @@
         <!-- <v-card class="infobox donations">
             Você não tem nenhuma doação agendada no momento.
         </v-card> -->
-
+        
         <v-card class="infobox donations">
           <h3> XX/XX/2021 </h3>
           <h4> Beneficiário: </h4>

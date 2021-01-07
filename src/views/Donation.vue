@@ -6,7 +6,7 @@
             Pagina de Doação
         </p>
     </div>       
-        
+    
      <div class="containerInfos">
         
         <div class="containerInput">
