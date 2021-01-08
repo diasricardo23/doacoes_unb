@@ -123,6 +123,7 @@ export default {
         align-items: center;
         color: #fff;
         margin-top: 15px;
+        justify-content: center;
 
     }
 
