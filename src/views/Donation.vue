@@ -148,6 +148,11 @@ export default {
 
     }
 
+    .form-control {
+      margin:10px;
+      width: 80%;
+    }
+
     .text {
         width: 80%;
         display: flex;
@@ -179,7 +184,7 @@ export default {
     .secondary {
         width: 80%;
         border-radius: 10px;
-        top: 30%;
+        top: 20%;
     }
 
     .menu {
