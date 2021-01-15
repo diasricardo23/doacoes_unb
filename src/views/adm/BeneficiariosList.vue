@@ -91,8 +91,8 @@ export default {
 }
 
 .listScroll {
-    width:80%;
-  height: 60%;
+  width:100%;
+  height: 70%;
   display: block;
   overflow-y: scroll;
   position: fixed;
@@ -124,7 +124,7 @@ export default {
 }
 
 .months {
-  width: 80%;
+  width: 88%;
 }
 
 .totalCard {

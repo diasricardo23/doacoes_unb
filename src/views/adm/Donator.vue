@@ -114,14 +114,13 @@ export default {
 
     .listStyle{
         margin-top: 10%;
-
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
 
     .listScroll{
-        height: 60%;
+        height: 70%;
         display:block;
         overflow-y:scroll;
         position:fixed;

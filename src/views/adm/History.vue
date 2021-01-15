@@ -4,9 +4,9 @@
 
     <div class="containerDashboard">
       <vue-scroll-snap>
-        <div v-for="bene in beneficiarios">{{bene.beneficiario}}</div>
+        <!--<div v-for="bene in beneficiarios">{{bene.beneficiario}}</div> -->
       </vue-scroll-snap>
-      <!-- <div class="listScroll">
+      <div class="listScroll">
         <div class="listStyle">
           <v-card class="infobox months">
             <div>
@@ -37,7 +37,7 @@
             </div>
           </v-card>
         </div>
-      </div> -->
+      </div>
     </div>
 
     <AdminBottomTabs />
@@ -90,15 +90,14 @@ export default {
 
   .listStyle {
     margin-top: 10%;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .listScroll {
-      width:80%;
-    height: 60%;
+    width:88%;
+    height: 70%;
     display: block;
     overflow-y: scroll;
     position: fixed;
