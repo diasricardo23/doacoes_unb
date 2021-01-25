@@ -19,7 +19,7 @@
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+            <v-list-item-title>Fooooo</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -36,6 +36,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
+    <h1>s</h1>
     </div>
     </template>
 

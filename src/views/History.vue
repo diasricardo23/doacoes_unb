@@ -65,6 +65,10 @@
             <span>Perfil</span>
             <v-icon>mdi-account</v-icon>
         </v-btn>
+        <v-btn @click="logout()">
+            <span>Logout</span>
+            <v-icon>mdi-logout</v-icon>
+        </v-btn>
     </v-bottom-navigation>
   </div>
 </template>

@@ -62,6 +62,10 @@
           <v-list-item>
             <v-list-item-title>Buzz</v-list-item-title>
           </v-list-item>
+          <v-btn @click="logout()">
+            <span>Logout</span>
+            <v-icon>mdi-logout</v-icon>
+        </v-btn>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

@@ -19,7 +19,7 @@
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+            <v-list-item-title>Fooooo</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -39,7 +39,7 @@
     
     <div class="containerDashboard">
         <div class="donations mt-2">
-            <b>Olá, Fulano de Tal!</b>
+            <b>Olá, {{user.name}}</b>
         </div>
 
         <!-- <v-card class="infobox donations">
@@ -90,6 +90,10 @@
             <span>Perfil</span>
             <v-icon>mdi-account</v-icon>
         </v-btn>
+        <v-btn @click="logout()">
+            <span>Logout</span>
+            <v-icon>mdi-logout</v-icon>
+        </v-btn>
     </v-bottom-navigation>
   </div>
 </template>
@@ -100,6 +104,7 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
+      user: JSON.parse(localStorage.getItem('userData'))
     }),
 
     watch: {
@@ -107,6 +112,12 @@ export default {
         this.drawer = false
       },
     },
+    methods: {
+      logout(){
+        localStorage.removeItem('userData')
+        this.$router.push('/');
+      }
+    }
   }
 
 </script>

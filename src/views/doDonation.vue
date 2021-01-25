@@ -115,6 +115,12 @@
             <span>Perfil</span>
             <v-icon>mdi-account</v-icon>
         </v-btn>
+
+        <v-btn @click="logout()">
+            <span>Logout</span>
+            <v-icon>mdi-logout</v-icon>
+        </v-btn>
+
     </v-bottom-navigation>
   </div>
 </template>
@@ -133,6 +139,9 @@ export default {
       save (date) {
         this.$refs.menu.save(date)
       },
+      logout(){
+        localStorage.removeItem('userData')
+      }
     },
 
     watch: {
