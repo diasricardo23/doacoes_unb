@@ -36,7 +36,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <h1>s</h1>
     </div>
     </template>
 

@@ -104,7 +104,7 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
-      user: JSON.parse(localStorage.getItem('userData'))
+      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
     }),
 
     watch: {

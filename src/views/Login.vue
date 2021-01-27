@@ -37,7 +37,7 @@ export default {
             let user = ( await Admin.login(this.login_form))
             if( user.status == 200 ){
                 localStorage.setItem("userData", JSON.stringify(user.data))
-                this.$router.push('dashboard');
+                this.$router.push('admsystem');
             }if(user.status == 401){
                 console.log("N pode, man")
             }

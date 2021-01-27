@@ -37,37 +37,19 @@
       </div>
     </div>
 
-    <v-bottom-navigation v-model="value">
-      <v-btn to="/dashboard">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/donation">
-        <span>Doar</span>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn to="/history">
-        <span>Histórico</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn to="/profile">
-        <span>Perfil</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
+    <Nav/>
   </div>
 </template>
 
 <script>
 import Sidebar from "../../components/Sidebar.vue";
+import Nav from "../../components/AdminNavigation.vue"
 // @ is an alias to /src
 
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    Nav
   },
   data: () => ({
     drawer: false,

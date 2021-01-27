@@ -4,13 +4,13 @@
             <div class="containerDashboard">
                 <v-data-table
                     :headers="headers"
-                    :items="beneficiaries"
+                    :items="administrators"
                     :items-per-page="5"
                     class="elevation-1"
                 >
                     <template v-slot:top>
                         <v-toolbar flat>
-                            <v-toolbar-title> Beneficiarios </v-toolbar-title>
+                            <v-toolbar-title> Administradores </v-toolbar-title>
                             <v-divider
                                 class="mx-4"
                                 inset
@@ -31,7 +31,7 @@
                                         v-bind="attrs"
                                         v-on="on"
                                     >
-                                    Cadastrar Beneficiário
+                                    Cadastrar Administrador
                                     </v-btn>
                                 </template>
                                 <v-card>
@@ -78,24 +78,6 @@
                                             <v-col cols="12">
                                                 <v-divider/>
                                             </v-col>
-                                            <v-col cols="12" sm="12" md="12">
-                                                <v-text-field v-model="editedItem.address.bank" label="Banco"/>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.account" label="Conta"/>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.agency" label="Agência"/>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.pix_type" label="Pix (Email, CPF, Telefone)"/>
-                                            </v-col>
-                                            <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.pix_key" label="Chave Pix"/>
-                                            </v-col>
-                                            <v-col cols="12">
-                                                <v-divider/>
-                                            </v-col>
                                         </v-row>
                                     </v-container>
                                     </v-card-text>
@@ -134,7 +116,7 @@
                     </template>
                     
                     <template v-slot:no-data>
-                        <v-btn color="primary" @click="getBeneficiaries()">
+                        <v-btn color="primary" @click="getAdmin()">
                             Reset
                         </v-btn>
                     </template>
@@ -166,7 +148,7 @@ export default {
             { text: "CPF", value: "cpf" },
             { text: "Ações", value: "actions" },
         ],
-        beneficiaries: [],
+        administrators: [],
         defaultItem: {
             _id: {
                 $oid: null
@@ -205,7 +187,7 @@ export default {
         }
     }),
     async mounted(){
-        this.getBeneficiary()
+        this.getAdmin()
     },
     watch: {
         group () {
@@ -218,8 +200,8 @@ export default {
         },
     },
     methods: {
-        async getBeneficiary() {
-            this.beneficiaries = ((await (new Administrator().getAllBeneficiaries())).data)
+        async getAdmin() {
+            this.administrators = ((await (new Administrator().getAllAdministrators())).data)
         },
         editItem(item){
             this.editedIndex = this.administrators.indexOf(item)
@@ -232,7 +214,7 @@ export default {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
             })
-        },
+      },
     }
 }
 </script>

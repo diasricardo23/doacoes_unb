@@ -1,42 +1,7 @@
 <template>
   <div class="container">
       <Sidebar/>
- <!-- <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer> --> 
     
     <div class="containerDashboard">
         <div class="formSection">
@@ -46,36 +11,18 @@
   
     </div>
     
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
+    <Nav/>
   </div>
 </template>
 
 <script>
     import Sidebar from '../../components/Sidebar.vue'
+    import Nav from "../../components/AdminNavigation.vue"
 // @ is an alias to /src
 export default {
     components:{
-        Sidebar
+        Sidebar,
+        Nav
     },
     data: () => ({
       drawer: false,

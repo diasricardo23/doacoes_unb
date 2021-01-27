@@ -1,123 +1,222 @@
 <template>
-  <div class="container listview">
-      <Sidebar/>
-    
-    <div class="containerDashboard">
-        <div class="listScroll">
-        <div class="listStyle">
+    <div class="container">
+        <Sidebar/>
+            <div class="containerDashboard">
+                <v-data-table
+                    :headers="headers"
+                    :items="donators"
+                    :items-per-page="5"
+                    class="elevation-1"
+                >
+                    <template v-slot:top>
+                        <v-toolbar flat>
+                            <v-toolbar-title> Doadores </v-toolbar-title>
+                            <v-divider
+                                class="mx-4"
+                                inset
+                                vertical
+                            ></v-divider>
 
-           <v-card class="infobox total" >
-            <div>
-                <h1>Fulano Ciclano</h1>
-            </div>
-            <div>
-                <b>Contato</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
+                            <v-dialog
+                                v-model="dialog"
+                                max-width="500px"
+                            >
 
-           </v-card>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        color="primary"
+                                        dark
+                                        text
+                                        class="mb-2"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    >
+                                    Cadastrar Doador
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">{{ formTitle }}</span>
+                                    </v-card-title>
 
-                               <v-card class="infobox total" >
-            <div>
-                <h1>Fulano Ciclano</h1>
-            </div>
-            <div>
-                <b>Contato</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
+                                    <v-card-text>
+                                    <v-container>
+                                        <v-row>
+                                            <v-col cols="12" sm="12" md="12">
+                                                <v-text-field v-model="editedItem._id.$oid" disabled label="Identificador"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12">
+                                                <v-text-field v-model="editedItem.name" label="Nome"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12">
+                                                <v-text-field v-model="editedItem.email" label="Email"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="editedItem.cpf" label="CPF"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="editedItem.phone" label="Telefone"/>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-divider/>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="editedItem.address.address" label="Endereço"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="6">
+                                                <v-text-field v-model="editedItem.address.cep" label="CEP"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="4" md="4">
+                                                <v-text-field v-model="editedItem.address.city" label="Cidade"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="4" md="4">
+                                                <v-text-field v-model="editedItem.address.number" label="Número"/>
+                                            </v-col>
+                                            <v-col cols="12" sm="4" md="4">
+                                                <v-text-field v-model="editedItem.address.state" label="Estado"/>
+                                            </v-col>
+                                            <v-col cols="12">
+                                                <v-divider/>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                    </v-card-text>
 
-           </v-card>
-                      <v-card class="infobox total" >
-            <div>
-                <h1>Fulano Ciclano</h1>
-            </div>
-            <div>
-                <b>Contato</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
+                                    <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        @click="close"
+                                    >
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn
+                                        color="blue darken-1"
+                                        text
+                                        disabled
+                                    >
+                                        Save
+                                    </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                                </v-dialog>
+                            <v-spacer/>
+                        </v-toolbar>
+                    </template>
 
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <h1>Fulano Ciclano</h1>
+                    <template v-slot:item.actions="{ item }">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="editItem(item)"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                    </template>
+                    
+                    <template v-slot:no-data>
+                        <v-btn color="primary" @click="getDonator()">
+                            Reset
+                        </v-btn>
+                    </template>
+                </v-data-table>
             </div>
-            <div>
-                <b>Contato</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <h1>Fulano Ciclano</h1>
-            </div>
-            <div>
-                <b>Contato</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-
-           </v-card>
-        </div>
-        </div>
+        <Nav/>
     </div>
-    
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
-  </div>
 </template>
 
 <script>
-    import Sidebar from '../../components/Sidebar.vue'
-// @ is an alias to /src
-
+import Sidebar from '../../components/Sidebar.vue'
+import Nav from "../../components/AdminNavigation.vue"
+import { Administrator } from "../../functions/administrator.js"
 
 export default {
     components:{
-        Sidebar
+        Sidebar,
+        Nav
     },
     data: () => ({
-      drawer: false,
-      group: null
+        dialog: false,
+        drawer: false,
+        group: null,
+        editedIndex: -1,
+        headers: [
+            { text: "Nome", value: "name" },
+            { text: "E-mail", value: "email" },
+            { text: "Telefone", value: "phone" },
+            { text: "CPF", value: "cpf" },
+            { text: "Ações", value: "actions" },
+        ],
+        donators: [],
+        defaultItem: {
+            _id: {
+                $oid: null
+            },
+            address: {
+                address: null,
+                cep: null,
+                city: null,
+                number: null,
+                state: null
+            },
+            cpf: null,
+            created_time: null,
+            email: null,
+            name: null,
+            password: null,
+            phone: null
+        },
+        editedItem: {
+            _id: {
+                $oid: null
+            },
+            address: {
+                address: null,
+                cep: null,
+                city: null,
+                number: null,
+                state: null
+            },
+            cpf: null,
+            created_time: null,
+            email: null,
+            name: null,
+            password: null,
+            phone: null
+        }
     }),
-
-    watch: {
-      group () {
-        this.drawer = false
-      },
+    async mounted(){
+        this.getDonator()
     },
-  }
-
+    watch: {
+        group () {
+            this.drawer = false
+        },
+    },
+    computed: {
+        formTitle () {
+            return this.editedIndex === -1 ? 'Criar novo Administrador' : 'Editar Administrador'
+        },
+    },
+    methods: {
+        async getDonator() {
+            this.administrators = ((await (new Administrator().getAllDonators())).data)
+        },
+        editItem(item){
+            this.editedIndex = this.administrators.indexOf(item)
+            this.editedItem = Object.assign({}, item)
+            this.dialog = true
+        },
+        close () {
+            this.dialog = false
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            })
+        },
+    }
+}
 </script>
 
 <style>
@@ -130,24 +229,8 @@ export default {
         width: 100%;
     }
 
-    .listStyle{
-        margin-top: 10%;
-
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .listScroll{
-        height: 60%;
-        display:block;
-        overflow-y:scroll;
-        position:fixed;
-        margin-top:5%;
-    }
     .containerDashboard {
         width: 100% !important;
-        display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
@@ -177,8 +260,31 @@ export default {
     .totalCard{
         background-color: #717171;
     }
-    .listview{
-        overflow: none;
+
+    .formSection{
+        text-align: center;
+        color: #1D2D50;
+        display:flex;
+        width:100%;
+        justify-content: center;
+    }
+    .divider{
+        border-bottom: #1D2D50 2px solid;
+        line-height: 0.1em;
+        margin-top: 5%;
+        width:80%;
+    }
+    .side1{
+        width: 20%;
+        color: rgb(37, 59, 105);
+        margin-top:1%;
+    }
+    .formSection::before{
+        content:" "
+    }
+    .titleDivider{
+        background:#dadada;
+        padding: 0 2%;
     }
 
     .infoNumbers {

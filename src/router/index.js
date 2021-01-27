@@ -8,6 +8,7 @@ import ADMDashboard from "../views/adm/Dashboard.vue";
 import HistoryDonations from "../views/adm/History.vue";
 import BeneficiariosList from "../views/adm/BeneficiariosList.vue";
 import CadastroBeneficio from "../views/adm/CadastroBeneficiario.vue";
+import CadastroAdmin from "../views/adm/CadastroAdmin.vue"
 import Donators from "../views/adm/Donator.vue";
 import Payments from "../views/adm/Payments.vue";
 import AboutProject from "../views/AboutProject.vue";
@@ -28,7 +29,7 @@ beforeEach: (to, from, next) => {
     let userData = JSON.parse(localStorage.getItem("userData"))
     let token = userData.token 
   }
-  next()
+  next('/')
 }
 
 const routes = [
@@ -53,8 +54,7 @@ const routes = [
     component: SignUp
   },
   {
-    path: "/system",
-    name: "system",
+    path: "/admsystem",
     component: layoutDefault,
     beforeEnter: (to, from, next) => {
       if(util.checkToken()){
@@ -73,26 +73,6 @@ const routes = [
       },
       {
         path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard
-      },
-      {
-        path: "/donation",
-        name: "Donation",
-        component: Donation
-      },
-      {
-        path: "/history",
-        name: "History",
-        component: History
-      },
-      {
-        path: "/profile",
-        name: "Profile",
-        component: Profile
-      },
-      {
-        path: "/admin/dashboard",
         name: "ADMDashboard",
         component: ADMDashboard
       },
@@ -120,9 +100,34 @@ const routes = [
         path: "/admin/cadastro",
         name: "CadastroBeneficio",
         component: CadastroBeneficio
+      },
+      {
+        path: "/admin/admin",
+        name: "CadastroAdmin",
+        component: CadastroAdmin
       }
     ]
   },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard
+  // },
+  // {
+  //   path: "/donation",
+  //   name: "Donation",
+  //   component: Donation
+  // },
+  // {
+  //   path: "/history",
+  //   name: "History",
+  //   component: History
+  // },
+  // {
+  //   path: "/profile",
+  //   name: "Profile",
+  //   component: Profile
+  // },
 ];
 
 const router = new VueRouter({
