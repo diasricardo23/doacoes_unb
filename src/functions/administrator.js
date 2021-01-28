@@ -34,6 +34,34 @@ export class Administrator {
         })
     }
 
+    createAdministrator(data){
+        return axios.post(`${api_url}/admin/adm`, data, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    editAdministrator(id, data){
+        return axios.patch(`${api_url}/admin/adm/${id}`, data, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
     getAllDonators(){
         return axios.get(`${api_url}/admin/donator`, {
             headers: { Authorization: `Bearer ${this.token}` }

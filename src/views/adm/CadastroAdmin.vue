@@ -5,8 +5,9 @@
                 <v-data-table
                     :headers="headers"
                     :items="administrators"
-                    :items-per-page="5"
+                    :items-per-page="15"
                     class="elevation-1"
+                    :key="administrators"
                 >
                     <template v-slot:top>
                         <v-toolbar flat>
@@ -75,29 +76,25 @@
                                             <v-col cols="12" sm="4" md="4">
                                                 <v-text-field v-model="editedItem.address.state" label="Estado"/>
                                             </v-col>
+                                            <v-col cols="12" sm="4" md="4">
+                                                <v-text-field v-model="editedItem.password" label="Senha"/>
+                                            </v-col>
                                             <v-col cols="12">
                                                 <v-divider/>
                                             </v-col>
                                         </v-row>
+                                        <span v-if="created_message">
+                                            {{ created_message }}
+                                        </span>
                                     </v-container>
                                     </v-card-text>
-
                                     <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        @click="close"
-                                    >
+                                    <v-btn color="blue darken-1" text @click="close">
                                         Cancel
                                     </v-btn>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        disabled
-                                    >
-                                        Save
-                                    </v-btn>
+                                    <v-btn v-if="editedIndex === -1" @click="createAdmin" color="blue darken-1" text> Criar </v-btn>
+                                    <v-btn v-if="editedIndex !== -1" @click="editAdmin" color="blue darken-1" text> Modificar </v-btn>
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
@@ -138,9 +135,11 @@ export default {
     },
     data: () => ({
         dialog: false,
+        table_key: 1,
         drawer: false,
         group: null,
         editedIndex: -1,
+        created_message: null,
         headers: [
             { text: "Nome", value: "name" },
             { text: "E-mail", value: "email" },
@@ -214,7 +213,30 @@ export default {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
             })
-      },
+        },
+        async createAdmin(){
+            let admin = this.editedItem
+            delete admin['_id']
+            delete admin['password']
+            let res = await new Administrator().createAdministrator(admin)
+            if(res.data.code == 200){
+                window.location.reload()
+            }else{
+                alert("Erro!")
+            }
+        },
+        async editAdmin(){
+            let admin = this.editedItem
+            let id = admin['_id']['$oid']
+            delete admin['_id']
+            let res = await new Administrator().editAdministrator(id, admin)
+            console.log(res)
+            if(res.data.code == 200){
+                window.location.reload()
+            }else{
+                alert("Erro!")
+            }
+        }
     }
 }
 </script>
