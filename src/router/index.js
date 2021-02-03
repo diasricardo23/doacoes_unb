@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+import LoginAdmin from "../views/LoginAdmin.vue";
+import LoginDonator from "../views/LoginDonator.vue";
 import SignUp from "../views/SignUp.vue";
 import Dashboard from "../views/Dashboard.vue";
 import ADMDashboard from "../views/adm/Dashboard.vue";
@@ -28,9 +29,14 @@ const routes = [{
         component: AboutProject
     },
     {
-        path: "/login",
-        name: "Login",
-        component: Login
+        path: "/loginAdmin",
+        name: "LoginAdmin",
+        component: LoginAdmin
+    },
+    {
+        path: "/loginDonator",
+        name: "LoginDonator",
+        component: LoginDonator
     },
     {
         path: "/signup",

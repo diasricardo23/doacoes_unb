@@ -3,10 +3,16 @@
     <div class="containerImg">
         <v-img alt="Logo UnB" src="../assets/logo.png" max-width="200" max-height="150" contain />
     </div>
-    <div class="containerButtons">
-        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/loginAdmin">Login Administrador</v-btn>
-        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/loginDonator">Login Doador</v-btn>
-        <v-btn rounded class="secondary white--text loginBtn" to="/about">Sobre a Ação</v-btn>
+    <div class="containerLogin">
+        <div class="containerInput">
+            <input type="text" class="form-control white emailInput" placeholder="E-mail" />
+            <input type="text" class="form-control white emailInput" placeholder="Senha" />
+            <v-btn class="secondary white--text loginBtn" to="/dashboard">Entrar</v-btn>
+        </div>
+        <div class="white--text mb-2">
+            Não tem uma conta? 
+            <v-btn outlined class="white--text cadastro" to="/signup">Cadastre-se aqui.</v-btn>
+        </div>
     </div>
   </div>
 </template>
@@ -18,7 +24,7 @@
 
 <style scoped>
     .container1 {
-        background-color: rgb(19, 62, 121);
+        background-color: #1D2D50;
         display: flex;
         flex: 1;
         flex-direction: column;
@@ -35,12 +41,13 @@
         justify-content: center;
     }
 
-    .containerButtons {
+    .containerLogin {
         width: 100%;
         display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
     }
 
     .containerInput {
@@ -48,6 +55,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 5em;
     }
 
     .emailInput {
@@ -59,6 +67,15 @@
     }
 
     .loginBtn {
+        margin-top: 3em;
         width: 60%;
+    }
+
+    .cadastro {
+        font-weight: normal !important;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+        padding: 0.2em !important;
+        margin-left: 0.5em;
     }
 </style>
