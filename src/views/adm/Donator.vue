@@ -75,6 +75,9 @@
                                             <v-col cols="12" sm="4" md="4">
                                                 <v-text-field v-model="editedItem.address.state" label="Estado"/>
                                             </v-col>
+                                            <v-col cols="12" sm="4" md="4">
+                                                <v-text-field v-model="editedItem.password" label="Senha"/>
+                                            </v-col>
                                             <v-col cols="12">
                                                 <v-divider/>
                                             </v-col>

@@ -108,26 +108,39 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: "/dashboard",
-  //   name: "Dashboard",
-  //   component: Dashboard
-  // },
-  // {
-  //   path: "/donation",
-  //   name: "Donation",
-  //   component: Donation
-  // },
-  // {
-  //   path: "/history",
-  //   name: "History",
-  //   component: History
-  // },
-  // {
-  //   path: "/profile",
-  //   name: "Profile",
-  //   component: Profile
-  // },
+  {
+    path: "/donatorsystem",
+    component: layoutDefault,
+    beforeEnter: (to, from, next) => {
+      if(true){
+        next()
+      }else{
+        next('/');
+      }
+    },
+    children: [
+      {
+        path: "/dashboard",
+        name: "Dashboard",
+        component: Dashboard
+      },
+      {
+        path: "/donation",
+        name: "Donation",
+        component: Donation
+      },
+      {
+        path: "/history",
+        name: "History",
+        component: History
+      },
+      {
+        path: "/profile",
+        name: "Profile",
+        component: Profile
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
