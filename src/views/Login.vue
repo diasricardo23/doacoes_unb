@@ -47,7 +47,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
     .container1 {
         background-color: #1D2D50;
         display: flex;
@@ -80,6 +80,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 5em;
     }
 
     .emailInput {
@@ -91,6 +92,7 @@ export default {
     }
 
     .loginBtn {
+        margin-top: 3em;
         width: 60%;
     }
 

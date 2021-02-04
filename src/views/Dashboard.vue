@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
@@ -36,7 +36,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
+
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, {{user.name}}</b>
@@ -67,7 +67,7 @@
                 <div class="imglink"><img alt="Vue logo" src="../assets/logo.png" width="58" /></div>
             </v-card>
         </div>
-        
+
     </div>
     
     <v-bottom-navigation absolute hide-on-scroll v-model="value">
@@ -99,8 +99,12 @@
 </template>
 
 <script>
+import BottomTabs from '../components/BottomTabs.vue'
 // @ is an alias to /src
 export default {
+    components:{
+        BottomTabs
+    },
     data: () => ({
       drawer: false,
       group: null,
@@ -122,8 +126,8 @@ export default {
 
 </script>
 
-<style>
-    .container {
+<style scoped>
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;

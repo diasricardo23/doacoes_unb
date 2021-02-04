@@ -42,7 +42,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
     .container2 {
         background-color: #1D2D50;
         display: flex;
@@ -90,7 +90,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 10px;
+
     }
 
     .emailInput {

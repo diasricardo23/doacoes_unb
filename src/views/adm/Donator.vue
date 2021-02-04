@@ -240,8 +240,8 @@ export default {
 }
 </script>
 
-<style>
-    .container {
+<style scoped>
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -315,6 +315,6 @@ export default {
   .menuIcon{
     color: white;
   }
-  
+
 
 </style>

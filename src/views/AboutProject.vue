@@ -36,7 +36,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
     .container3 {
         background-color: #1D2D50;
         display: flex;

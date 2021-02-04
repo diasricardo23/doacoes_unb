@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
       <Sidebar/>
     
     <div class="containerDashboard">
@@ -57,8 +57,8 @@ export default {
 
 </script>
 
-<style>
-    .container {
+<style scoped>
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -100,7 +100,7 @@ export default {
         background-color: #717171;
     }
 
-    
+
 
     .infoNumbers {
         width: 40%;
@@ -109,6 +109,6 @@ export default {
   .menuIcon{
     color: white;
   }
-  
+
 
 </style>
