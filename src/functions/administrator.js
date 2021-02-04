@@ -1,6 +1,6 @@
 import axios from "axios"
-// let api_url = process.env.VUE_APP_API_URL
-let api_url = "http://localhost:5000"
+let api_url = process.env.VUE_APP_API_URL
+// let api_url = "http://localhost:5000"
 
 let user = JSON.parse(localStorage.getItem("userData"))
 export class Administrator {

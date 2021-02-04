@@ -23,7 +23,7 @@
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Sobre o Projeto
                 <div>
-                   <h1> 7</h1>
+                  <h1> 7</h1>
                 </div>
             </v-card>
         </div>

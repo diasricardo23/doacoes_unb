@@ -1,11 +1,8 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-         <p class = "header">
-            Pagina de Doação
-        </p>
-    </div>   
+    </div>
 
     <v-navigation-drawer
       v-model="drawer"
@@ -22,7 +19,7 @@
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+            <v-list-item-title>Fooooo</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -39,66 +36,57 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    
+
     <div class="containerDashboard">
         <div class="donations mt-2">
-            <b>Olá, Fulano de Tal!</b>
+            <b>Olá, {{user.name}}</b>
         </div>
 
         <!-- <v-card class="infobox donations">
             Você não tem nenhuma doação agendada no momento.
         </v-card> -->
-        
+
         <v-card class="infobox donations">
-          <h3> XX/XX/2021 </h3>
-          <h4> Beneficiário: </h4>
-          <h4> Valor: </h4>
+            Sua próxima doação será na data xx/xx/xx no valor de R$: 0,00
         </v-card>
 
         <v-card class="infobox donations">
-          <h3> XX/XX/2021 </h3>
-          <h4> Beneficiário: </h4>
-          <h4> Valor: </h4>
+            Você receberá uma mensagem com os dados para doação. <br/>
+            Ao realizá-la, enviar o comprovante para: <br/>
+            (61) xxxx-xxxx <br/>
+            xxxxxxxx@xxxx.com <br/>
         </v-card>
 
-       
-        
+        <div class="containerMenu">
+            <v-card class="infobox menu">
+                Nova Doação
+                <div class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="58" /></div>
+            </v-card>
+            <v-card class="infobox menu">
+                Sobre o Projeto
+                <div class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="58" /></div>
+            </v-card>
+        </div>
+
     </div>
     
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-        <v-btn @click="logout()">
-            <span>Logout</span>
-            <v-icon>mdi-logout</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
+    <Nav/>
   </div>
 </template>
 
 <script>
+import BottomTabs from '../../components/BottomTabs.vue'
+import Nav from "../../components/DonatorNavigation.vue"
 // @ is an alias to /src
 export default {
+    components:{
+        BottomTabs,
+        Nav
+    },
     data: () => ({
       drawer: false,
       group: null,
+      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
     }),
 
     watch: {
@@ -106,29 +94,24 @@ export default {
         this.drawer = false
       },
     },
+    methods: {
+      logout(){
+        localStorage.removeItem('userData')
+        this.$router.push('/');
+      }
+    }
   }
 
 </script>
 
 <style scoped>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
         width: 100%;
-    }
-
-
-    .header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #fff;
-        margin-top: 15px;
-        justify-content: center;
-
     }
 
     .containerDrawer {

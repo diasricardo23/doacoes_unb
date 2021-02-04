@@ -1,9 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+import LoginAdmin from "../views/LoginAdmin.vue";
+import LoginDonator from "../views/LoginDonator.vue";
 import SignUp from "../views/SignUp.vue";
-import Dashboard from "../views/Dashboard.vue";
+
+// Donator views
+import Dashboard_don from "../views/donator/Dashboard.vue";
+import doDonation_don from "../views/donator/doDonation.vue";
+import History_don from "../views/donator/History.vue"; 
+import Profile_don from "../views/donator/Profile.vue";
+
+
+// Adm views
 import ADMDashboard from "../views/adm/Dashboard.vue";
 import HistoryDonations from "../views/adm/History.vue";
 import BeneficiariosList from "../views/adm/BeneficiariosList.vue";
@@ -11,26 +20,17 @@ import CadastroBeneficio from "../views/adm/CadastroBeneficiario.vue";
 import CadastroAdmin from "../views/adm/CadastroAdmin.vue"
 import Donators from "../views/adm/Donator.vue";
 import Payments from "../views/adm/Payments.vue";
+
+
 import AboutProject from "../views/AboutProject.vue";
-import Profile from "../views/Profile.vue";
 import Donation from "../views/Donation.vue";
-import History from "../views/History.vue"; 
-import doDonation from "../views/doDonation.vue";
 import layoutDefault from "../views/layoutDefault.vue";
 import { Util } from "../functions/util.js"
-import { push } from "core-js/fn/array";
 
 Vue.use(VueRouter);
 
 let util = new Util()
 
-beforeEach: (to, from, next) => {
-    if(localStorage.getItem("userData")){
-    let userData = JSON.parse(localStorage.getItem("userData"))
-    let token = userData.token 
-  }
-  next('/')
-}
 
 const routes = [
   {
@@ -44,9 +44,14 @@ const routes = [
     component: AboutProject
   },
   {
-    path: "/login",
-    name: "Login",
-    component: Login
+    path: "/loginadm",
+    name: "Loginadm",
+    component: LoginAdmin
+  },
+  {
+    path: "/logindonator",
+    name: "Logindon",
+    component: LoginDonator
   },
   {
     path: "/signup",
@@ -54,7 +59,7 @@ const routes = [
     component: SignUp
   },
   {
-    path: "/admsystem",
+    path: "/adm",
     component: layoutDefault,
     beforeEnter: (to, from, next) => {
       if(util.checkToken()){
@@ -105,14 +110,13 @@ const routes = [
         path: "/admin/admin",
         name: "CadastroAdmin",
         component: CadastroAdmin
-      }
-    ]
+      }]
   },
   {
-    path: "/donatorsystem",
+    path: "/donator",
     component: layoutDefault,
     beforeEnter: (to, from, next) => {
-      if(true){
+      if(util.checkToken()){
         next()
       }else{
         next('/');
@@ -120,24 +124,24 @@ const routes = [
     },
     children: [
       {
-        path: "/dashboard",
+        path: "/",
         name: "Dashboard",
-        component: Dashboard
+        component: Dashboard_don
       },
       {
         path: "/donation",
         name: "Donation",
-        component: Donation
+        component: doDonation_don
       },
       {
         path: "/history",
         name: "History",
-        component: History
+        component: History_don
       },
       {
         path: "/profile",
         name: "Profile",
-        component: Profile
+        component: Profile_don
       }
     ]
   }

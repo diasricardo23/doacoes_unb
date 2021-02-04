@@ -1,8 +1,11 @@
 <template>
-  <div class="containerPage">
+  <div class="container">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
+         <p class = "header">
+            Pagina de Doação
+        </p>
+    </div>   
 
     <v-navigation-drawer
       v-model="drawer"
@@ -33,54 +36,60 @@
           <v-list-item>
             <v-list-item-title>Buzz</v-list-item-title>
           </v-list-item>
-          <v-btn @click="logout()">
-            <span>Logout</span>
-            <v-icon>mdi-logout</v-icon>
-        </v-btn>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
+    
     <div class="containerDashboard">
+        <div class="donations mt-2">
+            <b>Olá, Fulano de Tal!</b>
+        </div>
 
+        <!-- <v-card class="infobox donations">
+            Você não tem nenhuma doação agendada no momento.
+        </v-card> -->
+        {{ donation }}
         <v-card class="infobox donations">
-            Página de Perfil
+          <h3> XX/XX/2021 </h3>
+          <h4> Beneficiário: </h4>
+          <h4> Valor: </h4>
         </v-card>
 
+        <v-card class="infobox donations">
+          <h3> XX/XX/2021 </h3>
+          <h4> Beneficiário: </h4>
+          <h4> Valor: </h4>
+        </v-card>
     </div>
-
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
+    
+    <Nav/>
   </div>
 </template>
 
 <script>
+import Nav from "../../components/DonatorNavigation.vue"
+import { Donator } from "../../functions/donator.js"
 // @ is an alias to /src
+
+let Don = new Donator()
+
 export default {
+  components: {
+    Nav
+  },
     data: () => ({
       drawer: false,
       group: null,
+      donation: []
     }),
-
+    async mounted() {
+      this.getDonations()
+    },
+    methods: {
+      async getDonations(){
+        this.donations = ( (await Don.getDonations()).data )
+      },
+    },
     watch: {
       group () {
         this.drawer = false
@@ -91,13 +100,24 @@ export default {
 </script>
 
 <style scoped>
-    .containerPage {
+    .container {
         background-color: #DADADA;
         display: flex;
         flex: 1;
         flex-direction: column;
         align-items: center;
         width: 100%;
+    }
+
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        margin-top: 15px;
+        justify-content: center;
+
     }
 
     .containerDrawer {
@@ -141,6 +161,10 @@ export default {
     .menu {
         width: 45%;
         text-align: center;
+    }
+
+    .imglink{
+      width:100%;
     }
 
 </style>

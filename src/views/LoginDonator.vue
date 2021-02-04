@@ -19,25 +19,26 @@
 </template>
 
 <script>
-import { Administrator } from "../functions/administrator.js"
+import { Donator } from "../functions/donator.js"
 
-const Admin = new Administrator()
+let Don = new Donator()
 
 export default {
     data(){
         return{
             login_form: {
                 email: "danielsprado12@gmail.com",
-                password: "dCpy9NW9kh",
+                password: "h8kPJ97V9wax",
             }
         }
     },
     methods: {
         async login(){
-            let user = ( await Admin.login(this.login_form))
+            let user = ( await Don.login(this.login_form) )
+            console.log(user)
             if( user.status == 200 ){
                 localStorage.setItem("userData", JSON.stringify(user.data))
-                this.$router.push('admsystem');
+                this.$router.push('donator');
             }if(user.status == 401){
                 console.log("N pode, man")
             }

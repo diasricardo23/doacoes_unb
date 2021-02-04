@@ -45,14 +45,14 @@
                 </v-col>
                 <v-col cols="7">
                     <v-text-field
+                    v-model="donation.value"
                     label="Valor"
-                    value="10.00"
                     prefix="R$"
                     ></v-text-field>
                 </v-col>
             </v-row>
         </div>
-    
+<!--     
         <div class="date">
             <v-menu
                 ref="menu"
@@ -80,8 +80,9 @@
                 @change="save"
                 ></v-date-picker>
             </v-menu>
-        </div>
+        </div> -->
 
+    <v-btn rounded @click="doDonation" class="secondary white--text loginBtn mb-4">Doar</v-btn>
         <v-card
         elevation="2"
         class="aviso"
@@ -93,46 +94,28 @@
         <v-icon></v-icon> xxxxxxxxxxxxxxx@xxxxx.com</v-card>
     </div>
 
-    <v-btn rounded class="secondary white--text loginBtn mb-4" to="/doDonation">Doar</v-btn>
-    
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-
-        <v-btn @click="logout()">
-            <span>Logout</span>
-            <v-icon>mdi-logout</v-icon>
-        </v-btn>
-
-    </v-bottom-navigation>
+    <Nav/>
   </div>
 </template>
 
 <script>
+import Nav from "../../components/DonatorNavigation.vue"
+import { Donator } from "../../functions/donator.js"
+
+let Don = new Donator()
 // @ is an alias to /src
 export default {
+  components: {
+    Nav
+  },
     data: () => ({
       drawer: false,
       group: null,
       date: null,
       menu: false,
+      donation: {
+        value: null
+      }
     }),
     
     methods: {
@@ -141,6 +124,10 @@ export default {
       },
       logout(){
         localStorage.removeItem('userData')
+      },
+      async doDonation(){
+        let donation = ( await Don.create_donation(this.donation) )
+        console.log(donation)
       }
     },
 

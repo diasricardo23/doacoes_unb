@@ -4,6 +4,9 @@ export class Util {
     checkToken(){
         if(localStorage.getItem("userData")){
             let user =  JSON.parse(localStorage.getItem("userData"))
+            // if(user.profile != 'adm'){
+            //     return false
+            // }
             if(user.token){
                 let token = user.token
                 // Validar se token é valido, se sim, retorna o token se não, retorna false

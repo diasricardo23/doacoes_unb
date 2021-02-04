@@ -1,6 +1,6 @@
 <template>
     <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
+        <v-btn to="/adm">
             <span>Home</span>
             <v-icon>mdi-home</v-icon>
         </v-btn>

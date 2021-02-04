@@ -4,7 +4,8 @@
         <v-img alt="Logo UnB" src="../assets/logo.png" max-width="200" max-height="150" contain />
     </div>
     <div class="containerButtons">
-        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/login">Entrar</v-btn>
+        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/loginadm">Login Administrador</v-btn>
+        <v-btn rounded class="secondary white--text loginBtn mb-4" to="/logindonator">Login Doador</v-btn>
         <v-btn rounded class="secondary white--text loginBtn" to="/about">Sobre a Ação</v-btn>
     </div>
   </div>

@@ -4,49 +4,29 @@
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 </div>
 
-<v-navigation-drawer
-  v-model="drawer"
-  absolute
-  left
-  temporary
->
-  <v-list
-    nav
-    dense
-  >
-    <v-list-item-group
-      v-model="group"
-      active-class="deep-purple--text text--accent-4"
-    >
-<<<<<<< HEAD
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
+<v-navigation-drawer v-model="drawer" absolute left temporary>
+  <v-list nav dense>
+    <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+      <v-list nav dense>
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4" >
           <v-list-item>
             <v-list-item-title>Fooooo</v-list-item-title>
           </v-list-item>
-=======
-      <v-list-item>
-        <v-list-item-title>Foo</v-list-item-title>
-      </v-list-item>
->>>>>>> develop
 
-      <v-list-item>
-        <v-list-item-title>Bar</v-list-item-title>
-      </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Bar</v-list-item-title>
+          </v-list-item>
 
-      <v-list-item>
-        <v-list-item-title>Fizz</v-list-item-title>
-      </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Fizz</v-list-item-title>
+          </v-list-item>
 
-      <v-list-item>
-        <v-list-item-title>Sair</v-list-item-title>
-      </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Sair</v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
     </v-list-item-group>
   </v-list>
 </v-navigation-drawer>
