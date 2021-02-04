@@ -79,19 +79,19 @@
                                                 <v-divider/>
                                             </v-col>
                                             <v-col cols="12" sm="12" md="12">
-                                                <v-text-field v-model="editedItem.address.bank" label="Banco"/>
+                                                <v-text-field v-model="editedItem.bank.bank" label="Banco"/>
                                             </v-col>
                                             <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.account" label="Conta"/>
+                                                <v-text-field v-model="editedItem.bank.account" label="Conta"/>
                                             </v-col>
                                             <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.agency" label="Agência"/>
+                                                <v-text-field v-model="editedItem.bank.agency" label="Agência"/>
                                             </v-col>
                                             <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.pix_type" label="Pix (Email, CPF, Telefone)"/>
+                                                <v-text-field v-model="editedItem.bank.pix_type" label="Pix (Email, CPF, Telefone)"/>
                                             </v-col>
                                             <v-col cols="12" sm="6" md="6">
-                                                <v-text-field v-model="editedItem.address.pix_key" label="Chave Pix"/>
+                                                <v-text-field v-model="editedItem.bank.pix_key" label="Chave Pix"/>
                                             </v-col>
                                             <v-col cols="12">
                                                 <v-divider/>
@@ -102,20 +102,11 @@
 
                                     <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        @click="close"
-                                    >
+                                    <v-btn color="blue darken-1" text @click="close">
                                         Cancel
                                     </v-btn>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        disabled
-                                    >
-                                        Save
-                                    </v-btn>
+                                    <v-btn v-if="editedIndex === -1" @click="createBeneficiary" color="blue darken-1" text> Criar </v-btn>
+                                    <v-btn v-if="editedIndex !== -1" @click="editBeneficiary" color="blue darken-1" text> Modificar </v-btn>
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
@@ -178,6 +169,13 @@ export default {
                 number: null,
                 state: null
             },
+            bank: {
+                bank: null,
+                account: null,
+                agency: null,
+                pix_type: null,
+                pix_key: null,
+            },
             cpf: null,
             created_time: null,
             email: null,
@@ -195,6 +193,13 @@ export default {
                 city: null,
                 number: null,
                 state: null
+            },
+            bank: {
+                bank: null,
+                account: null,
+                agency: null,
+                pix_type: null,
+                pix_key: null,
             },
             cpf: null,
             created_time: null,
@@ -222,7 +227,7 @@ export default {
             this.beneficiaries = ((await (new Administrator().getAllBeneficiaries())).data)
         },
         editItem(item){
-            this.editedIndex = this.administrators.indexOf(item)
+            this.editedIndex = this.beneficiaries.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
@@ -233,6 +238,30 @@ export default {
                 this.editedIndex = -1
             })
         },
+        async createBeneficiary(){
+            let beneficiary = this.editedItem
+            delete beneficiary['_id']
+            delete beneficiary['password']
+            let res = await new Administrator().createBeneficiary(beneficiary)
+            console.log(res)
+            if(res.data.code == 200){
+                window.location.reload()
+            }else{
+                alert("Erro!")
+            }
+        },
+        async editBeneficiary(){
+            let beneficiary = this.editedItem
+            let id = beneficiary['_id']['$oid']
+            delete beneficiary['_id']
+            let res = await new Administrator().editBeneficiary(id, beneficiary)
+            console.log(res)
+            if(res.data.code == 200){
+                window.location.reload()
+            }else{
+                alert("Erro!")
+            }
+        }
     }
 }
 </script>

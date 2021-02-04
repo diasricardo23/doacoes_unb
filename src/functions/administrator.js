@@ -76,8 +76,64 @@ export class Administrator {
         })
     }
 
+    createDonator(data){
+        return axios.post(`${api_url}/admin/donator`, data, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    editDonator(id, data){
+        return axios.patch(`${api_url}/admin/donator/${id}`, data, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
     getAllBeneficiaries(){
         return axios.get(`${api_url}/admin/beneficiary`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    createBeneficiary(data){
+        return axios.post(`${api_url}/admin/beneficiary`, data, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    editBeneficiary(id, data){
+        return axios.patch(`${api_url}/admin/beneficiary/${id}`, data, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

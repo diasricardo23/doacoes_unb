@@ -91,13 +91,8 @@
                                     >
                                         Cancel
                                     </v-btn>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        disabled
-                                    >
-                                        Save
-                                    </v-btn>
+                                    <v-btn v-if="editedIndex === -1" @click="createDonator" color="blue darken-1" text> Criar </v-btn>
+                                    <v-btn v-if="editedIndex !== -1" @click="editDonator" color="blue darken-1" text> Modificar </v-btn>
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
@@ -201,10 +196,10 @@ export default {
     },
     methods: {
         async getDonator() {
-            this.administrators = ((await (new Administrator().getAllDonators())).data)
+            this.donators = ((await (new Administrator().getAllDonators())).data)
         },
         editItem(item){
-            this.editedIndex = this.administrators.indexOf(item)
+            this.editedIndex = this.donators.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
         },
@@ -215,6 +210,29 @@ export default {
                 this.editedIndex = -1
             })
         },
+        async editDonator(){
+            let donator = this.editedItem
+            let id = donator['_id']['$oid']
+            delete donator['_id']
+            let res = await new Administrator().editDonator(id, donator)
+            console.log(res)
+            if(res.data.code == 200){
+                window.location.reload()
+            }else{
+                alert("Erro!")
+            }
+        },
+        async createDonator(){
+            let donator = this.editedItem
+            delete donator['_id']
+            let res = await new Administrator().createDonator(donator)
+            console.log(res)
+            // if(res.data.code == 200){
+            //     window.location.reload()
+            // }else{
+            //     alert("Erro!")
+            // }
+        }
     }
 }
 </script>
