@@ -9,20 +9,26 @@
     
     <div class="containerDashboard">
         <div class="donations mt-2">
-            <b>Olá, Fulano de Tal!</b>
+            <b>Olá, {{user.name}}</b>
         </div>
-        <v-card class="infobox donations" v-for="item in donations.reverse() " :key="item._id">
+        <v-card class="infobox donations" v-for="item in donations" :key="item._id.$oid">
           <div class="left">
             <v-badge v-if="item.is_changeable" color="red"/>
             <v-badge v-else color="grey"/>
             <v-badge v-if="item.aproved" color="green"/>
           </div>
           <div class="right">
+            <p class="text-subtitle-2 font-weight-thin mt-1">{{ item._id.$oid }}</p>
             <h3> Criação: {{ item.created_time | format_date }} </h3>
             <h4> Data de validação: dd/mm/yyyy </h4>
             <h4> Beneficiário: {{ item.beneficiary_id }} </h4>
             <h4> Valor: {{ item.value }} </h4>
           </div>
+          <v-card-actions>
+            <v-btn rounded class="red lighten-2 ml-3" small v-if="item.is_changeable" @click="deleteDonation(item._id.$oid)">
+              Deletar Doação
+            </v-btn>
+          </v-card-actions>
         </v-card>
     </div>
     
@@ -44,18 +50,20 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
-      donations: []
+      donations: [],
+      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
     }),
     async mounted() {
       this.getDonations()
     },
     methods: {
       async getDonations(){
-        this.donations = ( (await Don.getDonations()).data )
+        this.donations = ( (await Don.getDonations()).data ).reverse()
         console.log(this.donations)
       },
-      backgroundColor(){
-        return "red"
+      async deleteDonation(donation_id){
+        let res = ( (await Don.deleteDonation(donation_id)).data )
+        console.log(res)
       }
     },
     filters: {

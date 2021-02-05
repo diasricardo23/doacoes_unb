@@ -48,6 +48,20 @@ export class Donator {
             }
         })
     }
+
+    deleteDonation(donation_id){
+        return axios.delete(`${api_url}/donator/donations/${donation_id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
     // getAllAdministrators(){
     //     return axios.get(`${api_url}/admin/adm`, {
     //         headers: { Authorization: `Bearer ${this.token}` }

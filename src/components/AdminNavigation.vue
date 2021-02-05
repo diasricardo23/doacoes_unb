@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation v-model="value">
+    <v-bottom-navigation fixed absolute v-model="value">
         <v-btn to="/adm">
             <span>Home</span>
             <v-icon>mdi-home</v-icon>

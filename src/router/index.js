@@ -16,14 +16,12 @@ import Profile_don from "../views/donator/Profile.vue";
 import ADMDashboard from "../views/adm/Dashboard.vue";
 import HistoryDonations from "../views/adm/History.vue";
 import BeneficiariosList from "../views/adm/BeneficiariosList.vue";
-import CadastroBeneficio from "../views/adm/CadastroBeneficiario.vue";
 import CadastroAdmin from "../views/adm/CadastroAdmin.vue"
 import Donators from "../views/adm/Donator.vue";
 import Payments from "../views/adm/Payments.vue";
 
 
 import AboutProject from "../views/AboutProject.vue";
-import Donation from "../views/Donation.vue";
 import layoutDefault from "../views/layoutDefault.vue";
 import { Util } from "../functions/util.js"
 
@@ -100,11 +98,6 @@ const routes = [
         path: "/admin/listabeneficiarios",
         name: "BeneficiariosList",
         component: BeneficiariosList
-      },
-      {
-        path: "/admin/cadastro",
-        name: "CadastroBeneficio",
-        component: CadastroBeneficio
       },
       {
         path: "/admin/admin",

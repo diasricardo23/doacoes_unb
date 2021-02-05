@@ -146,4 +146,46 @@ export class Administrator {
         })
     }
 
+    deleteBeneficiary(id){
+        return axios.delete(`${api_url}/admin/beneficiary/${id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    deleteAdmin(id){
+        return axios.delete(`${api_url}/admin/adm/${id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+    
+    deleteDonator(id){
+        return axios.delete(`${api_url}/admin/donator/${id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
 }

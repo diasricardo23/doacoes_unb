@@ -99,18 +99,32 @@
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
+                                <v-dialog v-model="dialogDelete" max-width="500px">
+                                    <v-card>
+                                        <v-card-title class="headline">
+                                            <h4>Você tem certeza que quer deletar este usuário?</h4> <br>
+                                        </v-card-title>
+                                        <v-card-text>
+                                            Nome: {{ editedItem.name }} <br>
+                                            E-mail: {{ editedItem.email }} <br>
+                                            CPF: {{ editedItem.cpf }} <br>
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <h6>Esta operação é permanente </h6>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="blue darken-1" text @click="closeDelete" class="grey--text">Cancelar</v-btn>
+                                            <v-btn color="blue darken-1" text @click="deleteItemConfirm" class="red--text">Deletar</v-btn>
+                                            <v-spacer></v-spacer>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
                             <v-spacer/>
                         </v-toolbar>
                     </template>
 
                     <template v-slot:item.actions="{ item }">
-                        <v-icon
-                            small
-                            class="mr-2"
-                            @click="editItem(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
+                        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+                        <v-icon small class="mr-2" @click="deleteItem(item)"> mdi-trash-can </v-icon>
                     </template>
                     
                     <template v-slot:no-data>
@@ -139,6 +153,7 @@ export default {
         drawer: false,
         group: null,
         editedIndex: -1,
+        dialogDelete: false,
         headers: [
             { text: "Nome", value: "name" },
             { text: "E-mail", value: "email" },
@@ -198,6 +213,21 @@ export default {
         },
     },
     methods: {
+        deleteItem(item){
+            this.editedItem = Object.assign({}, item)
+            this.dialogDelete = true
+            
+        },
+        closeDelete(){
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.dialogDelete = false
+        },
+        async deleteItemConfirm(){
+            this.beneficiaries = ((await (new Administrator().deleteDonator(this.editedItem._id.$oid))).data)
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.dialogDelete = false
+            window.location.reload()
+        },
         async getDonator() {
             this.donators = ((await (new Administrator().getAllDonators())).data)
         },
