@@ -36,7 +36,7 @@ export class Donator {
     }
     
     getDonations(){
-        return axios.get(`${api_url}/donator`, {
+        return axios.get(`${api_url}/donator/donation`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

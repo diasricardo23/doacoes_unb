@@ -2,63 +2,27 @@
   <div class="container">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-         <p class = "header">
+          <p class = "header">
             Pagina de Doação
         </p>
     </div>   
-
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
     
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, Fulano de Tal!</b>
         </div>
-
-        <!-- <v-card class="infobox donations">
-            Você não tem nenhuma doação agendada no momento.
-        </v-card> -->
-        {{ donation }}
-        <v-card class="infobox donations">
-          <h3> XX/XX/2021 </h3>
-          <h4> Beneficiário: </h4>
-          <h4> Valor: </h4>
-        </v-card>
-
-        <v-card class="infobox donations">
-          <h3> XX/XX/2021 </h3>
-          <h4> Beneficiário: </h4>
-          <h4> Valor: </h4>
+        <v-card class="infobox donations" v-for="item in donations.reverse() " :key="item._id">
+          <div class="left">
+            <v-badge v-if="item.is_changeable" color="red"/>
+            <v-badge v-else color="grey"/>
+            <v-badge v-if="item.aproved" color="green"/>
+          </div>
+          <div class="right">
+            <h3> Criação: {{ item.created_time | format_date }} </h3>
+            <h4> Data de validação: dd/mm/yyyy </h4>
+            <h4> Beneficiário: {{ item.beneficiary_id }} </h4>
+            <h4> Valor: {{ item.value }} </h4>
+          </div>
         </v-card>
     </div>
     
@@ -80,7 +44,7 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
-      donation: []
+      donations: []
     }),
     async mounted() {
       this.getDonations()
@@ -88,7 +52,22 @@ export default {
     methods: {
       async getDonations(){
         this.donations = ( (await Don.getDonations()).data )
+        console.log(this.donations)
       },
+      backgroundColor(){
+        return "red"
+      }
+    },
+    filters: {
+      format_date(item){
+        let data = new Date(item)
+        let dia  = data.getDate().toString()
+        let diaF = (dia.length == 1) ? '0'+dia : dia
+        let mes  = (data.getMonth()+1).toString() //+1 pois no getMonth Janeiro começa com zero.
+        let mesF = (mes.length == 1) ? '0'+mes : mes
+        let anoF = data.getFullYear();
+        return diaF+"/"+mesF+"/"+anoF;
+      }
     },
     watch: {
       group () {
@@ -100,6 +79,22 @@ export default {
 </script>
 
 <style scoped>
+    .active{
+      background-color: blue;
+    }
+    .left, .right {
+      display: inline-block; 
+      *display: inline; 
+      zoom: 1; 
+      vertical-align: top; 
+    }
+    .left {
+      width: 25px;
+      height: 100%; 
+    }
+    .right{
+      width: 25%; 
+    }
     .container {
         background-color: #DADADA;
         display: flex;
@@ -146,7 +141,6 @@ export default {
     }
 
     .infobox {
-        background-color: white;
         color: #485550;
         padding: 10px;
         border-radius: 10px;
