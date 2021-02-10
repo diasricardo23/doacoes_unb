@@ -4,26 +4,31 @@
     
     <div class="containerDashboard">
         <div class="donations mt-2">
-            <b>Olá, {{ user.name }}</b>
+            <h2 class="grey--text"><b>Olá, {{ user.name }}</b></h2>
         </div>
-
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO</b>
             <v-row>
-                <v-col offset-md="5"><h1>R$<span>0000,00</span></h1></v-col>
+                <v-col offset-md="5"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
             </v-row>
         </v-card>
         <div class="containerMenu">
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
-                Nova Doação
+                Quantidade de Administradores
                 <div>
-                    <h1>7</h1>
+                    <h1>{{administrators_amount}}</h1>
                 </div>
             </v-card>
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
-                Sobre o Projeto
+                Quantidade de Doadores
                 <div>
-                  <h1> 7</h1>
+                    <h1>{{donators_amount}}</h1>
+                </div>
+            </v-card>
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+                Quantidade de Beneficiários
+                <div>
+                    <h1>{{beneficiaries_amount}}</h1>
                 </div>
             </v-card>
         </div>
@@ -36,6 +41,10 @@
 <script>
     import Sidebar from '../../components/Sidebar.vue'
     import Nav from "../../components/AdminNavigation.vue"
+    import { Administrator } from "../../functions/administrator.js"
+
+    let Admin = new Administrator();
+
 // @ is an alias to /src
 export default {
     components:{
@@ -45,15 +54,43 @@ export default {
     data: () => ({
         drawer: false,
         group: null,
-        user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
+        user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" },
+        donations_amount: 0,
+        donators_amount: 0,
+        beneficiaries_amount: 0,
+        administrators_amount: 0,
     }),
-
-    watch: {
-      group () {
-        this.drawer = false
-      },
+    filters: {
+        toReal: function(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
+        }
     },
-  }
+    watch: {
+        group () {
+            this.drawer = false
+        },
+    },
+    mounted(){
+        this.getDonationsQtd()
+        this.getDonatorsQtd()
+        this.getBeneficiariesQtd()
+        this.getAdministratorsQtd()
+    },
+    methods: {
+        async getDonationsQtd(){
+            this.donations_amount = ( await Admin.getDonationsAmount() ).data
+        },
+        async getDonatorsQtd(){
+            this.donators_amount = ( await Admin.getAllDonators() ).data.length
+        },
+        async getBeneficiariesQtd(){
+            this.beneficiaries_amount = ( await Admin.getAllBeneficiaries() ).data.length
+        },
+        async getAdministratorsQtd(){
+            this.administrators_amount = ( await Admin.getAllAdministrators() ).data.length
+        }
+    }
+}
 
 </script>
 

@@ -5,106 +5,23 @@
     <div class="containerDashboard">
         <div class="listScroll">
         <div class="listStyle">
-
-           <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+            <v-card class="infobox total" v-for="item in donations.reverse()" :key="item._id.$oid">
+                <div>
+                    <b>Doador .............. {{ item.donator_data.name }}</b>
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Valor Informado .............. {{ item.value | toReal}}</b>
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Valor Real .............. {{ item.real_value | toReal }}</b>
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Telefone .............. {{item.donator_data.phone}} </b>
+                    </div>
+                <div>
+                    <b>Beneficiário .............. ---</b>
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
+            </v-card>
         </div>
         </div>
     </div>
@@ -116,8 +33,10 @@
 <script>
     import Sidebar from '../../components/Sidebar.vue'
     import Nav from "../../components/AdminNavigation.vue"
+    import { Administrator } from "../../functions/administrator.js"
 // @ is an alias to /src
 
+let Admin = new Administrator()
 
 export default {
     components:{
@@ -125,16 +44,29 @@ export default {
         Nav
     },
     data: () => ({
-      drawer: false,
-      group: null
+        drawer: false,
+        group: null,
+        donations: [],
     }),
-
-    watch: {
-      group () {
-        this.drawer = false
-      },
+    filters: {
+        toReal: function(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
+        }
     },
-  }
+    watch: {
+        group () {
+            this.drawer = false
+        },
+    },
+    async mounted() {
+        this.getDonations()
+    },
+    methods: {
+        async getDonations(){
+            this.donations = ( await Admin.getDonations() ).data
+        }
+    }
+}
 
 </script>
 

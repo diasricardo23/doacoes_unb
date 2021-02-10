@@ -59,7 +59,11 @@ export default {
     drawer: false,
     group: null
   }),
-
+  filters: {
+    toReal: function(value){
+      return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
+    }
+  },
   watch: {
     group() {
       this.drawer = false;
