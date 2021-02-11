@@ -33,6 +33,15 @@
             </v-card>
         </div>
     </div>
+
+    <div class="containerDashboard">
+        <v-card color="#C4C4C4" class="infobox total" >
+            <b>TOTAL ARRECADADO - MES</b>
+            <v-row>
+            </v-row>
+        </v-card>
+        
+    </div>
     
     <Nav />
   </div>

@@ -5,6 +5,7 @@
     <div class="containerDashboard">
         <div class="listScroll">
         <div class="listStyle">
+            Total - A cada seleção - diminui valor
             <v-card class="infobox total" v-for="item in donations.reverse()" :key="item._id.$oid">
                 <div>
                     <b>Doador .............. {{ item.donator_data.name }}</b>
@@ -16,8 +17,14 @@
                     <b>Valor Real .............. {{ item.real_value | toReal }}</b>
                 </div>
                 <div>
+                    <b>Beneficiário: --------------</b>
+                </div>
+                <div>
                     <b>Telefone .............. {{item.donator_data.phone}} </b>
-                    </div>
+                </div>
+                <div>
+                    <b>Data: .............. {{item.created_time}} (FORMATAR)</b>
+                </div>
                 <div>
                     <b>Beneficiário .............. ---</b>
                 </div>
