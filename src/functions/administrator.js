@@ -215,4 +215,18 @@ export class Administrator {
             }
         })
     }
+
+    getDonationsMonths(){
+        return axios.get(`${api_url}/admin/donations/months`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
 }

@@ -51,7 +51,7 @@ export default {
       drawer: false,
       group: null,
       donations: [],
-      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
+      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" },
     }),
     async mounted() {
       this.getDonations()
