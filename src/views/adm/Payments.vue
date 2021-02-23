@@ -1,19 +1,21 @@
 <template>
-  <div class="container listview">
-      <Sidebar/>
-    
+    <div class="container listview">
+    <Sidebar/>
     <div class="containerDashboard">
         <div class="listScroll">
         <div class="listStyle">
             <div class="infobox total">
+                <v-menu>
+                    Meses
+                </v-menu>
                 <v-select
-                    v-model="select.name"
-                    :hint="select.name"
+                    v-model="select"
                     :items="months"
                     item-text="name"
                     return-object
                 />
             </div><br>
+            <div v-show="select.name">
             <div class="containerMenu">
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Valor Total / Mês
@@ -71,9 +73,10 @@
                 </div>
                 <v-card-actions>
                     <v-spacer/>
-                    <v-btn color="blue darken-4 white--text"> Enviar </v-btn>
+                    <v-btn color="blue darken-4n white--text"> Enviar </v-btn>
                 </v-card-actions>
             </v-card>
+            </div>
         </div>
         </div>
     </div>
@@ -101,6 +104,7 @@ export default {
         donations: [],
         months: [],
         select: {},
+        is_selected: false,
         menu: {
             total: 0,
             beneficiarios: 0,
