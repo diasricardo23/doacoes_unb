@@ -2,42 +2,25 @@
   <div class="containerPage listview">
     <Sidebar />
 
-    <div class="containerDashboard">
+    <div class="containerDashboard" justify="center">
       <vue-scroll-snap>
         <!--<div v-for="bene in beneficiarios">{{bene.beneficiario}}</div> -->
       </vue-scroll-snap>
-      <div class="listScroll">
-        <div class="listStyle">
-          <v-card class="infobox months">
-            <div>
-              <h1>Janeiro 2021<br><br></h1>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-          </v-card>
-                    <v-card class="infobox months">
-            <div>
-              <h1>Fevereiro 2021<br><br></h1>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-          </v-card>
-        </div>
-      </div>
+
+      <v-row justify="center">
+        <v-expansion-panels inset>
+          <v-expansion-panel
+            v-for="(item,i) in 5"
+            :key="i"
+            class="ms-5 mt-3 mb-2"
+          >
+          <v-expansion-panel-header>Mês Referente</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Total Arrecadado: R$ 00.000,00
+          </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
     </div>
 
     <Nav/>
