@@ -1,36 +1,32 @@
 <template>
-<div class="encapsulate">
-<div class="primary containerDrawerElement dark" >
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-</div>
+  <div class="encapsulate">
+    <div class="primary containerDrawerElement dark" >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
 
-<v-navigation-drawer v-model="drawer" absolute left temporary>
-  <v-list nav dense>
-    <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+    <v-navigation-drawer v-model="drawer" absolute left temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4" >
-          <v-list-item>
-            <v-list-item-title>Fooooo</v-list-item-title>
-          </v-list-item>
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+          <v-list nav dense>
+            <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4" >
+              <v-btn to="/admin/admin" class="ms-5">
+                Administradores
+              </v-btn>
 
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
+              <v-btn to="/admin/doadores" class="ms-5 mt-3 mb-3">
+                Doadores
+              </v-btn>
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Sair</v-list-item-title>
-          </v-list-item>
-
+              <v-btn to="/admin/listabeneficiarios" class="ms-5">
+                Beneficiários
+              </v-btn>
+              
+            </v-list-item-group>
+          </v-list>
         </v-list-item-group>
       </v-list>
-    </v-list-item-group>
-  </v-list>
-</v-navigation-drawer>
-</div>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>

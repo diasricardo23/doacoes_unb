@@ -6,41 +6,46 @@
         <div class="donations mt-2">
             <h2 class="grey--text"><b>Olá, {{ user.name }}</b></h2>
         </div>
+
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO</b>
             <v-row>
                 <v-col offset-md="5"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
             </v-row>
         </v-card>
+
         <div class="containerMenu">
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Administradores
                 <div>
                     <h1>{{administrators_amount}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Doadores
                 <div>
                     <h1>{{donators_amount}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Beneficiários
                 <div>
                     <h1>{{beneficiaries_amount}}</h1>
                 </div>
             </v-card>
-        </div>
-    </div>
 
-    <div class="containerDashboard">
+        </div>
+
         <v-card color="#C4C4C4" class="infobox total" >
-            <b>TOTAL ARRECADADO - MES</b>
+            <b>TOTAL ARRECADADO - MÊS</b>
             <v-row>
+                <v-col offset-md="5"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
             </v-row>
         </v-card>
-        
+
     </div>
     
     <Nav />

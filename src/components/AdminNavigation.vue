@@ -10,22 +10,6 @@
             <v-icon>mdi-currency-brl</v-icon>
         </v-btn>
 
-        <v-btn to="/admin/admin">
-            <span>Administradores</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-
-        <v-btn to="/admin/doadores">
-            <span>Doadores</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-
-        <v-btn to="/admin/listabeneficiarios">
-            <span>Beneficiários</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-
-
         <v-btn to="/admin/history">
             <span>Historico</span>
             <v-icon>mdi-history</v-icon>
