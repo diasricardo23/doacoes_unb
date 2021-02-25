@@ -14,7 +14,7 @@
 
     
 
-    <div class="containerDashboard">
+  <div class="containerDashboard">
         <v-card class="infobox donations">
           <h2>
             PÁGINA DE PERFIL
@@ -25,7 +25,8 @@
     max-width="344"
     outlined
     >
-    <v-list-item three-line>
+    
+      
       <v-list-item-content>
         <div class="overline text-center mb-2">
           <h3>{{ user.name }}</h3>
@@ -51,26 +52,80 @@
         </div>
       </v-list-item-content>
     </v-list-item>
-
   </v-card>
-        <v-card class="infobox donations">
-          <v-card-title>
-            {{ user.name }}
-          </v-card-title>
-          <v-card-text>
-            ID: {{ user._id.$oid }}<br>
-            EMAIL: {{ user.email }}<br>
-            TELEFONE: {{ user.phone }}<br>
-            ENDEREÇO --------------------------------------- <br> 
-            Endereço: {{ user.address.address }}<br>
-            Cep: {{ user.address.cep }}<br>
-            Cidade: {{ user.address.city }}<br>
-            Número: {{ user.address.number }}<br>
-            Estado: {{ user.address.state }}<br>
-          </v-card-text>
-        </v-card>
 
-    </div>
+  <template>
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <div class="senha">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Trocar a Senha
+        </v-btn>
+        </div>
+      
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Trocar a Senha</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+
+              <v-col cols="12">
+                <v-text-field
+                  label="Nova Senha*"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12">
+                <v-text-field
+                  label="Confirmar Nova Senha*"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>
+                            
+            </v-row>
+          </v-container>
+          <small>*indica campos obrigatórios</small>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text 
+            @click="dialog = false"
+          >
+            Cancelar
+          </v-btn>
+
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            Confirmar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
+</template>
+
+  </div>
 
     <Nav/>
   </div>
@@ -85,6 +140,7 @@ export default {
   },
     data: () => ({
       drawer: false,
+      dialog: false,
       group: null,
       user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Error" }
     }),
@@ -149,6 +205,11 @@ export default {
     .menu {
         width: 45%;
         text-align: center;
+    }
+
+    .senha {
+        padding-bottom: 30px;
+        padding-top: 40px;
     }
 
 </style>

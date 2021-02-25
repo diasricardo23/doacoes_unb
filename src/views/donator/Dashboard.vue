@@ -57,6 +57,69 @@
             xxxxxxxx@xxxx.com <br/>
         </v-card>
 
+        
+        <div>
+            <template>
+              <v-row
+                align="center"
+                justify="space-around"
+              >
+                <v-btn x-large class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="88" />
+                  ⠀⠀Nova Doação
+                </v-btn>
+                
+              </v-row>
+            </template>
+
+            <div class="sobre">
+            <template>
+              <div>
+                <v-dialog
+                  v-model="dialog"
+                  width="500"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      v-bind="attrs"
+                      v-on="on"
+                      x-large
+                      class="imglink"
+                    ><img alt="Vue logo" src="../../assets/logo.png" width="88" />
+                      ⠀⠀Sobre o Projeto
+                    </v-btn>
+
+                  </template>
+                        <v-card>
+                          <v-card-title class="headline grey lighten-2">
+                            Sobre o Projeto
+                          </v-card-title>
+                          <div class="sobre-text">
+                          <v-card-text>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          </v-card-text>
+                          </div>
+                          <v-divider></v-divider>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="primary"
+                              text
+                              @click="dialog = false"
+                            >
+                              Fechar
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </div>
+                  </template>
+            </div>
+        </div>
+
         <div class="containerMenu">
             <v-card class="infobox menu">
                 Nova Doação
@@ -86,6 +149,7 @@ export default {
     data: () => ({
       drawer: false,
       group: null,
+      dialog: false,
       user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
     }),
 
@@ -159,6 +223,16 @@ export default {
 
     .imglink{
       width:100%;
+    }
+
+    .sobre {
+        padding-bottom: 30px;
+        padding-top: 40px;
+    }
+
+    .sobre-text {
+        padding-bottom: 15px;
+        padding-top: 15px;
     }
 
 </style>
