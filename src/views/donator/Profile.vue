@@ -12,12 +12,47 @@
     >
     </v-navigation-drawer>
 
+    
+
     <div class="containerDashboard">
         <v-card class="infobox donations">
           <h2>
             PÁGINA DE PERFIL
           </h2>
         </v-card>
+        <v-card
+    class="mx-auto"
+    max-width="344"
+    outlined
+    >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline text-center mb-2">
+          <h3>{{ user.name }}</h3>
+        </div>
+        <hr class="mb-3">
+        <div class="text-center">
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">ID</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user._id.$oid }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">EMAIL</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.email }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">TELEFONE</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.phone }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">ENDEREÇO</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.address.address }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">CEP</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.address.cep }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">CIDADE</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.address.city }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">ESTADO</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.address.state }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">NÚMERO</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.address.number }}</v-list-item-subtitle>
+        </div>
+      </v-list-item-content>
+    </v-list-item>
+
+  </v-card>
         <v-card class="infobox donations">
           <v-card-title>
             {{ user.name }}
