@@ -15,18 +15,11 @@
     
 
   <div class="containerDashboard">
-        <v-card class="infobox donations">
-          <h2>
-            PÁGINA DE PERFIL
-          </h2>
-        </v-card>
         <v-card
     class="mx-auto"
     max-width="344"
     outlined
     >
-    
-      
       <v-list-item-content>
         <div class="overline text-center mb-2">
           <h3>{{ user.name }}</h3>
@@ -62,7 +55,7 @@
       max-width="600px"
     >
       <template v-slot:activator="{ on, attrs }">
-        <div class="senha">
+        <div class="senha mb-5">
         <v-btn
           color="primary"
           dark
