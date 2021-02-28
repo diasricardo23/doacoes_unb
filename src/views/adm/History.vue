@@ -16,6 +16,21 @@
           >
           <v-expansion-panel-header>Mês Referente</v-expansion-panel-header>
           <v-expansion-panel-content>
+            <v-list subheader>
+              <v-subheader>Doação</v-subheader>
+                <v-list-item v-for="donation in donations" :key="donation._id.$oid">
+                  <v-list-item-content>
+                    <v-list-item-title v-text="donation.donator_data.name"></v-list-item-title>
+                    <v-list-item-subtitle v-text="donation.value"></v-list-item-subtitle>
+                    <v-btn 
+                      class="ma-1"
+                      color="blue darken-4n white--text"
+                      plain
+                      @click="approve(donation._id.$oid)"
+                    > Aprovar</v-btn>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
             Total Arrecadado: R$ 00.000,00
           </v-expansion-panel-content>
           </v-expansion-panel>
@@ -31,7 +46,10 @@
 import VueScrollSnap from "vue-scroll-snap";
 import Sidebar from "../../components/Sidebar.vue";
 import Nav from "../../components/AdminNavigation.vue"
+import { Administrator } from '../../functions/administrator';
 // @ is an alias to /src
+
+let Admin = new Administrator()
 
 export default {
   components: {
@@ -40,7 +58,14 @@ export default {
   },
   data: () => ({
     drawer: false,
-    group: null
+    group: null,
+
+    donations:[
+      // {
+      //    active:true, 
+      //    value:"150,00"
+      // }
+    ]
   }),
   filters: {
     toReal: function(value){
@@ -50,6 +75,17 @@ export default {
   watch: {
     group() {
       this.drawer = false;
+    }
+  },
+  async mounted(){
+    this.getDonations()
+  },
+  methods:{
+    async getDonations(){
+            this.donations = ( await Admin.getDonations() ).data.reverse()
+        },
+    async approve(id){
+      await Admin.ApproveDonation(id)
     }
   }
 };

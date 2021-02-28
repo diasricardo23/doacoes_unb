@@ -229,4 +229,17 @@ export class Administrator {
             }
         })
     }
+    ApproveDonation(id){
+        return axios.post(`${api_url}admin/donations/approve/${id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
 }

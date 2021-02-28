@@ -27,8 +27,8 @@ export default {
     data(){
         return{
             login_form: {
-                email: "danielsprado12@gmail.com",
-                password: "h8kPJ97V9wax",
+                email: "victor@teste.com",
+                password: "123456",
             }
         }
     },

@@ -54,12 +54,13 @@
                 </div>
                 <div>
                     <b>Beneficiário: -------------- 
+                        <v-list-item v-for="beneficiario in teste_combobox" :key="beneficiario.name">
                         <v-combobox 
-                            v-model="combo_model" 
-                            :items="teste_combobox"
+                            :items="teste_combobox[0].name"
                             multiple
                             small-chips
                         /> 
+                        </v-list-item>
                     </b>
                 </div>
                 <div>
@@ -112,7 +113,7 @@ export default {
             parcial: 0,
         },
         combo_model: ["João"],
-        teste_combobox: [ "João", "Maria", "josé" ]
+        teste_combobox: [ ]
     }),
     filters: {
         toReal: function(value){
@@ -144,10 +145,14 @@ export default {
         this.getDonations()
         this.getMonths()
         this.getBeneficiarios()
+        this.getBeneficiariosNames()
     },
     methods: {
         async getBeneficiarios(){
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
+        },
+        async getBeneficiariosNames(){
+            this.teste_combobox=(await Admin.getAllBeneficiaries()).data.reverse()
         },
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )
