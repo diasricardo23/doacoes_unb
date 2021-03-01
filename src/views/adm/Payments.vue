@@ -14,8 +14,12 @@
                     item-text="name"
                     return-object
                 />
-            </div><br>
-            <div v-show="select.name">
+            <v-btn @click="searchDonations()">
+                Pesquisar
+            </v-btn>
+            </div>
+            <br>
+            <div v-show="select">
             <div class="containerMenu">
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Valor Total / Mês
@@ -32,7 +36,7 @@
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Valor médio / Beneficiário
                 <div>
-                    <h1>{{menu.valor_medio}}</h1>
+                    <h1>{{menu.total / menu.beneficiarios}}</h1>
                 </div>
             </v-card>
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
@@ -104,7 +108,7 @@ export default {
         group: null,
         donations: [],
         months: [],
-        select: {},
+        select: null,
         is_selected: false,
         menu: {
             total: 0,
@@ -140,9 +144,10 @@ export default {
             this.$nextTick(() => this.model.pop())
             }
         },
+
     },
     async mounted() {
-        this.getDonations()
+        // this.getDonations()
         this.getMonths()
         this.getBeneficiarios()
         this.getBeneficiariosNames()
@@ -157,9 +162,16 @@ export default {
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )
         },
-        async getDonations(){
-            this.donations = ( await Admin.getDonations() ).data.reverse()
-        }
+        async totalByMonth(){
+            this.menu.total = (await Admin.getTotalByMonth(this.select)).data
+        },
+        // async getDonations(){
+        //     this.donations = ( await Admin.getDonations() ).data.reverse()
+        // },
+        async searchDonations(){
+            this.donations = ( await Admin.getDonationsByMonth(this.select) ).data
+            this.totalByMonth()
+        },
     }
 }
 

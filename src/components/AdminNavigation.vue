@@ -15,6 +15,22 @@
             <v-icon>mdi-history</v-icon>
         </v-btn>
 
+        <v-btn to="/admin/admin">
+            <span>Admin</span>
+            <v-icon>mdi-face-profile</v-icon>
+        </v-btn>
+
+        <v-btn to="/admin/doadores">
+            <span>Doadores</span>
+            <v-icon>mdi-face-profile</v-icon>
+        </v-btn>
+
+        <v-btn to="/admin/listabeneficiarios">
+            <span>Beneficiários</span>
+            <v-icon>mdi-face-profile</v-icon>
+        </v-btn>
+
+
         <v-btn @click="logout">
             <span>Sair</span>
             <v-icon>mdi-logout</v-icon>
