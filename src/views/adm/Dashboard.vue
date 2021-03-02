@@ -15,35 +15,33 @@
         </v-card>
 
         <div class="containerMenu">
-
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Administradores
                 <div>
                     <h1>{{administrators_amount}}</h1>
                 </div>
             </v-card>
-
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Doadores
                 <div>
                     <h1>{{donators_amount}}</h1>
                 </div>
             </v-card>
-
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
                 Quantidade de Beneficiários
                 <div>
                     <h1>{{beneficiaries_amount}}</h1>
                 </div>
             </v-card>
-
         </div>
 
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO - MÊS</b>
-            <v-row>
-                <v-col offset-md="5"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
-            </v-row>
+        </v-card>
+
+        <v-card color="#C4C4C4" class="infobox total" v-for="(item, index) in months" :key="index">
+            <b>{{item}}</b><br>
+            {{ searchDonations(item) }}
         </v-card>
 
     </div>
@@ -73,6 +71,7 @@ export default {
         donators_amount: 0,
         beneficiaries_amount: 0,
         administrators_amount: 0,
+        months: 0
     }),
     filters: {
         toReal: function(value){
@@ -89,8 +88,12 @@ export default {
         this.getDonatorsQtd()
         this.getBeneficiariesQtd()
         this.getAdministratorsQtd()
+        this.getMonths()
     },
     methods: {
+        async getMonths(){
+            this.months = ( (await Admin.getDonationsMonths()).data )
+        },
         async getDonationsQtd(){
             this.donations_amount = ( await Admin.getDonationsAmount() ).data
         },
@@ -102,7 +105,11 @@ export default {
         },
         async getAdministratorsQtd(){
             this.administrators_amount = ( await Admin.getAllAdministrators() ).data.length
-        }
+        },
+        async searchDonations(month){
+            let item = ( await Admin.getDonationsByMonth(month) ).data
+            return item
+        },
     }
 }
 

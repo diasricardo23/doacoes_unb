@@ -48,13 +48,13 @@
         </div>
             <v-card class="infobox total" v-for="item in donations" :key="item._id.$oid">
                 <div>
-                    <b>Doador .............. {{ item.donator_data.name }}</b>
+                    <b>Doador</b> .............. {{ item.donator_data.name }}
                 </div>
                 <div>
-                    <b>Valor Informado .............. {{ item.value | toReal}}</b>
+                    <b>Valor Informado</b> .............. {{ item.value | toReal}}
                 </div>
                 <div>
-                    <b>Valor Real .............. {{ item.real_value | toReal }}</b>
+                    <b>Valor Real</b> .............. {{ item.real_value | toReal }}
                 </div>
                 <div>
                     <b>Beneficiário: -------------- 
@@ -68,13 +68,10 @@
                     </b>
                 </div>
                 <div>
-                    <b>Telefone .............. {{item.donator_data.phone}} </b>
+                    <b>Telefone</b> .............. {{item.donator_data.phone}} 
                 </div>
                 <div>
-                    <b>Data: .............. {{item.created_time | dateToPT}}</b>
-                </div>
-                <div>
-                    <b>Beneficiário .............. ---</b>
+                    <b>Data:</b> .............. {{item.created_time | dateToPT}}
                 </div>
                 <v-card-actions>
                     <v-spacer/>
