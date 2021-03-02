@@ -50,7 +50,7 @@ export class Donator {
     }
 
     deleteDonation(donation_id){
-        return axios.delete(`${api_url}/donator/donations/${donation_id}`, {
+        return axios.delete(`${api_url}/donator/donation/${donation_id}`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

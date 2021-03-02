@@ -32,6 +32,8 @@
           <v-list-item-subtitle class="mb-3">{{ user.email }}</v-list-item-subtitle>
           <v-list-item-title class="headline mb-2 body-1 font-weight-medium">TELEFONE</v-list-item-title>
           <v-list-item-subtitle class="mb-3">{{ user.phone }}</v-list-item-subtitle>
+          <v-list-item-title class="headline mb-2 body-1 font-weight-medium">CPF</v-list-item-title>
+          <v-list-item-subtitle class="mb-3">{{ user.cpf }}</v-list-item-subtitle>
           <v-list-item-title class="headline mb-2 body-1 font-weight-medium">ENDEREÇO</v-list-item-title>
           <v-list-item-subtitle class="mb-3">{{ user.address.address }}</v-list-item-subtitle>
           <v-list-item-title class="headline mb-2 body-1 font-weight-medium">CEP</v-list-item-title>
