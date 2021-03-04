@@ -57,13 +57,13 @@
             xxxxxxxx@xxxx.com <br/>
         </v-card>
 
-        <div>
-          <template>
-              <v-row
-                align="center"
-                justify="space-around"
-              >
-              
+        <!-- 
+          ---------------------------------------ALA DOS BOTÕES----------------------------------------          
+         -->
+
+        <div> 
+          <template>            
+            <v-row align="center" justify="space-around">              
               <div class="button">
                 <v-dialog
                   v-model="dialog"
@@ -74,8 +74,8 @@
                       <img alt="Vue logo" src="../../assets/logo.png" width="88" />
                       ⠀⠀⠀⠀⠀⠀Sobre o Projeto⠀⠀⠀⠀⠀⠀
                     </v-btn>
-
                   </template>
+
                         <v-card>
                           <v-card-title class="headline grey lighten-2">
                             Sobre o Projeto
@@ -103,22 +103,18 @@
                         </v-card>
                       </v-dialog>
                     </div>
-
-              
-                
               </v-row>
-            <v-row
-                align="center"
-                justify="space-around"
-              >
-              <div>
+
+
+            <v-row align="center" justify="space-around">
+              <div class="containerButtons">
                 <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="88" />
                   ⠀⠀⠀⠀⠀⠀⠀Nova Doação⠀⠀⠀⠀⠀⠀⠀⠀
                 </v-btn>
               </div>
-                
-              </v-row>  
-            </template>
+            </v-row>
+
+          </template>
         </div>
 
 
@@ -229,6 +225,14 @@ export default {
     .button {
         padding-bottom: 25px;
         padding-top: 20px;
+    }
+    
+    .containerButtons {
+      width: 100%;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
     }
 
 </style>
