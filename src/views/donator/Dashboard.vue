@@ -57,35 +57,22 @@
             xxxxxxxx@xxxx.com <br/>
         </v-card>
 
-        
         <div>
-            <template>
+          <template>
               <v-row
                 align="center"
                 justify="space-around"
               >
-                <v-btn x-large class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="88" />
-                  ⠀⠀Nova Doação
-                </v-btn>
-                
-              </v-row>
-            </template>
-
-            <div class="sobre">
-            <template>
-              <div>
+              
+              <div class="button">
                 <v-dialog
                   v-model="dialog"
                   width="500"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      v-bind="attrs"
-                      v-on="on"
-                      x-large
-                      class="imglink"
-                    ><img alt="Vue logo" src="../../assets/logo.png" width="88" />
-                      ⠀⠀Sobre o Projeto
+                    <v-btn block v-bind="attrs" v-on="on" x-large class="imglink" >
+                      <img alt="Vue logo" src="../../assets/logo.png" width="88" />
+                      ⠀⠀⠀⠀⠀⠀Sobre o Projeto⠀⠀⠀⠀⠀⠀
                     </v-btn>
 
                   </template>
@@ -116,20 +103,24 @@
                         </v-card>
                       </v-dialog>
                     </div>
-                  </template>
-            </div>
+
+              
+                
+              </v-row>
+            <v-row
+                align="center"
+                justify="space-around"
+              >
+              <div>
+                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="88" />
+                  ⠀⠀⠀⠀⠀⠀⠀Nova Doação⠀⠀⠀⠀⠀⠀⠀⠀
+                </v-btn>
+              </div>
+                
+              </v-row>  
+            </template>
         </div>
 
-        <div class="containerMenu">
-            <v-card class="infobox menu">
-                Nova Doação
-                <div class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="58" /></div>
-            </v-card>
-            <v-card class="infobox menu">
-                Sobre o Projeto
-                <div class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="58" /></div>
-            </v-card>
-        </div>
 
     </div>
     
@@ -231,8 +222,13 @@ export default {
     }
 
     .sobre-text {
-        padding-bottom: 15px;
-        padding-top: 15px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .button {
+        padding-bottom: 25px;
+        padding-top: 20px;
     }
 
 </style>
