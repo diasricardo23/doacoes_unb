@@ -1,13 +1,12 @@
 <template>
   <div class="container1">
     <div class="containerImg">
-      <v-img alt="Logo UnB" src="../assets/logo.png" contain />
+      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" contain />
     </div>
-    <div class="logo-title">DOAÇÕES COVID UNB</div>
     <div class="containerButtons">
-      <v-btn color="primary" class="loginBtn mb-4" to="/loginadm">Login Admin</v-btn>
-      <v-btn color="primary" class="loginBtn mb-4" to="/logindonator">Login Doador</v-btn>
-      <v-btn color="primary" class="loginBtn mb-4" to="/about">Sobre a Ação</v-btn>
+      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/loginadm">Login Admin</v-btn>
+      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/logindonator">Login Doador</v-btn>
+      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/about">Sobre a Ação</v-btn>
     </div>
   </div>
 </template>
@@ -18,7 +17,7 @@
 
 <style scoped>
 .container1 {
-  background-color: white;
+  background-color: #547A9C;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -26,15 +25,8 @@
   width: 100%;
 }
 
-.logo-title {
-  color: #1d2d50;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 25%;
-}
-
 .containerImg {
-  width: 60% !important;
+  width: 90% !important;
   display: flex;
   flex: 2;
   flex-direction: column;
@@ -55,14 +47,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.emailInput {
-  border-radius: 8px;
-  width: 80%;
-  height: 36px;
-  margin-bottom: 5px;
-  padding: 5px;
 }
 
 .loginBtn {
