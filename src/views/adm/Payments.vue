@@ -14,8 +14,12 @@
                     item-text="name"
                     return-object
                 />
-            </div><br>
-            <div v-show="select.name">
+            <v-btn @click="searchDonations()">
+                Pesquisar
+            </v-btn>
+            </div>
+            <br>
+            <div v-show="select">
             <div class="containerMenu">
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Valor Total / Mês
@@ -32,7 +36,7 @@
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
                 Valor médio / Beneficiário
                 <div>
-                    <h1>{{menu.valor_medio}}</h1>
+                    <h1>{{menu.total / menu.beneficiarios}}</h1>
                 </div>
             </v-card>
             <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
@@ -44,13 +48,13 @@
         </div>
             <v-card class="infobox total" v-for="item in donations" :key="item._id.$oid">
                 <div>
-                    <b>Doador .............. {{ item.donator_data.name }}</b>
+                    <b>Doador</b> .............. {{ item.donator_data.name }}
                 </div>
                 <div>
-                    <b>Valor Informado .............. {{ item.value | toReal}}</b>
+                    <b>Valor Informado</b> .............. {{ item.value | toReal}}
                 </div>
                 <div>
-                    <b>Valor Real .............. {{ item.real_value | toReal }}</b>
+                    <b>Valor Real</b> .............. {{ item.real_value | toReal }}
                 </div>
                 <div>
                     <b>Beneficiário: -------------- 
@@ -64,13 +68,10 @@
                     </b>
                 </div>
                 <div>
-                    <b>Telefone .............. {{item.donator_data.phone}} </b>
+                    <b>Telefone</b> .............. {{item.donator_data.phone}} 
                 </div>
                 <div>
-                    <b>Data: .............. {{item.created_time | dateToPT}}</b>
-                </div>
-                <div>
-                    <b>Beneficiário .............. ---</b>
+                    <b>Data:</b> .............. {{item.created_time | dateToPT}}
                 </div>
                 <v-card-actions>
                     <v-spacer/>
@@ -104,7 +105,7 @@ export default {
         group: null,
         donations: [],
         months: [],
-        select: {},
+        select: null,
         is_selected: false,
         menu: {
             total: 0,
@@ -140,9 +141,10 @@ export default {
             this.$nextTick(() => this.model.pop())
             }
         },
+
     },
     async mounted() {
-        this.getDonations()
+        // this.getDonations()
         this.getMonths()
         this.getBeneficiarios()
         this.getBeneficiariosNames()
@@ -157,9 +159,16 @@ export default {
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )
         },
-        async getDonations(){
-            this.donations = ( await Admin.getDonations() ).data.reverse()
-        }
+        async totalByMonth(){
+            this.menu.total = (await Admin.getTotalByMonth(this.select)).data
+        },
+        // async getDonations(){
+        //     this.donations = ( await Admin.getDonations() ).data.reverse()
+        // },
+        async searchDonations(){
+            this.donations = ( await Admin.getDonationsByMonth(this.select) ).data
+            this.totalByMonth()
+        },
     }
 }
 

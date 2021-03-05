@@ -202,6 +202,34 @@ export class Administrator {
         })
     }
 
+    getDonationsByMonth(month){
+        return axios.get(`${api_url}/admin/donations/month/${month}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    getTotalByMonth(month){
+        return axios.get(`${api_url}/admin/donations/month/${month}/total`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+    
     getDonationsAmount(){
         return axios.get(`${api_url}/admin/donations/amount`, {
             headers: { Authorization: `Bearer ${this.token}` }
@@ -229,6 +257,9 @@ export class Administrator {
             }
         })
     }
+
+    
+
     ApproveDonation(id){
         return axios.post(`${api_url}admin/donations/approve/${id}`, {
             headers: { Authorization: `Bearer ${this.token}` }
