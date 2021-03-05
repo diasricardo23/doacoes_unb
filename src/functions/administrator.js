@@ -271,8 +271,22 @@ export class Administrator {
             }
         })
     }
+
     getBeneficiaryNames(){
-        return axios.get(`${api_url}admin/beneficiary/names`, {
+        return axios.get(`${api_url}admin/beneficiaries`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+    editDonation(id, data){
+        return axios.patch(`${api_url}admin/donations/${id}`, data, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

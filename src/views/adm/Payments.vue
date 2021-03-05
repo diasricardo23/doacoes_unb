@@ -64,13 +64,20 @@
                     <b>Beneficiário: -------------- 
                         <v-list-item>
                         <v-combobox 
-                            :items="teste_combobox"
+                            :items="teste"
+                            item-text="name"
                             multiple
                             small-chips
+                            v-model="selectedBeneficiary"
                         /> 
                         </v-list-item>
+                        <div v-for='(beneficiario,index) in selectedBeneficiary' :key="index">
+                            {{beneficiario}}
+                            <v-text-field v-model='beneficiario.value'></v-text-field>
+                        </div>
                     </b>
                 </div>
+               
                 <div>
                     <b>Telefone</b> .............. {{item.donator_data.phone}} 
                 </div>
@@ -79,7 +86,7 @@
                 </div>
                 <v-card-actions>
                     <v-spacer/>
-                    <v-btn color="blue darken-4n white--text"> Enviar </v-btn>
+                    <v-btn color="blue darken-4n white--text" @click="updateDonation(item._id.$oid,selectedBeneficiary)"> Enviar </v-btn>
                 </v-card-actions>
             </v-card>
             </div>
@@ -117,8 +124,9 @@ export default {
             valor_medio: 0,
             parcial: 0,
         },
-        //combo_model: ["João"],
-        teste_combobox: [ ]
+        teste_combobox: [ ],
+        teste:[ ],
+        selectedBeneficiary:[ ]
     }),
     filters: {
         toReal: function(value){
@@ -158,7 +166,12 @@ export default {
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
         },
         async getBeneficiariosNames(){
-            this.teste_combobox=(await Admin.getBeneficiaryNames()).data.reverse()
+            this.teste=(await Admin.getBeneficiaryNames()).data
+           
+            this.teste.forEach(element => {
+                this.teste_combobox.push(element.name)
+            }); 
+            console.log('***res.data',this.teste)
         },
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )
@@ -173,6 +186,10 @@ export default {
             this.donations = ( await Admin.getDonationsByMonth(this.select) ).data
             this.totalByMonth()
         },
+        async updateDonation(id, data){
+            let aux = {beneficiary_data:data}
+            await Admin.editDonation(id,aux)
+        }
     }
 }
 
