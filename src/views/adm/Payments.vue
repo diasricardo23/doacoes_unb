@@ -1,5 +1,5 @@
 <template>
-    <div class="container listview">
+    <div class="containerPage listview">
     <Sidebar/>
     <div class="containerDashboard">
         <div class="listScroll">
@@ -21,32 +21,36 @@
             <br>
             <div v-show="select">
             <div class="containerMenu">
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
                 Valor Total / Mês
                 <div>
                     <h1>{{menu.total}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
                 Quantidade de Beneficiários
                 <div>
                     <h1>{{menu.beneficiarios}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+
+            
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
                 Valor médio / Beneficiário
                 <div>
                     <h1>{{menu.total / menu.beneficiarios}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1">
+            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
                 Parcial
                 <div>
                     <h1>{{menu.parcial}}</h1>
                 </div>
             </v-card>
+
         </div>
-            <v-card class="infobox total" v-for="item in donations" :key="item._id.$oid">
+
+            <v-card class="infobox total infoboxdata " v-for="item in donations" :key="item._id.$oid">
                 <div>
                     <b>Doador</b> .............. {{ item.donator_data.name }}
                 </div>
@@ -175,6 +179,15 @@ export default {
 </script>
 
 <style scoped>
+    .containerPage {
+        background-color: #DADADA;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
     .container {
         background-color: #DADADA;
         display: flex;
@@ -228,10 +241,10 @@ export default {
         width: 88%;
     }
 
-    .totalCard{
+    .totalCard {
         background-color: #717171;
     }
-    .listview{
+    .listview {
         overflow: none;
     }
 
@@ -239,9 +252,26 @@ export default {
         width: 40%;
         text-align: center;
     }
-  .menuIcon{
+    .menuIcon {
     color: white;
   }
-  
+
+    .infonum1 {
+        margin-right: 10px;
+        margin-left: 35px;
+    }
+
+    .infonum2 {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .infonum3 {
+        margin-left: 10px;
+    }
+
+    .infoboxdata {
+        margin-left: 30px;
+    }
 
 </style>

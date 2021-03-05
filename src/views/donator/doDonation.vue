@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
@@ -146,6 +146,16 @@ export default {
 </script>
 
 <style>
+
+    .containerPage {
+        background-color: #DADADA;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
     .container {
         background-color: #DADADA;
         display: flex;

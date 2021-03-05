@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerPage">
     <div class="primary containerDrawer dark" >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
           <p class = "header">
@@ -87,6 +87,16 @@ export default {
 </script>
 
 <style scoped>
+    
+    .containerPage {
+      background-color: #DADADA;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    
     .active{
       background-color: blue;
     }

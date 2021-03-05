@@ -71,8 +71,8 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn block v-bind="attrs" v-on="on" x-large class="imglink" >
-                      <img alt="Vue logo" src="../../assets/logo.png" width="88" />
-                      ⠀⠀⠀⠀⠀⠀Sobre o Projeto⠀⠀⠀⠀⠀⠀
+                      <img alt="Vue logo" src="../../assets/sobre.png" width="30" />
+                      ⠀Sobre o Projeto 
                     </v-btn>
                   </template>
 
@@ -103,13 +103,10 @@
                         </v-card>
                       </v-dialog>
                     </div>
-              </v-row>
-
-
-            <v-row align="center" justify="space-around">
-              <div class="containerButtons">
-                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/logo.png" width="88" />
-                  ⠀⠀⠀⠀⠀⠀⠀Nova Doação⠀⠀⠀⠀⠀⠀⠀⠀
+            
+              <div class>
+                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/money.png" width="60" />
+                 ⠀Nova Doação    
                 </v-btn>
               </div>
             </v-row>

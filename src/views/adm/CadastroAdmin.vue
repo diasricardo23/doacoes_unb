@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="containerPage">
         <Sidebar/>
             <div class="containerDashboard">
                 <v-data-table
@@ -272,6 +272,15 @@ export default {
 </script>
 
 <style>
+    .containerPage {
+        background-color: #DADADA;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
     .container {
         background-color: #DADADA;
         display: flex;
