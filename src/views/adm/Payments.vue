@@ -1,5 +1,5 @@
 <template>
-    <div class="container listview">
+    <div class="containerPage listview">
     <Sidebar/>
     <div class="containerDashboard">
         <div class="listScroll">
@@ -166,7 +166,7 @@ export default {
 </script>
 
 <style scoped>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;

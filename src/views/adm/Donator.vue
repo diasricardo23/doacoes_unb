@@ -1,12 +1,12 @@
 <template>
-    <div class="container">
+    <div class="containerPage">
         <Sidebar/>
             <div class="containerDashboard">
                 <v-data-table
                     :headers="headers"
                     :items="donators"
                     :items-per-page="5"
-                    class="elevation-1"
+                    class="elevation-1 tableWidth"
                 >
                     <template v-slot:top>
                         <v-toolbar flat>
@@ -342,9 +342,14 @@ export default {
         width: 40%;
         text-align: center;
     }
-  .menuIcon{
-    color: white;
-  }
+    
+    .menuIcon{
+        color: white;
+    }
+
+    .tableWidth {
+        min-width: 80vw;
+    }
 
 
 </style>

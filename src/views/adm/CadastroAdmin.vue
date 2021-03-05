@@ -1,12 +1,12 @@
 <template>
-    <div class="container">
+    <div class="containerPage">
         <Sidebar/>
             <div class="containerDashboard">
                 <v-data-table
                     :headers="headers"
                     :items="administrators"
                     :items-per-page="15"
-                    class="elevation-1"
+                    class="elevation-1 tableWidth"
                     :key="administrators"
                 >
                     <template v-slot:top>
@@ -272,7 +272,7 @@ export default {
 </script>
 
 <style>
-    .container {
+    .containerPage {
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -343,9 +343,14 @@ export default {
         width: 40%;
         text-align: center;
     }
-  .menuIcon{
-    color: white;
-  }
+
+    .menuIcon{
+        color: white;
+    }
+
+    .tableWidth {
+        min-width: 80vw;
+    }
   
 
 </style>
