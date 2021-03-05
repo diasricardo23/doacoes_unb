@@ -1,17 +1,12 @@
 <template>
   <div class="containerPage">
-    <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-          <p class = "header">
-            Pagina de Doação
-        </p>
-    </div>   
+    <SidebarDonator />
     
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, {{user.name}}</b>
         </div>
-        <v-card class="infobox donations" v-for="item in donations" :key="item._id.$oid">
+        <v-card class="infobox donations mb-2" v-for="item in donations" :key="item._id.$oid">
           <div class="left">
             <v-badge v-if="item.is_changeable" color="red"/>
             <v-badge v-else color="grey"/>
@@ -23,12 +18,12 @@
             <h4> Data de validação: dd/mm/yyyy </h4>
             <h4> Beneficiário: {{ item.beneficiary_id }} </h4>
             <h4> Valor: {{ item.value }} </h4>
-          </div>
-          <v-card-actions>
-            <v-btn rounded class="red lighten-2 ml-3" small v-if="item.is_changeable" @click="deleteDonation(item._id.$oid)">
+            <v-card-actions>
+            <v-btn rounded class="red lighten-2" small v-if="item.is_changeable" @click="deleteDonation(item._id.$oid)">
               Deletar Doação
             </v-btn>
           </v-card-actions>
+          </div>
         </v-card>
     </div>
     
@@ -37,6 +32,7 @@
 </template>
 
 <script>
+import SidebarDonator from '../../components/SidebarDonator.vue'
 import Nav from "../../components/DonatorNavigation.vue"
 import { Donator } from "../../functions/donator.js"
 // @ is an alias to /src
@@ -45,6 +41,7 @@ let Don = new Donator()
 
 export default {
   components: {
+    SidebarDonator,
     Nav
   },
     data: () => ({

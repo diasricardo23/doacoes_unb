@@ -1,42 +1,6 @@
 <template>
   <div class="containerPage">
-    <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Fooooo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-
+    <SidebarDonator />
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, {{user.name}}</b>
@@ -104,8 +68,8 @@
                       </v-dialog>
                     </div>
             
-              <div class>
-                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/money.png" width="60" />
+              <div class="ms-16 posicao">
+                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/money.png" width="40" />
                  ⠀Nova Doação    
                 </v-btn>
               </div>
@@ -122,11 +86,13 @@
 </template>
 
 <script>
+import SidebarDonator from '../../components/SidebarDonator.vue'
 import BottomTabs from '../../components/BottomTabs.vue'
 import Nav from "../../components/DonatorNavigation.vue"
 // @ is an alias to /src
 export default {
     components:{
+        SidebarDonator,
         BottomTabs,
         Nav
     },
@@ -230,6 +196,10 @@ export default {
       flex: 1;
       flex-direction: column;
       align-items: center;
+    }
+
+    .posicao {
+      margin-bottom: 4.5px !important;
     }
 
 </style>

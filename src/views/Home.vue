@@ -26,9 +26,9 @@
 }
 
 .containerImg {
-  width: 90% !important;
+  width: 30% !important;
   display: flex;
-  flex: 2;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;

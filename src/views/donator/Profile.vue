@@ -1,19 +1,6 @@
 <template>
   <div class="containerPage">
-    <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-    </v-navigation-drawer>
-
-    
-
+    <SidebarDonator />
     <div class="containerDashboard">
       <v-card
       class="mx-auto"
@@ -126,10 +113,12 @@
 </template>
 
 <script>
+import SidebarDonator from '../../components/SidebarDonator.vue'
 import Nav from "../../components/DonatorNavigation.vue"
 // @ is an alias to /src
 export default {
   components: {
+    SidebarDonator,
     Nav
   },
     data: () => ({

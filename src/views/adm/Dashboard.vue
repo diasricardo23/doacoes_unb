@@ -1,7 +1,6 @@
 <template>
   <div class="containerPage">
     <Sidebar/>
-    
     <div class="containerDashboard">
         <div class="donations mt-2">
             <h2 class="black--text"><b>Olá, {{ user.name }}</b></h2>
