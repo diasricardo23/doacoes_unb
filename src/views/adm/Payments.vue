@@ -158,7 +158,7 @@ export default {
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
         },
         async getBeneficiariosNames(){
-            this.teste_combobox=(await Admin.getBeneficiariesNames()).data.reverse()
+            this.teste_combobox=(await Admin.getBeneficiaryNames()).data.reverse()
         },
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )

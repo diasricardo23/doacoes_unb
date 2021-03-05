@@ -272,7 +272,7 @@ export class Administrator {
         })
     }
     getBeneficiaryNames(){
-        return axios.get(`${api_url}/admin/beneficiary/names`, {
+        return axios.get(`${api_url}admin/beneficiary/names`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
