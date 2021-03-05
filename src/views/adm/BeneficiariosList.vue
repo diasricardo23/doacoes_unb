@@ -6,7 +6,7 @@
                     :headers="headers"
                     :items="beneficiaries"
                     :items-per-page="5"
-                    class="elevation-1"
+                    class="elevation-1 tableWidth"
                 >
                     <template v-slot:top>
                         <v-toolbar flat>
@@ -298,6 +298,7 @@ export default {
 
 <style>
     .containerPage {
+<<<<<<< HEAD
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -307,6 +308,8 @@ export default {
     }
 
     .container {
+=======
+>>>>>>> 1ef0869b9bd8a628012ea3e92c2a6c807bb73689
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -377,9 +380,13 @@ export default {
         width: 40%;
         text-align: center;
     }
-  .menuIcon{
-    color: white;
-  }
-  
+
+    .menuIcon{
+        color: white;
+    }
+    
+    .tableWidth {
+        min-width: 80vw;
+    }
 
 </style>

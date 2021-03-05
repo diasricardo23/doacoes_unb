@@ -1,10 +1,10 @@
 <template>
   <div class="containerPage">
-      <Sidebar/>
+    <Sidebar/>
     
     <div class="containerDashboard">
         <div class="donations mt-2">
-            <h2 class="grey--text"><b>Olá, {{ user.name }}</b></h2>
+            <h2 class="black--text"><b>Olá, {{ user.name }}</b></h2>
         </div>
 
         <v-card color="#C4C4C4" class="infobox total" >

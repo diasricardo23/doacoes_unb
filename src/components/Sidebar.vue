@@ -1,28 +1,43 @@
 <template>
   <div class="encapsulate">
     <div class="primary containerDrawerElement dark" >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text"></v-app-bar-nav-icon>
     </div>
 
     <v-navigation-drawer v-model="drawer" absolute left temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list nav dense>
-            <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4" >
-              <v-btn to="/admin/admin" class="ms-5">
-                Administradores
-              </v-btn>
+        
+        <v-list-item-group v-model="group" active-class="blue--text text--accent-4" >
+          <v-list-item link to="/admin/admin">
+            <v-list-item-icon>
+              <v-icon>mdi-account-cog</v-icon>
+            </v-list-item-icon>
 
-              <v-btn to="/admin/doadores" class="ms-5 mt-3 mb-3">
-                Doadores
-              </v-btn>
+            <v-list-item-content>
+              <v-list-item-title>ADMINISTRADORES</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-              <v-btn to="/admin/listabeneficiarios" class="ms-5">
-                Beneficiários
-              </v-btn>
-              
-            </v-list-item-group>
-          </v-list>
+          <v-list-item link to="/admin/doadores">
+            <v-list-item-icon>
+              <v-icon>mdi-account-cash</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>DOADORES</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link to="/admin/listabeneficiarios">
+            <v-list-item-icon>
+              <v-icon>mdi-account-group</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>BENEFICIÁRIOS</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+            
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -52,8 +67,6 @@ watch: {
     height: 100%!important;
     display: flex;
     align-items: center;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 
 .containerDashboard {
