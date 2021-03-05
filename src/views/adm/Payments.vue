@@ -62,9 +62,9 @@
                 </div>
                 <div>
                     <b>Beneficiário: -------------- 
-                        <v-list-item v-for="beneficiario in teste_combobox" :key="beneficiario.name">
+                        <v-list-item>
                         <v-combobox 
-                            :items="teste_combobox[0].name"
+                            :items="teste_combobox"
                             multiple
                             small-chips
                         /> 
@@ -117,7 +117,7 @@ export default {
             valor_medio: 0,
             parcial: 0,
         },
-        combo_model: ["João"],
+        //combo_model: ["João"],
         teste_combobox: [ ]
     }),
     filters: {
@@ -158,7 +158,7 @@ export default {
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
         },
         async getBeneficiariosNames(){
-            this.teste_combobox=(await Admin.getAllBeneficiaries()).data.reverse()
+            this.teste_combobox=(await Admin.getBeneficiariesNames()).data.reverse()
         },
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )

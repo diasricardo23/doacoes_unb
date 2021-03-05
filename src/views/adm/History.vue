@@ -85,7 +85,7 @@ export default {
             this.donations = ( await Admin.getDonations() ).data.reverse()
         },
     async approve(id){
-      await Admin.ApproveDonation(id)
+      await Admin.approveDonation(id)
     }
   }
 };
