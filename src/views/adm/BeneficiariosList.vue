@@ -298,7 +298,6 @@ export default {
 
 <style>
     .containerPage {
-<<<<<<< HEAD
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -308,8 +307,7 @@ export default {
     }
 
     .container {
-=======
->>>>>>> 1ef0869b9bd8a628012ea3e92c2a6c807bb73689
+
         background-color: #DADADA;
         display: flex;
         flex: 1;
