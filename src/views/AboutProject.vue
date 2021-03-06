@@ -76,7 +76,7 @@ export default {
 
 .infobox {
   background-color: white;
-  color: #485550;
+  color: #547a9c;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;
