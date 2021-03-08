@@ -1,13 +1,13 @@
 <template>
   <div class="container3">
-    <div class="secondary containerDrawer">
+    <div class="primary containerDrawer">
       <v-btn to="/" class="backButton">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
     </div>
 
     <div class="containerImg">
-      <v-img alt="Logo UnB" src="../assets/logo.png" contain />
+      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" contain />
     </div>
     <div class="containerAbout">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -66,7 +66,8 @@ export default {
 }
 
 .containerImg {
-  width: 60% !important;
+  width: 70% !important;
+  max-height: 400px !important;
   display: flex;
   flex: 2;
   flex-direction: column;
@@ -76,7 +77,7 @@ export default {
 
 .infobox {
   background-color: white;
-  color: #485550;
+  color: #547a9c;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 20px;

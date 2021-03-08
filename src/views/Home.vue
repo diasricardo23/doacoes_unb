@@ -5,7 +5,13 @@
     </div>
     <div class="containerButtons">
       <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/loginadm">Login Admin</v-btn>
-      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/logindonator">Login Doador</v-btn>
+      <v-btn
+        outlined
+        elevation="0"
+        color="#C5DDF7"
+        class="loginBtn mb-5"
+        to="/logindonator"
+      >Login Doador</v-btn>
       <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/about">Sobre a Ação</v-btn>
     </div>
   </div>
@@ -17,7 +23,7 @@
 
 <style scoped>
 .container1 {
-  background-color: #547A9C;
+  background-color: #547a9c;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -26,9 +32,10 @@
 }
 
 .containerImg {
-  width: 90% !important;
+  width: 80% !important;
+  max-height: 500px !important;
   display: flex;
-  flex: 2;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;

@@ -1,42 +1,6 @@
 <template>
   <div class="containerPage">
-    <div class="primary containerDrawer dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    </div>
-
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-    
+    <SidebarDonator />
     <div class="containerDashboard">
         <div>
             <v-row>
@@ -99,6 +63,7 @@
 </template>
 
 <script>
+import SidebarDonator from '../../components/SidebarDonator.vue'
 import Nav from "../../components/DonatorNavigation.vue"
 import { Donator } from "../../functions/donator.js"
 
@@ -106,6 +71,7 @@ let Don = new Donator()
 // @ is an alias to /src
 export default {
   components: {
+    SidebarDonator,
     Nav
   },
     data: () => ({
