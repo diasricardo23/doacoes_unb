@@ -1,7 +1,7 @@
 <template>
   <div class="container1">
     <div class="containerImg">
-      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" contain />
+      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" contain class="mt-8"/>
     </div>
     <div class="containerButtons">
       <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/loginadm">Login Admin</v-btn>
