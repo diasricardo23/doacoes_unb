@@ -2,6 +2,7 @@
   <div class="containerPage">
     <SidebarDonator />
     <div class="containerDashboard">
+      <div v-if="status.status">
         <div>
             <v-row>
                 <v-col cols="5">
@@ -16,37 +17,7 @@
                 </v-col>
             </v-row>
         </div>
-<!--     
-        <div class="date">
-            <v-menu
-                ref="menu"
-                v-model="menu"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-            >
-                <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                    v-model="date"
-                    label="Data da doação"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                ></v-text-field>
-                </template>
-                <v-date-picker
-                ref="picker"
-                v-model="date"
-                :max="new Date().toISOString().substr(0, 10)"
-                min="1950-01-01"
-                @change="save"
-                ></v-date-picker>
-            </v-menu>
-        </div> -->
-
-    <v-btn rounded @click="doDonation" class="secondary white--text loginBtn mb-4">Doar</v-btn>
+        <v-btn rounded @click="doDonation" class="secondary white--text loginBtn mb-4">Doar</v-btn>
         <v-card
         elevation="2"
         class="aviso"
@@ -56,6 +27,14 @@
         <br><br>
         <v-icon></v-icon>(61) X XXXX-XXXX <br>
         <v-icon></v-icon> xxxxxxxxxxxxxxx@xxxxx.com</v-card>
+      </div>
+      <div v-else>
+        <v-card class="container red lighten-4">
+          Você não poderá realizar doações no momento <br>
+          Estamos fora do período de doações
+        </v-card>
+      </div>
+
     </div>
 
     <Nav/>
@@ -81,9 +60,12 @@ export default {
       menu: false,
       donation: {
         value: null
-      }
+      },
+      status: null
     }),
-    
+    mounted(){
+      this.status_donation()
+    },
     methods: {
       save (date) {
         this.$refs.menu.save(date)
@@ -94,6 +76,11 @@ export default {
       async doDonation(){
         let donation = ( await Don.create_donation(this.donation) )
         console.log(donation)
+      },
+      async status_donation(){
+        let status = (await Don.statusDonation()).data
+        console.log(status)
+        this.status = status
       }
     },
 

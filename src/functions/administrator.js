@@ -188,8 +188,36 @@ export class Administrator {
         })
     }
 
+    deleteDonation(id){ 
+        return axios.delete(`${api_url}/admin/donations/${id}`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
     getDonations(){
         return axios.get(`${api_url}/admin/donations`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    sendReminder(){
+        return axios.get(`${api_url}/admin/donations/reminder`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
@@ -258,6 +286,20 @@ export class Administrator {
         })
     }
 
+    get_logs(){
+        return axios.get(`${api_url}/admin/donations/logs`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
     approveDonation(id){
         return axios.post(`${api_url}admin/donations/approve/${id}`, {
             headers: { Authorization: `Bearer ${this.token}` }
@@ -273,6 +315,48 @@ export class Administrator {
     }
     getBeneficiaryNames(){
         return axios.get(`${api_url}admin/beneficiary/names`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    open_month(){
+        return axios.get(`${api_url}admin/month/open`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    close_month(){
+        return axios.get(`${api_url}admin/month/close`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
+
+    status_month(){
+        return axios.get(`${api_url}admin/month/status`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

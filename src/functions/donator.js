@@ -62,6 +62,20 @@ export class Donator {
             }
         })
     }
+
+    statusDonation(){
+        return axios.get(`${api_url}/donator/donation/status`, {
+            headers: { Authorization: `Bearer ${this.token}` }
+        })
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
     // getAllAdministrators(){
     //     return axios.get(`${api_url}/admin/adm`, {
     //         headers: { Authorization: `Bearer ${this.token}` }

@@ -34,6 +34,34 @@
             </v-card>
         </div>
 
+        <v-card color="#C4C4C4" class="infobox total">
+            <b>SISTEMA DE CONTROLE</b>
+            <v-card-text>
+                    Status da doação:
+                <span class="green" v-if="status_month.status">
+                    Aberta
+                </span>
+                <span class="red" v-else>
+                    Fechada
+                </span>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn @click="sendReminder()"> Lembrar de criar doação </v-btn>
+                <!-- <v-btn> Lembrar de doar </v-btn> -->
+                <v-spacer/>
+                <v-btn class="green" @click="open_month"> Abrir Mês </v-btn>
+                <v-btn class="red lighten-3" @click="close_month"> Fechar Mês </v-btn>
+            </v-card-actions>
+            <v-card-text>
+            <v-data-table
+                :headers="headers"
+                :items="logs"
+                :items-per-page="5"
+                class="elevation-1"
+            ></v-data-table>
+            </v-card-text>
+        </v-card>
+
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO - MÊS</b>
         </v-card>
@@ -70,7 +98,29 @@ export default {
         donators_amount: 0,
         beneficiaries_amount: 0,
         administrators_amount: 0,
-        months: 0
+        months: 0,
+        logs: [],
+        headers: [
+            {
+                text: 'Ação realizada',
+                align: 'start',
+                sortable: false,
+                value: 'action',
+            },
+            {
+                text: 'Afetados',
+                align: 'start',
+                sortable: false,
+                value: "affected"
+            },
+            {
+                text: 'Horário',
+                align: 'start',
+                sortable: false,
+                value: "created_time"
+            }
+        ],
+        status_month: null
     }),
     filters: {
         toReal: function(value){
@@ -88,6 +138,8 @@ export default {
         this.getBeneficiariesQtd()
         this.getAdministratorsQtd()
         this.getMonths()
+        this.getLogs()
+        this.statusMonth()
     },
     methods: {
         async getMonths(){
@@ -107,8 +159,26 @@ export default {
         },
         async searchDonations(month){
             let item = ( await Admin.getDonationsByMonth(month) ).data
+            console.log("teste")
+            console.log(item)
             return item
         },
+        async sendReminder(){
+            let res = ( await Admin.sendReminder() )
+            console.log(res)
+        },
+        async getLogs(){
+            this.logs = (await Admin.get_logs()).data.reverse()
+        },
+        async open_month(){
+            (await Admin.open_month())
+        },
+        async close_month(){
+            (await Admin.close_month())
+        },
+        async statusMonth(){
+            this.status_month = (await Admin.status_month()).data
+        }
     }
 }
 

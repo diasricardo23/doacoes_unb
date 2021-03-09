@@ -249,6 +249,7 @@ export default {
             delete admin['_id']
             delete admin['password']
             let res = await new Administrator().createAdministrator(admin)
+            console.log(res)
             if(res.data.code == 200){
                 window.location.reload()
             }else{

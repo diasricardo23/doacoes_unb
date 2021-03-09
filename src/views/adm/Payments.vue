@@ -78,6 +78,8 @@
                     <b>Data:</b> .............. {{item.created_time | dateToPT}}
                 </div>
                 <v-card-actions>
+                    <v-btn small text color="red darken-4n white--text" @click="deleteDonation(item._id.$oid)"> Deletar </v-btn> - <b class="text-caption">Esta é uma ação definitiva</b>
+                    
                     <v-spacer/>
                     <v-btn color="blue darken-4n white--text"> Enviar </v-btn>
                 </v-card-actions>
@@ -154,6 +156,10 @@ export default {
         this.getBeneficiariosNames()
     },
     methods: {
+        async deleteDonation(id){
+            let res = (await Admin.deleteDonation(id)).data
+            console.log(res)
+        },
         async getBeneficiarios(){
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
         },
