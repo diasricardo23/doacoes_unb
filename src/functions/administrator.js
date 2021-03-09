@@ -328,7 +328,7 @@ export class Administrator {
     }
 
     open_month(){
-        return axios.get(`${api_url}admin/month/open`, {
+        return axios.get(`${api_url}/admin/month/open`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
@@ -342,7 +342,7 @@ export class Administrator {
     }
 
     close_month(){
-        return axios.get(`${api_url}admin/month/close`, {
+        return axios.get(`${api_url}/admin/month/close`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
@@ -356,7 +356,7 @@ export class Administrator {
     }
 
     status_month(){
-        return axios.get(`${api_url}admin/month/status`, {
+        return axios.get(`${api_url}/admin/month/status`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
