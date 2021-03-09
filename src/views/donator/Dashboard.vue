@@ -11,14 +11,14 @@
         </v-card> -->
 
         <v-card class="infobox donations">
-            Sua próxima doação será na data xx/xx/xx no valor de R$: 0,00
+            Sua última doação foi em <strong>XX/XX/XXXX</strong> no valor de <strong>R$: 0,00</strong>
         </v-card>
 
-        <v-card class="infobox donations">
+        <v-card class="infobox donations pa-4">
             Você receberá uma mensagem com os dados para doação. <br/>
-            Ao realizá-la, enviar o comprovante para: <br/>
-            (61) xxxx-xxxx <br/>
-            xxxxxxxx@xxxx.com <br/>
+            Ao realizá-la, enviar o comprovante para: <br/><br/>
+            <strong>(61) xxxx-xxxx <br/>
+            xxxxxxxx@xxxx.com <br/></strong>
         </v-card>
 
         <!-- 
@@ -35,8 +35,8 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn block v-bind="attrs" v-on="on" x-large class="imglink" >
-                      <img alt="Vue logo" src="../../assets/sobre.png" width="30" />
-                      ⠀Sobre o Projeto 
+                      <img alt="Vue logo" src="../../assets/sobre.png" width="30" class="mr-4"/>
+                      Sobre o Projeto 
                     </v-btn>
                   </template>
 
@@ -69,8 +69,8 @@
                     </div>
             
               <div class="ms-16 posicao">
-                <v-btn block x-large class="imglink"><img alt="Vue logo" src="../../assets/money.png" width="40" />
-                 ⠀Nova Doação    
+                <v-btn block x-large class="imglink" to="/donation"><img alt="Vue logo" src="../../assets/money.png" width="40" class="mr-4" />
+                 Nova Doação    
                 </v-btn>
               </div>
             </v-row>
