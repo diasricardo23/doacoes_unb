@@ -3,30 +3,17 @@
     <Sidebar />
 
     <div class="containerDashboard" justify="center">
-      <vue-scroll-snap>
-        <!--<div v-for="bene in beneficiarios">{{bene.beneficiario}}</div> -->
-      </vue-scroll-snap>
 
       <v-row justify="center">
         <v-expansion-panels inset>
-          <v-expansion-panel v-for="(item,i) in 5" :key="i" class="ms-5 mt-3 mb-2">
-            <v-expansion-panel-header>Mês Referente</v-expansion-panel-header>
+          <v-expansion-panel v-for="item in months" :key="item" class="ms-5 mt-3 mb-2">
+            <v-expansion-panel-header>{{item}}</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-list subheader>
-                <v-subheader>Doação</v-subheader>
-                <v-list-item v-for="donation in donations" :key="donation._id.$oid">
-                  <v-list-item-content>
-                    <v-list-item-title v-text="donation.donator_data.name"></v-list-item-title>
-                    <v-list-item-subtitle v-text="donation.value"></v-list-item-subtitle>
-                    <v-btn
-                      class="ma-1"
-                      color="blue darken-4n white--text"
-                      plain
-                      @click="approve(donation._id.$oid)"
-                    >Aprovar</v-btn>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>Total Arrecadado: R$ 00.000,00
+                <v-subheader>Doações</v-subheader>
+                <admin-display-donation 
+                :data="item"/>
+              </v-list>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -42,6 +29,7 @@ import VueScrollSnap from "vue-scroll-snap";
 import Sidebar from "../../components/Sidebar.vue";
 import Nav from "../../components/AdminNavigation.vue";
 import { Administrator } from "../../functions/administrator";
+import AdminDisplayDonation from "../../components/AdminDisplayDonation.vue";
 // @ is an alias to /src
 
 let Admin = new Administrator();
@@ -49,18 +37,14 @@ let Admin = new Administrator();
 export default {
   components: {
     Sidebar,
-    Nav
+    Nav,
+    AdminDisplayDonation
   },
   data: () => ({
     drawer: false,
     group: null,
-
-    donations: [
-      // {
-      //    active:true,
-      //    value:"150,00"
-      // }
-    ]
+    months:[],
+    donations: []
   }),
   filters: {
     toReal: function(value) {
@@ -77,16 +61,17 @@ export default {
   },
   async mounted() {
     this.getDonations();
+    this.getMonths();
   },
   methods: {
     async getDonations() {
       this.donations = (await Admin.getDonations()).data.reverse();
     },
-    async approve(id) {
-      await Admin.approveDonation(id);
-    }
+    async getMonths(){
+      this.months = ( (await Admin.getDonationsMonths()).data )
+    },
   }
-};
+  };
 </script>
 
 <style scoped>

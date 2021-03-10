@@ -301,7 +301,7 @@ export class Administrator {
     }
 
     approveDonation(id){
-        return axios.post(`${api_url}admin/donations/approve/${id}`, {
+        return axios.post(`${api_url}/admin/donations/approve/${id}`,{}, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
@@ -315,7 +315,7 @@ export class Administrator {
     }
 
     getBeneficiaryNames(){
-        return axios.get(`${api_url}admin/beneficiaries`, {
+        return axios.get(`${api_url}/admin/beneficiaries`, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {
@@ -328,7 +328,7 @@ export class Administrator {
         })
     }
     editDonation(id, data){
-        return axios.patch(`${api_url}admin/donations/${id}`, data, {
+        return axios.patch(`${api_url}/admin/donations/${id}`, data, {
             headers: { Authorization: `Bearer ${this.token}` }
         })
         .then(res => {

@@ -60,23 +60,6 @@
                 <div>
                     <b>Valor Real</b> .............. {{ item.real_value | toReal }}
                 </div>
-                <div>
-                    <b>Beneficiário: -------------- 
-                        <v-list-item>
-                        <v-combobox 
-                            :items="teste"
-                            item-text="name"
-                            multiple
-                            small-chips
-                            v-model="selectedBeneficiary"
-                        /> 
-                        </v-list-item>
-                        <div v-for='(beneficiario,index) in selectedBeneficiary' :key="index">
-                            {{beneficiario}}
-                            <v-text-field v-model='beneficiario.value'></v-text-field>
-                        </div>
-                    </b>
-                </div>
                
                 <div>
                     <b>Telefone</b> .............. {{item.donator_data.phone}} 
@@ -84,12 +67,11 @@
                 <div>
                     <b>Data:</b> .............. {{item.created_time | dateToPT}}
                 </div>
-                <v-card-actions>
-                    <v-btn small text color="red darken-4n white--text" @click="deleteDonation(item._id.$oid)"> Deletar </v-btn> - <b class="text-caption">Esta é uma ação definitiva</b>
-                    
-                    <v-spacer/>
-                    <v-btn color="blue darken-4n white--text" @click="updateDonation(item._id.$oid,selectedBeneficiary)"> Enviar </v-btn>
-                </v-card-actions>
+                 <div>
+                    <b>Beneficiário: 
+                        <admin-display-beneficiary :data="item"/>
+                    </b>
+                </div>
             </v-card>
             </div>
         </div>
@@ -104,6 +86,7 @@
     import Sidebar from '../../components/Sidebar.vue'
     import Nav from "../../components/AdminNavigation.vue"
     import { Administrator } from "../../functions/administrator.js"
+    import AdminDisplayBeneficiary from "../../components/AdminDisplayBeneficiary.vue"
 // @ is an alias to /src
 
 let Admin = new Administrator()
@@ -111,7 +94,8 @@ let Admin = new Administrator()
 export default {
     components:{
         Sidebar,
-        Nav
+        Nav,
+        AdminDisplayBeneficiary
     },
     data: () => ({
         drawer: false,
@@ -175,7 +159,9 @@ export default {
             this.teste=(await Admin.getBeneficiaryNames()).data
            
             this.teste.forEach(element => {
-                this.teste_combobox.push(element.name)
+                this.teste_combobox.push({
+                    "_id":element._id.$oid, 
+                    "name":element.name})
             }); 
             console.log('***res.data',this.teste)
         },
