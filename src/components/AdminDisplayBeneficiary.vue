@@ -16,7 +16,7 @@
             </div>
     </div>
     <v-card-actions>
-        <v-btn small text color="red darken-4n white--text" @click="deleteDonation(data._id.$oid)"> Deletar </v-btn> - <b class="text-caption">Esta é uma ação definitiva</b>
+        <v-btn small depressed color="error" @click="deleteDonation(data._id.$oid)"> Deletar </v-btn> - <b class="text-caption">Esta é uma ação definitiva</b>
         <v-spacer/>
         <v-btn color="blue darken-4n white--text" @click="updateDonation(data._id.$oid,selectedBeneficiary)"> Enviar </v-btn>
     </v-card-actions>

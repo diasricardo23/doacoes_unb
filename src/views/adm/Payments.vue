@@ -20,35 +20,35 @@
             </div>
             <br>
             <div v-show="select">
+
             <div class="containerMenu">
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
-                Valor Total / Mês
-                <div>
-                    <h1>{{menu.total}}</h1>
-                </div>
-            </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
-                Quantidade de Beneficiários
-                <div>
-                    <h1>{{menu.beneficiarios}}</h1>
-                </div>
-            </v-card>
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
+                    Valor Total / Mês
+                    <div>
+                        <h1>{{menu.total}}</h1>
+                    </div>
+                </v-card>
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                    Quantidade de Beneficiários
+                    <div>
+                        <h1>{{menu.beneficiarios}}</h1>
+                    </div>
+                </v-card>
 
-            
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
-                Valor médio / Beneficiário
-                <div>
-                    <h1>{{menu.total / menu.beneficiarios}}</h1>
-                </div>
-            </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
-                Parcial
-                <div>
-                    <h1>{{menu.parcial}}</h1>
-                </div>
-            </v-card>
-
-        </div>
+                
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                    Valor médio / Beneficiário
+                    <div>
+                        <h1>{{menu.total / menu.beneficiarios}}</h1>
+                    </div>
+                </v-card>
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
+                    Parcial
+                    <div>
+                        <h1>{{menu.parcial}}</h1>
+                    </div>
+                </v-card>
+            </div>
 
             <v-card class="infobox total infoboxdata " v-for="item in donations" :key="item._id.$oid">
                 <div>
@@ -237,7 +237,7 @@ export default {
     .containerMenu {
         width: 85%;
         display: flex;
-        justify-content: space-between;
+        margin: 0 auto;
     }
 
     .infobox {
@@ -250,7 +250,8 @@ export default {
     }
 
     .total{
-        width: 88%;
+        width: 80%;
+        margin: 3rem auto;
     }
 
     .totalCard {
@@ -261,29 +262,12 @@ export default {
     }
 
     .infoNumbers {
-        width: 40%;
+        width: 20%;
+        margin: 0px 5px;
         text-align: center;
     }
     .menuIcon {
     color: white;
   }
-
-    .infonum1 {
-        margin-right: 10px;
-        margin-left: 35px;
-    }
-
-    .infonum2 {
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-    .infonum3 {
-        margin-left: 10px;
-    }
-
-    .infoboxdata {
-        margin-left: 30px;
-    }
 
 </style>

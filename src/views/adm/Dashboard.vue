@@ -14,19 +14,19 @@
         </v-card>
 
         <div class="containerMenu">
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
+            <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Administradores
                 <div>
                     <h1>{{administrators_amount}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
+            <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Doadores
                 <div>
                     <h1>{{donators_amount}}</h1>
                 </div>
             </v-card>
-            <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ma-5">
+            <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Beneficiários
                 <div>
                     <h1>{{beneficiaries_amount}}</h1>
@@ -34,7 +34,7 @@
             </v-card>
         </div>
 
-        <v-card color="#C4C4C4" class="infobox total">
+        <v-card contain color="#C4C4C4" class="infobox total">
             <b>SISTEMA DE CONTROLE</b>
             <v-card-text>
                     Status da doação:
@@ -45,11 +45,9 @@
                     Fechada
                 </span>
             </v-card-text>
-            <v-card-actions>
+            <v-card-actions class="alinhamento">
                 <v-btn @click="sendReminder()"> Lembrar de criar doação </v-btn>
-                <!-- <v-btn> Lembrar de doar </v-btn> -->
-                <v-spacer/>
-                <v-btn class="green" @click="open_month"> Abrir Mês </v-btn>
+                <v-btn class="green ma-3" @click="open_month"> Abrir Mês </v-btn>
                 <v-btn class="red lighten-3" @click="close_month"> Fechar Mês </v-btn>
             </v-card-actions>
             <v-card-text>
@@ -208,6 +206,7 @@ export default {
         width: 85%;
         display: flex;
         justify-content: space-between;
+        flex-shrink: inherit;
     }
 
     .infobox {
@@ -230,11 +229,15 @@ export default {
 
 
     .infoNumbers {
-        width: 40%;
+        width: 30%;
         text-align: center;
     }
   .menuIcon{
     color: white;
+  }
+
+  .alinhamento {
+      flex-direction: column;
   }
 
 
