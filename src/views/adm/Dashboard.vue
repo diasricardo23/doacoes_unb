@@ -62,14 +62,14 @@
             </v-card-text>
         </v-card>
 
-        <v-card color="#C4C4C4" class="infobox total" >
+        <!-- <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO - MÊS</b>
         </v-card>
 
         <v-card color="#C4C4C4" class="infobox total" v-for="(item, index) in months" :key="index">
-            <b>{{item}}</b><br>
+            <b>{{months}}</b><br>
             {{ searchDonations(item) }}
-        </v-card>
+        </v-card> -->
 
     </div>
     
@@ -132,7 +132,7 @@ export default {
             this.drawer = false
         },
     },
-    mounted(){
+    async mounted(){
         this.getDonationsQtd()
         this.getDonatorsQtd()
         this.getBeneficiariesQtd()
