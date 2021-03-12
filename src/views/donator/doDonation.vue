@@ -78,10 +78,10 @@ export default {
       async doDonation(){
         let donation = ( await Don.create_donation(this.donation) )
          if(donation.data.code == 200){
-          alert("Doação realizada com sucesso");
+          alert("DOAÇÃO REALIZADA COM SUCESSO");
           window.location.reload()   
          }else{
-          alert("Ocorreu algum problema na doação. Favor, checar se o valor da doação é múltiplo de 50.")}
+          alert("OCORREU ALGUM PROBLEMA NA DOAÇÃO. FAVOR, CHECAR SE O VALOR DA DOAÇÃO É MÚLTIPLO DE 50.")}
         console.log(donation)
       },
       async status_donation(){
