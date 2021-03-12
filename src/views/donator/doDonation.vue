@@ -5,19 +5,21 @@
       <div v-if="status.status">
         <div>
             <v-row>
-                <v-col cols="5">
-                    <v-subheader light>Doação (valores multiplos de 50)</v-subheader>
-                </v-col>
-                <v-col cols="7">
+                <v-subheader>Doação (valores multiplos de 50)</v-subheader>
+                
                     <v-text-field
                     v-model="donation.value"
                     label="Valor"
                     prefix="R$"
                     ></v-text-field>
-                </v-col>
+                
             </v-row>
         </div>
+
+        <div align="center" justify="space-around">
         <v-btn rounded @click="doDonation" class="secondary white--text loginBtn mb-4">Doar</v-btn>
+        </div>
+        
         <v-card
         elevation="2"
         class="aviso"
@@ -75,6 +77,11 @@ export default {
       },
       async doDonation(){
         let donation = ( await Don.create_donation(this.donation) )
+         if(donation.data.code == 200){
+          alert("Doação realizada com sucesso");
+          window.location.reload()   
+         }else{
+          alert("Ocorreu algum problema na doação. Favor, checar se o valor da doação é múltiplo de 50.")}
         console.log(donation)
       },
       async status_donation(){
