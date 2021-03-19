@@ -1,24 +1,17 @@
 <template>
   <div>
     <div >
-        <v-list-item>
-            <v-combobox 
-                :items="beneficiarios_combobox"
-                item-text="name"
-                multiple
-                small-chips
-                v-model="selectedBeneficiary"
-            /> 
+        <v-list>
+            <v-list-item v-for="(beneficiary,index) in data.beneficiary_data" :key="index">
+            <v-list-item-title v-text="beneficiary.name"></v-list-item-title>
+            <v-list-item-subtitle v-text="beneficiary.value"></v-list-item-subtitle>
             </v-list-item>
-            
-            <div v-for='(beneficiario,index) in selectedBeneficiary' :key="index">
-                <v-text-field :label="`Valor para ${beneficiario.name}`" v-model='beneficiario.value'></v-text-field>
-            </div>
+        </v-list>
     </div>
     <v-card-actions>
         <v-btn small depressed color="error" @click="deleteDonation(data._id.$oid)"> Deletar </v-btn> - <b class="text-caption">Esta é uma ação definitiva</b>
         <v-spacer/>
-        <v-btn color="blue darken-4n white--text" @click="updateDonation(data._id.$oid,selectedBeneficiary)"> Enviar </v-btn>
+        <v-btn color="blue darken-4n white--text" @click="updateDonation(data._id.$oid,data.beneficiary_data)"> Enviar </v-btn>
     </v-card-actions>
   </div>
 </template>
@@ -33,8 +26,7 @@ export default {
         donations:[],
         total:"",
         beneficiarios:[],
-        beneficiarios_combobox:[],
-        selectedBeneficiary:[]
+        
     }),
     async mounted(){
         this.getBeneficiariosNames()
