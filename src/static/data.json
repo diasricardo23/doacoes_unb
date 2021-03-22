@@ -1,0 +1,16 @@
+{
+    "payments": [
+        {"name": "Michael Jordan", "value": "R$50,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"},
+        {"name": "Keanus Reeves", "value": "R$150,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"},
+        {"name": "Cristiano Ronaldo", "value": "R$250,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"},
+        {"name": "Katy Perry", "value": "R$200,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"},
+        {"name": "Anitta", "value": "R$500,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"},
+        {"name": "Angel Romero", "value": "R$50,00", "phone": "(00) 00000-0000", "email": "email@gmail.com"}
+    ],
+    "history": [
+        {"beneficiario": "Michael Jordan", "value": "R$250,00", "date": "25/12/2020"},
+        {"beneficiario": "Michael Jordan", "value": "R$500,00", "date": "28/12/2020"},
+        {"beneficiario": "Michael Jordan", "value": "R$50,00", "date": "12/07/2020"},
+        {"beneficiario": "Michael Jordan", "value": "R$300,00", "date": "25/12/2020"}
+    ]
+}

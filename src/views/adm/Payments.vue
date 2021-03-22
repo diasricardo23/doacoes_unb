@@ -1,163 +1,206 @@
 <template>
-  <div class="container listview">
-      <Sidebar/>
-    
+    <div class="containerPage listview">
+    <Sidebar/>
     <div class="containerDashboard">
         <div class="listScroll">
         <div class="listStyle">
-
-           <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
+            <div class="infobox total">
+                <v-menu>
+                    Meses
+                </v-menu>
+                <v-select
+                    v-model="select"
+                    :items="months"
+                    item-text="name"
+                    return-object
+                />
+            <v-btn @click="searchDonations()">
+                Pesquisar
+            </v-btn>
             </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+            <br>
+            <div v-show="select">
+
+            <div class="containerMenu">
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
+                    Valor Total / Mês
+                    <div>
+                        <h1>{{menu.total}}</h1>
+                    </div>
+                </v-card>
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                    Quantidade de Beneficiários
+                    <div>
+                        <h1>{{menu.beneficiarios}}</h1>
+                    </div>
+                </v-card>
+
+                
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                    Valor médio / Beneficiário
+                    <div>
+                        <h1>{{menu.total / menu.beneficiarios}}</h1>
+                    </div>
+                </v-card>
+                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
+                    Parcial
+                    <div>
+                        <h1>{{menu.parcial}}</h1>
+                    </div>
+                </v-card>
+            </div>
+
+            <v-card class="infobox total infoboxdata " v-for="item in donations" :key="item._id.$oid">
+                <div>
+                    <b>Doador</b> .............. {{ item.donator_data.name }}
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Valor Informado</b> .............. {{ item.value | toReal}}
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Valor Real</b> .............. {{ item.real_value | toReal }}
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+               
+                <div>
+                    <b>Telefone</b> .............. {{item.donator_data.phone}} 
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                <div>
+                    <b>Data:</b> .............. {{item.created_time | dateToPT}}
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
+                 <div>
+                    <b>Beneficiário: 
+                        <admin-display-beneficiary :data="item"/>
+                    </b>
                 </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
+            </v-card>
             </div>
-           </v-card>
-
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
-
-                      <v-card class="infobox total" >
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-            <div>
-                <b>(61)xxxx-xxxx</b>
-                </div>
-            <div>
-                <b>Fulano Cilcano .............. R$00,00</b>
-            </div>
-           </v-card>
         </div>
         </div>
     </div>
     
-    <v-bottom-navigation v-model="value">
-        <v-btn to="/dashboard">
-            <span>Home</span>
-            <v-icon>mdi-home</v-icon>
-        </v-btn>
-
-        <v-btn to="/donation">
-            <span>Doar</span>
-            <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn to="/history">
-            <span>Histórico</span>
-            <v-icon>mdi-history</v-icon>
-        </v-btn>
-
-        <v-btn to="/profile">
-            <span>Perfil</span>
-            <v-icon>mdi-account</v-icon>
-        </v-btn>
-    </v-bottom-navigation>
+    <Nav/>
   </div>
 </template>
 
 <script>
     import Sidebar from '../../components/Sidebar.vue'
+    import Nav from "../../components/AdminNavigation.vue"
+    import { Administrator } from "../../functions/administrator.js"
+    import AdminDisplayBeneficiary from "../../components/AdminDisplayBeneficiary.vue"
 // @ is an alias to /src
 
+let Admin = new Administrator()
 
 export default {
     components:{
-        Sidebar
+        Sidebar,
+        Nav,
+        AdminDisplayBeneficiary
     },
     data: () => ({
-      drawer: false,
-      group: null
+        drawer: false,
+        group: null,
+        donations: [],
+        months: [],
+        select: null,
+        is_selected: false,
+        menu: {
+            total: 0,
+            beneficiarios: 0,
+            valor_medio: 0,
+            parcial: 0,
+        },
+        teste_combobox: [ ],
+        teste:[ ],
+        selectedBeneficiary:[ ]
     }),
-
-    watch: {
-      group () {
-        this.drawer = false
-      },
+    filters: {
+        toReal: function(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
+        },
+        dateToPT(value){
+                var data = new Date(value)
+                let dia  = data.getDate().toString()
+                let diaF = (dia.length == 1) ? '0'+dia : dia
+                let mes  = (data.getMonth()+1).toString() //+1 pois no getMonth Janeiro começa com zero.
+                let mesF = (mes.length == 1) ? '0'+mes : mes
+                let anoF = data.getFullYear()
+                let hora = data.getHours()
+                let minuto = data.getMinutes()
+            return diaF+"/"+mesF+"/"+anoF+"  "+hora+":"+minuto;
+        }
     },
-  }
+    watch: {
+        group () {
+            this.drawer = false
+        },
+        combo_model (val) {
+            if (val.length > 5) {
+            this.$nextTick(() => this.model.pop())
+            }
+        },
+
+    },
+    async mounted() {
+        // this.getDonations()
+        this.getMonths()
+        this.getBeneficiarios()
+        this.getBeneficiariosNames()
+    },
+    methods: {
+        async deleteDonation(id){
+            let res = (await Admin.deleteDonation(id)).data
+            console.log(res)
+        },
+        async getBeneficiarios(){
+            this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
+        },
+        async getBeneficiariosNames(){
+            this.teste=(await Admin.getBeneficiaryNames()).data
+           
+            this.teste.forEach(element => {
+                this.teste_combobox.push({
+                    "_id":element._id.$oid, 
+                    "name":element.name})
+            }); 
+            console.log('***res.data',this.teste)
+        },
+        async getMonths(){
+            this.months = ( (await Admin.getDonationsMonths()).data )
+        },
+        async totalByMonth(){
+            this.menu.total = (await Admin.getTotalByMonth(this.select)).data
+        },
+        // async getDonations(){
+        //     this.donations = ( await Admin.getDonations() ).data.reverse()
+        // },
+        async searchDonations(){
+            this.donations = ( await Admin.getDonationsByMonth(this.select) ).data
+            this.totalByMonth()
+        },
+        async updateDonation(id, data){
+            let aux = {beneficiary_data:data}
+            await Admin.editDonation(id,aux)
+        }
+    }
+}
 
 </script>
 
-<style>
+<style scoped>
+    .containerPage {
+
+        background-color: #DADADA;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
     .container {
+
+
         background-color: #DADADA;
         display: flex;
         flex: 1;
@@ -194,7 +237,7 @@ export default {
     .containerMenu {
         width: 85%;
         display: flex;
-        justify-content: space-between;
+        margin: 0 auto;
     }
 
     .infobox {
@@ -207,23 +250,24 @@ export default {
     }
 
     .total{
-        width: 88%;
+        width: 80%;
+        margin: 3rem auto;
     }
 
-    .totalCard{
+    .totalCard {
         background-color: #717171;
     }
-    .listview{
+    .listview {
         overflow: none;
     }
 
     .infoNumbers {
-        width: 40%;
+        width: 20%;
+        margin: 0px 5px;
         text-align: center;
     }
-  .menuIcon{
+    .menuIcon {
     color: white;
   }
-  
 
 </style>

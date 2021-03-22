@@ -1,89 +1,81 @@
 <template>
-  <div class="container listview">
+  <div class="containerPage listview">
     <Sidebar />
 
-    <div class="containerDashboard">
-      <div class="listScroll">
-        <div class="listStyle">
-          <v-card class="infobox months">
-            <div>
-              <h1>Janeiro 2021<br><br></h1>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-          </v-card>
-                    <v-card class="infobox months">
-            <div>
-              <h1>Fevereiro 2021<br><br></h1>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-            <div>
-              <b>Total arrecadado ......... R$xxxxxx,xx</b>
-            </div>
-          </v-card>
-        </div>
-      </div>
+    <div class="containerDashboard" justify="center">
+
+      <v-row justify="center">
+        <v-expansion-panels inset>
+          <v-expansion-panel v-for="item in months" :key="item" class="ms-5 mt-3 mb-2">
+            <v-expansion-panel-header>{{item}}</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-list subheader>
+                <v-subheader>Doações</v-subheader>
+                <admin-display-donation 
+                :data="item"/>
+              </v-list>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-row>
     </div>
 
-    <v-bottom-navigation v-model="value">
-      <v-btn to="/dashboard">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/donation">
-        <span>Doar</span>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn to="/history">
-        <span>Histórico</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn to="/profile">
-        <span>Perfil</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
+    <Nav />
   </div>
 </template>
 
 <script>
+import VueScrollSnap from "vue-scroll-snap";
 import Sidebar from "../../components/Sidebar.vue";
+import Nav from "../../components/AdminNavigation.vue";
+import { Administrator } from "../../functions/administrator";
+import AdminDisplayDonation from "../../components/AdminDisplayDonation.vue";
 // @ is an alias to /src
+
+let Admin = new Administrator();
 
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    Nav,
+    AdminDisplayDonation
   },
   data: () => ({
     drawer: false,
-    group: null
+    group: null,
+    months:[],
+    donations: []
   }),
-
+  filters: {
+    toReal: function(value) {
+      return value.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+  },
   watch: {
     group() {
       this.drawer = false;
     }
+  },
+  async mounted() {
+    this.getDonations();
+    this.getMonths();
+  },
+  methods: {
+    async getDonations() {
+      this.donations = (await Admin.getDonations()).data.reverse();
+    },
+    async getMonths(){
+      this.months = ( (await Admin.getDonationsMonths()).data )
+    },
   }
-};
+  };
 </script>
 
-<style>
-.container {
+<style scoped>
+.containerPage {
   background-color: #dadada;
   display: flex;
   flex: 1;
@@ -94,20 +86,20 @@ export default {
 
 .listStyle {
   margin-top: 10%;
-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .listScroll {
-    width:80%;
-  height: 60%;
+  width: 88%;
+  height: 70%;
   display: block;
   overflow-y: scroll;
   position: fixed;
   margin-top: 5%;
 }
+
 .containerDashboard {
   width: 100% !important;
   display: flex;
@@ -148,7 +140,18 @@ export default {
   width: 40%;
   text-align: center;
 }
+
 .menuIcon {
   color: white;
+}
+
+.item {
+  /* Set the minimum height of the items to be the same as the height of the scroll-snap-container.*/
+  min-height: 500px;
+}
+
+.scroll-snap-container {
+  height: 500px;
+  width: 500px;
 }
 </style>

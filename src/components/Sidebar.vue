@@ -1,82 +1,85 @@
-   <template>
-    <div class="encapsulate">
+<template>
+  <div class="encapsulate">
     <div class="primary containerDrawerElement dark" >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text"></v-app-bar-nav-icon>
     </div>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      left
-      temporary
-    >
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+    <v-navigation-drawer v-model="drawer" absolute left temporary>
+      <v-list nav dense>
+        
+        <v-list-item-group v-model="group" active-class="blue--text text--accent-4" >
+          <v-list-item link to="/admin/admin">
+            <v-list-item-icon>
+              <v-icon>mdi-account-cog</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>ADMINISTRADORES</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
+          <v-list-item link to="/admin/doadores">
+            <v-list-item-icon>
+              <v-icon>mdi-account-cash</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>DOADORES</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
+          <v-list-item link to="/admin/listabeneficiarios">
+            <v-list-item-icon>
+              <v-icon>mdi-account-group</v-icon>
+            </v-list-item-icon>
 
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title>BENEFICIÁRIOS</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
+            
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    </div>
-    </template>
+  </div>
+</template>
 
-    <script>
+<script>
 // @ is an alias to /src
 export default {
-    name:'sidebar',
-    data: () => ({
-      drawer: false,
-      group: null,
-    }),
+name:'sidebar',
+data: () => ({
+  drawer: false,
+  group: null,
+}),
 
-    watch: {
-      group () {
-        this.drawer = false
-      },
-    },
-  }
+watch: {
+  group () {
+    this.drawer = false
+  },
+},
+}
 
 </script>
-<style>
-    .containerDrawerElement {
-        width: 100%;
-        height: 100%!important;
-        display: flex;
-        align-items: center;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-    }
+<style scoped>
+.containerDrawerElement {
+    width: 100%;
+    height: 100%!important;
+    display: flex;
+    align-items: center;
+}
 
-    .containerDashboard {
-        width: 100% !important;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 30px;
-        padding-top: 10px;
-    }
-    .encapsulate{
-        width: 100%;
-        height: 40px;
-    }
+.containerDashboard {
+    width: 100% !important;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+.encapsulate{
+    width: 100%;
+    height: 40px;
+}
 </style>
