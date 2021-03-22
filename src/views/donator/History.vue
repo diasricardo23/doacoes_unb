@@ -12,11 +12,67 @@
           <v-badge v-else color="grey" />
           <v-badge v-if="item.aproved" color="green" />
         </div>
-        <div class="right">
+        <div class="right" style="width: 40%">
           <p class="text-subtitle-2 font-weight-thin mt-1">{{ item._id.$oid }}</p>
           <h3>Criação: {{ item.created_time | format_date }}</h3>
           <h4>Data de validação: dd/mm/yyyy</h4>
-          <h4>Beneficiário: {{ item.beneficiary_id }}</h4>
+          <div v-for="benef_data in item.beneficiary_data" :key="benef_data.id">
+            <div v-if="benef_data.name != null">
+              <div v-if="innerWidth > 520" class="d-flex justify-space-between" style="width: 100%">
+                <div class="d-flex">
+                  <h4 class="mr-2">Beneficiário: </h4> 
+                  <span>{{benef_data.name}}</span>
+                  
+                </div>
+                <div v-if="benef_data.bank != null" class="mr-3">
+                  <div>
+                    <h5>Banco</h5>
+                    {{benef_data.bank.bank}}
+                  </div>
+                  <div>
+                    <h5>Conta</h5>
+                    {{benef_data.bank.account}}
+                  </div>
+                  <div>
+                    <h5>Agência</h5>
+                    {{benef_data.bank.agency}}
+                  </div>
+                  <div>
+                    <h5>Chave PIX</h5>
+                    {{(benef_data.bank.pix_type)}} {{benef_data.bank.pix}}
+                  </div>
+                </div>
+              </div>
+
+              <div v-else style="width: 100%">
+                <div class="d-flex">
+                  <h4 class="mr-2">Beneficiário: </h4> 
+                  <span>{{benef_data.name}}</span>
+                  
+                </div>
+                <div class="mr-3">
+                  <div>
+                    <h5>Banco</h5>
+                    {{benef_data.bank.bank}}
+                  </div>
+                  <div>
+                    <h5>Conta</h5>
+                    {{benef_data.bank.account}}
+                  </div>
+                  <div>
+                    <h5>Agência</h5>
+                    {{benef_data.bank.agency}}
+                  </div>
+                  <div>
+                    <h5>Chave PIX</h5>
+                    {{(benef_data.bank.pix_type)}} {{benef_data.bank.pix}}
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+          
           <h4>Valor: {{ item.value }}</h4>
           <v-card-actions>
             <v-btn
@@ -51,6 +107,7 @@ export default {
   data: () => ({
     drawer: false,
     group: null,
+    innerWidth: window.innerWidth,
     donations: [],
     user: JSON.parse(localStorage.getItem("userData"))
       ? JSON.parse(localStorage.getItem("userData"))
@@ -177,5 +234,9 @@ export default {
 
 .imglink {
   width: 100%;
+}
+
+.teste {
+  border: 1px solid black;
 }
 </style>

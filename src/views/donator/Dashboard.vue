@@ -21,6 +21,29 @@
             xxxxxxxx@xxxx.com <br/></strong>
         </v-card>
 
+        <v-card color="#C4C4C4" class="infobox total" >
+            <b>TOTAL DOADO</b>
+            <v-row>
+                <v-col offset-md="5"><h1><span>{{ data.collected_amount | toReal }}</span></h1></v-col>
+            </v-row>
+        </v-card>
+
+        <div class="containerMenu">
+            
+            <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
+                Quantidade de Doadores
+                <div>
+                    <h1>{{data.donator_amount}}</h1>
+                </div>
+            </v-card>
+            <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
+                Quantidade de Beneficiários
+                <div>
+                    <h1>{{data.beneficiary_amount}}</h1>
+                </div>
+            </v-card>
+        </div>
+
         <!-- 
           ---------------------------------------ALA DOS BOTÕES----------------------------------------          
          -->
@@ -89,6 +112,9 @@
 import SidebarDonator from '../../components/SidebarDonator.vue'
 import BottomTabs from '../../components/BottomTabs.vue'
 import Nav from "../../components/DonatorNavigation.vue"
+import { Administrator } from "../../functions/administrator.js"
+
+let Admin = new Administrator();
 // @ is an alias to /src
 export default {
     components:{
@@ -100,19 +126,31 @@ export default {
       drawer: false,
       group: null,
       dialog: false,
-      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" }
+      user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" },
+      data: {}
     }),
-
+    filters: {
+        toReal: function(value){
+            return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
+        }
+    },
     watch: {
       group () {
         this.drawer = false
       },
     },
+    async mounted(){
+        this.getPublicInfo()
+    },
     methods: {
       logout(){
         localStorage.removeItem('userData')
         this.$router.push('/');
-      }
+      },
+      async getPublicInfo(){
+        this.data = ( (await Admin.public_info()).data )
+        console.log(data);
+      },
     }
   }
 

@@ -382,4 +382,16 @@ export class Administrator {
             }
         })
     }
+
+    public_info(){
+        return axios.get(`${api_url}/public`)
+        .then(res => {
+            return res
+        })
+        .catch(err => {
+            if(err.response && err.response.status == 401){
+                return { status: 401 }
+            }
+        })
+    }
 }
