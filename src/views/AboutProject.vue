@@ -15,21 +15,103 @@
       aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
+    <doughnut-chart v-if="loaded" :data="doughnutData" :options="doughnutOptions"></doughnut-chart>
+    <bar-chart v-if="loaded" :data="barData" :options="barOptions"></bar-chart>
+    <br/>
+    
   </div>
+
+  
 </template>
 
 <script>
 // @ is an alias to /src
+import DoughnutChart from '../components/DoughnutChart.js'
+import BarChart from '../components/BarChart.js'
+import { Administrator } from "../functions/administrator.js"
+let Admin = new Administrator();
+
 export default {
+  components: { DoughnutChart, BarChart },
   data: () => ({
+    data: {},
+    test: [],
+    loaded: false,
     drawer: false,
-    group: null
+    group: null,
+    doughnutOptions: {
+      hoverBorderWidth: 20
+    },
+    doughnutData: null,
+    barOptions: {
+      hoverBorderWidth: 20
+    },
+    barData: null
   }),
 
   watch: {
     group() {
       this.drawer = false;
     }
+  },
+
+  methods: {
+    
+  },
+
+  async mounted () {
+  
+    this.loaded = false
+    try {
+      this.data = ( (await Admin.public_info()).data )
+    } catch (e) {
+      console.error(e)
+    }
+    
+    this.loaded = true
+
+    let dates = [];
+    let beneficiaryAmounts = [];
+    let donatorAmounts = [];
+    let collectedAmounts = [];
+
+    let i;
+
+    for(i = 0; i < this.data.length; i++) {
+      dates.push(this.data[i].date);
+      beneficiaryAmounts.push(this.data[i].beneficiary_amount);
+      donatorAmounts.push(this.data[i].donator_amount);
+      collectedAmounts.push(this.data[i].collectedAmounts);
+    }
+
+    this.doughnutData = {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: dates,
+        datasets: [
+          {
+            label: "Data One",
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            // data: [this.data[0].beneficiary_amount,this.data[0].beneficiary_amount,this.data[0].beneficiary_amount]
+            data: beneficiaryAmounts
+          }
+        ]
+      }
+
+    this.barData = {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: dates,
+        datasets: [
+          {
+            label: "Doades Ativos",
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            // data: [this.data[0].beneficiary_amount,this.data[0].beneficiary_amount,this.data[0].beneficiary_amount]
+            data: donatorAmounts
+          }
+        ]
+      }
+
   }
 };
 </script>
