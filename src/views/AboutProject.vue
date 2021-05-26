@@ -37,23 +37,26 @@
 
     </div>
 
-    <div style="display: flex; margin-bottom: 20px">
-      <div style="margin-right: 100px">
-        <h5>Beneficiários Ativos</h5>
-        <doughnut-chart v-if="loaded" :data="doughnutData" :options="doughnutOptions"></doughnut-chart>
+    <div style="display: flex; flex-direction: column; padding: 20px; justify-content: center; align-items: center">
+      <div v-if="loaded" :style="windowWidth > 700 ? { display: 'flex', marginBottom: 20 } : ''">
+        <div class="text-center mb-5">
+          <h5>Beneficiários Ativos</h5>
+          <doughnut-chart v-if="loaded" :data="doughnutData" :options="doughnutOptions"></doughnut-chart>
+        </div>
+
+        <div class="text-center mb-5">
+          <h5>Doadores Ativos</h5>
+          <bar-chart v-if="loaded" :data="barData" :options="barOptions"></bar-chart>
+        </div>
+
       </div>
 
-      <div>
-        <h5>Doadores Ativos</h5>
-        <bar-chart v-if="loaded" :data="barData" :options="barOptions"></bar-chart>
+      <div v-if="loaded" class="text-center mb-5">
+        <h5>Valores Coletados</h5>
+        <bar-chart v-if="loaded" :data="bar2Data" :options="bar2Options"></bar-chart>
       </div>
-
     </div>
-
-    <div>
-      <h5>Valores Coletados</h5>
-      <bar-chart v-if="loaded" :data="bar2Data" :options="bar2Options"></bar-chart>
-    </div>
+    
     
     <br/>
     
@@ -77,16 +80,21 @@ export default {
     loaded: false,
     drawer: false,
     group: null,
+    windowHeight: window.innerHeight,
+    windowWidth: window.innerWidth,
     doughnutOptions: {
-      hoverBorderWidth: 20
+      hoverBorderWidth: 20,
+      responsive: true,
     },
     doughnutData: null,
     barOptions: {
-      hoverBorderWidth: 20
+      hoverBorderWidth: 20,
+      responsive: true,
     },
     barData: null,
     bar2Options: {
-      hoverBorderWidth: 20
+      hoverBorderWidth: 20,
+      responsive: true,
     },
     bar2Data: null
   }),
