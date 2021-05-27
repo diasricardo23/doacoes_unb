@@ -10,6 +10,9 @@ export default {
   name: "App",
   data: () => ({
     
-  })
+  }),
+  created() {
+    document.title = 'Dissemine Amor'
+  },
 };
 </script>
