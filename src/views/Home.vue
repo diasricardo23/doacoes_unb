@@ -1,28 +1,29 @@
 <template>
   <div class="container1">
     <div class="containerImg">
-      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" max-height="350" class="mt-5"/>
+      <v-img alt="Logo UnB" src="../assets/LogoSemFundo_CorAlternativa.png" max-height="330" class="mt-3"/>
     </div>
     <div class="containerButtons">
-      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/loginadm">Login Admin</v-btn>
+      <v-btn outlined elevation="0" :small="windowHeight < 670" color="#C5DDF7" class="loginBtn mb-5" to="/loginadm">Login Admin</v-btn>
       <v-btn
+        :small="windowHeight < 670"
         outlined
         elevation="0"
         color="#C5DDF7"
         class="loginBtn mb-5"
         to="/logindonator"
       >Login Doador</v-btn>
-      <v-btn outlined elevation="0" color="#C5DDF7" class="loginBtn mb-5" to="/about">Sobre a Ação</v-btn>
+      <v-btn outlined elevation="0" :small="windowHeight < 670" color="#C5DDF7" class="loginBtn mb-5" to="/about">Sobre a Ação</v-btn>
     </div>
     <div class="footer" dark padless absolute>
       <v-card flat tile color="#547a9c" class="lighten-1 white--text text-center main_footer">
-        <v-card-text class="white--text pt-0 text_footer">
-          <p class="text-subtitle-1">Este projeto foi desenvolvido pelo  <a class="a" href="http://www.uiot.org">laboratório UIoT</a> e financiado pelo Laboratório de Tomata de Decisão <a class="a" href="http://redes.unb.br">Latitude</a></p>
+        <v-card-text class="white--text pt-0 pb-0 text_footer">
+          <small class="footer-text">Este projeto foi desenvolvido pelo  <a class="a" href="http://www.uiot.org">laboratório UIoT</a> e financiado pelo Laboratório de Tomata de Decisão <a class="a" href="http://redes.unb.br">Latitude</a></small>
         </v-card-text>
 
         <v-divider></v-divider>
 
-        <v-card-text class="white--text">
+        <v-card-text class="white--text footer-text pa-2">
           {{ new Date().getFullYear() }} — <strong>Dissemine Amor</strong>
         </v-card-text>
       </v-card>
@@ -32,6 +33,17 @@
 
 <script>
 // @ is an alias to /src
+export default {
+    data: () => ({
+      windowHeight: window.innerHeight,
+    }),
+
+    watch: {
+      group () {
+        this.drawer = false
+      },
+    },
+  }
 </script>
 
 <style scoped>
@@ -45,6 +57,10 @@
   bottom: 0;
 }
 
+.footer-text {
+  font-size: 12px !important;
+}
+
 .container1 {
   background-color: #547a9c;
   display: flex;
@@ -56,7 +72,7 @@
 
 .containerImg {
   width: 80% !important;
-  max-height: 500px !important;
+  max-height: 450px !important;
   display: flex;
   flex: 1;
   flex-direction: column;

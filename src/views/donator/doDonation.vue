@@ -2,9 +2,9 @@
   <div class="containerPage">
     <SidebarDonator />
     <div class="containerDashboard">
-      <div v-if="status.status">
-        <div>
-            <v-row>
+      <div v-if="status != undefined && status.status">
+        <div style="width: 90%" class="d-flex flex-column align-center">
+            
                 <v-subheader>Doação (valores multiplos de 50)</v-subheader>
                 
                     <v-text-field
@@ -13,7 +13,7 @@
                     prefix="R$"
                     ></v-text-field>
                 
-            </v-row>
+            
         </div>
 
         <div align="center" justify="space-around">

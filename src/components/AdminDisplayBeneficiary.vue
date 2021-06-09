@@ -4,7 +4,7 @@
         <v-list>
             <v-list-item v-for="(beneficiary,index) in data.beneficiary_data" :key="index">
             <v-list-item-title v-text="beneficiary.name"></v-list-item-title>
-            <v-list-item-subtitle v-text="beneficiary.value"></v-list-item-subtitle>
+            <v-list-item-subtitle v-if="beneficiary.value != undefined" v-text="$options.filters.toReal(beneficiary.value)"></v-list-item-subtitle>
             </v-list-item>
         </v-list>
     </div>
@@ -28,8 +28,16 @@ export default {
         beneficiarios:[],
         
     }),
+    filters: {
+      toReal: function(value) {
+        return value.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL"
+        });
+      }
+    },
     async mounted(){
-        this.getBeneficiariosNames()
+        // this.getBeneficiariosNames()
     },
     methods:{
          async deleteDonation(id){
@@ -39,16 +47,16 @@ export default {
         async getBeneficiarios(){
             this.menu.beneficiarios = ( (await Admin.getAllBeneficiaries()).data ).length
         },
-        async getBeneficiariosNames(){
-            this.beneficiarios=(await Admin.getBeneficiaryNames()).data
+        // async getBeneficiariosNames(){
+        //     this.beneficiarios=(await Admin.getBeneficiaryNames()).data
            
-            this.beneficiarios.forEach(element => {
-                this.beneficiarios_combobox.push({
-                    "_id":element._id.$oid, 
-                    "name":element.name})
-            }); 
-            console.log('***res.data',this.teste)
-        },
+        //     this.beneficiarios.forEach(element => {
+        //         this.beneficiarios_combobox.push({
+        //             "_id":element._id.$oid, 
+        //             "name":element.name})
+        //     }); 
+        //     console.log('***res.data',this.teste)
+        // },
         async getMonths(){
             this.months = ( (await Admin.getDonationsMonths()).data )
         },

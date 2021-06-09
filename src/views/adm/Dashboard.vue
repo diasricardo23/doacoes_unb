@@ -9,11 +9,11 @@
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL ARRECADADO</b>
             <v-row>
-                <v-col offset-md="5"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
+                <v-col class="text-center"><h1><span>{{ donations_amount | toReal }}</span></h1></v-col>
             </v-row>
         </v-card>
 
-        <div class="containerMenu">
+        <div class="containerMenu" v-if="windowWidth > 540">
             <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Administradores
                 <div>
@@ -33,19 +33,41 @@
                 </div>
             </v-card>
         </div>
-
+        <div class="containerMenuMobile" v-else>
+            <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                <div style="width: 80%" class="text-left">Quantidade de Administradores</div>
+                <h3>{{administrators_amount}}</h3>
+            </v-card>
+            <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                <div style="width: 80%" class="text-left">Quantidade de Doadores</div>
+                <h3>{{donators_amount}}</h3>
+            </v-card>
+            <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                <div style="width: 80%" class="text-left">Quantidade de Beneficiários</div>
+                <h3>{{beneficiaries_amount}}</h3>
+            </v-card>
+        </div>
+        
         <v-card contain color="#C4C4C4" class="infobox total">
             <b>SISTEMA DE CONTROLE</b>
             <v-card-text>
+                <div v-if="status_month != null">
                     Status da doação:
-                <span class="green" v-if="status_month.status">
-                    Aberta
-                </span>
-                <span class="red" v-else>
-                    Fechada
-                </span>
+                    <span class="green pa-1" v-if="status_month.status">
+                        Aberta
+                    </span>
+                    <span class="red pa-1" v-else>
+                        Fechada
+                    </span>
+                </div>
+                <div v-else>
+                    Status da doação:
+                    <span class="pa-1">
+                        -
+                    </span>
+                </div>
             </v-card-text>
-            <v-card-actions class="alinhamento">
+            <v-card-actions :class="windowWidth > 540 ? 'alinhamento' : 'alinhamentoMobile'">
                 <v-btn @click="sendReminder()"> Lembrar de criar doação </v-btn>
                 <v-btn class="green ma-3" @click="open_month"> Abrir Mês </v-btn>
                 <v-btn class="red lighten-3" @click="close_month"> Fechar Mês </v-btn>
@@ -55,8 +77,13 @@
                 :headers="headers"
                 :items="logs"
                 :items-per-page="5"
+                :footer-props="{ itemsPerPageText: 'Items por Página', disableItemsPerPage: windowWidth < 540 }"
                 class="elevation-1"
-            ></v-data-table>
+            >
+                <template v-slot:item.created_time="{ item }">
+                    {{item.created_time | moment}}
+                </template>
+            </v-data-table>
             </v-card-text>
         </v-card>
 
@@ -78,6 +105,7 @@
 <script>
     import Sidebar from '../../components/Sidebar.vue'
     import Nav from "../../components/AdminNavigation.vue"
+    import moment from 'moment'
     import { Administrator } from "../../functions/administrator.js"
 
     let Admin = new Administrator();
@@ -118,12 +146,17 @@ export default {
                 value: "created_time"
             }
         ],
-        status_month: null
+        status_month: null,
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth,
     }),
     filters: {
         toReal: function(value){
             return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
-        }
+        },
+        moment: function (date) {
+            return moment(date).format('DD/MM/yy HH:mm:ss');
+        },
     },
     watch: {
         group () {
@@ -131,13 +164,13 @@ export default {
         },
     },
     async mounted(){
-        this.getDonationsQtd()
-        this.getDonatorsQtd()
-        this.getBeneficiariesQtd()
-        this.getAdministratorsQtd()
-        this.getMonths()
-        this.getLogs()
-        this.statusMonth()
+        await this.getDonationsQtd()
+        await this.getDonatorsQtd()
+        await this.getBeneficiariesQtd()
+        await this.getAdministratorsQtd()
+        await this.getMonths()
+        await this.getLogs()
+        await this.statusMonth()
     },
     methods: {
         async getMonths(){
@@ -145,6 +178,7 @@ export default {
         },
         async getDonationsQtd(){
             this.donations_amount = ( await Admin.getDonationsAmount() ).data
+            console.log(this.donations_amount)
         },
         async getDonatorsQtd(){
             this.donators_amount = ( await Admin.getAllDonators() ).data.length
@@ -175,7 +209,10 @@ export default {
             (await Admin.close_month())
         },
         async statusMonth(){
+            console.log('teste1')
             this.status_month = (await Admin.status_month()).data
+            console.log('teste2')
+            console.log(this.status_month)
         }
     }
 }
@@ -209,6 +246,15 @@ export default {
         flex-shrink: inherit;
     }
 
+    .containerMenuMobile {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: inherit;
+    }
+
     .infobox {
         background-color: white;
         color: #485550;
@@ -216,6 +262,15 @@ export default {
         border-radius: 10px;
         margin-bottom: 20px;
         margin-top: 20px;
+    }
+
+    .infoboxMobile {
+        background-color: white;
+        color: #485550;
+        padding: 5px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
 
     .total{
@@ -237,6 +292,11 @@ export default {
   }
 
   .alinhamento {
+    display: flex;
+  }
+
+  .alinhamentoMobile {
+      display: flex;
       flex-direction: column;
   }
 

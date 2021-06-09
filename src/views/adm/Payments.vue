@@ -3,78 +3,96 @@
     <Sidebar/>
     <div class="containerDashboard">
         <div class="listScroll">
-        <div class="listStyle">
-            <div class="infobox total">
-                <v-menu>
-                    Meses
-                </v-menu>
-                <v-select
-                    v-model="select"
-                    :items="months"
-                    item-text="name"
-                    return-object
-                />
-            <v-btn @click="searchDonations()">
-                Pesquisar
-            </v-btn>
-            </div>
-            <br>
-            <div v-show="select">
-
-            <div class="containerMenu">
-                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
-                    Valor Total / Mês
-                    <div>
-                        <h1>{{menu.total}}</h1>
+            <div class="listStyle">
+                <div style="width: 100%">
+                    <div class="infobox total">
+                        <v-menu>
+                            Meses
+                        </v-menu>
+                        <v-select
+                            v-model="select"
+                            :items="months"
+                            item-text="name"
+                            return-object
+                        />
+                        <v-btn @click="searchDonations()">
+                            Pesquisar
+                        </v-btn>
                     </div>
-                </v-card>
-                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
-                    Quantidade de Beneficiários
-                    <div>
-                        <h1>{{menu.beneficiarios}}</h1>
-                    </div>
-                </v-card>
-
+                </div>
                 
-                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
-                    Valor médio / Beneficiário
-                    <div>
-                        <h1>{{menu.total / menu.beneficiarios}}</h1>
-                    </div>
-                </v-card>
-                <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
-                    Parcial
-                    <div>
-                        <h1>{{menu.parcial}}</h1>
-                    </div>
-                </v-card>
-            </div>
+                <div v-show="select">
 
-            <v-card class="infobox total infoboxdata " v-for="item in donations" :key="item._id.$oid">
-                <div>
-                    <b>Doador</b> .............. {{ item.donator_data.name }}
+                    <div class="containerMenu" v-if="windowWidth > 540">
+                        <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum1">
+                            Valor Total / Mês
+                            <div>
+                                <h2>{{menu.total | toReal}}</h2>
+                            </div>
+                        </v-card>
+                        <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                            Quantidade de Beneficiários
+                            <div>
+                                <h2>{{menu.beneficiarios}}</h2>
+                            </div>
+                        </v-card>
+                        <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum2">
+                            Valor médio / Beneficiário
+                            <div>
+                                <h2>{{menu.total / menu.beneficiarios | toReal}}</h2>
+                            </div>
+                        </v-card>
+                        <v-card color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 infonum3">
+                            Parcial
+                            <div>
+                                <h2>{{menu.parcial | toReal}}</h2>
+                            </div>
+                        </v-card>
+                    </div>
+                    <div class="containerMenuMobile" v-else>
+                        <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                            <div style="width: 80%" class="text-left">Valor Total / Mês</div>
+                            <h3>{{menu.total | toReal}}</h3>
+                        </v-card>
+                        <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                            <div style="width: 80%" class="text-left">Quantidade de Beneficiários</div>
+                            <h3>{{menu.beneficiarios}}</h3>
+                        </v-card>
+                        <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                            <div style="width: 80%" class="text-left">Valor médio / Beneficiário</div>
+                            <h3>{{menu.total / menu.beneficiarios | toReal}}</h3>
+                        </v-card>
+                        <v-card contain color="#f2f2f2" class="infoboxMobile infoNumbers grey--text text--darken-1 d-flex justify-space-around align-center" style="width: 90%">
+                            <div style="width: 80%" class="text-left">Parcial</div>
+                            <h3>{{menu.parcial | toReal}}</h3>
+                        </v-card>
+                    </div>
+
+                    <v-card class="infobox total infoboxdata " v-for="item in donations" :key="item._id.$oid">
+                        <div>
+                            <b>Doador</b> .............. {{ item.donator_data.name }}
+                        </div>
+                        <div>
+                            <b>Valor Informado</b> .............. {{ item.value | toReal}}
+                        </div>
+                        <div>
+                            <b>Valor Real</b> .............. {{ item.real_value | toReal }}
+                        </div>
+                    
+                        <div>
+                            <b>Telefone</b> .............. {{item.donator_data.phone}} 
+                        </div>
+                        <div>
+                            <b>Data:</b> .............. {{item.created_time | moment}}
+                        </div>
+                        <div>
+                            <b>Beneficiário: 
+                                <admin-display-beneficiary :data="item"/>
+                            </b>
+                        </div>
+                    </v-card>
                 </div>
-                <div>
-                    <b>Valor Informado</b> .............. {{ item.value | toReal}}
-                </div>
-                <div>
-                    <b>Valor Real</b> .............. {{ item.real_value | toReal }}
-                </div>
-               
-                <div>
-                    <b>Telefone</b> .............. {{item.donator_data.phone}} 
-                </div>
-                <div>
-                    <b>Data:</b> .............. {{item.created_time | dateToPT}}
-                </div>
-                 <div>
-                    <b>Beneficiário: 
-                        <admin-display-beneficiary :data="item"/>
-                    </b>
-                </div>
-            </v-card>
             </div>
-        </div>
         </div>
     </div>
     
@@ -85,6 +103,7 @@
 <script>
     import Sidebar from '../../components/Sidebar.vue'
     import Nav from "../../components/AdminNavigation.vue"
+    import moment from 'moment'
     import { Administrator } from "../../functions/administrator.js"
     import AdminDisplayBeneficiary from "../../components/AdminDisplayBeneficiary.vue"
 // @ is an alias to /src
@@ -112,22 +131,19 @@ export default {
         },
         teste_combobox: [ ],
         teste:[ ],
-        selectedBeneficiary:[ ]
+        selectedBeneficiary:[ ],
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth,
     }),
     filters: {
         toReal: function(value){
             return value.toLocaleString('pt-br', { style: 'currency', currency: "BRL" })
         },
-        dateToPT(value){
-                var data = new Date(value)
-                let dia  = data.getDate().toString()
-                let diaF = (dia.length == 1) ? '0'+dia : dia
-                let mes  = (data.getMonth()+1).toString() //+1 pois no getMonth Janeiro começa com zero.
-                let mesF = (mes.length == 1) ? '0'+mes : mes
-                let anoF = data.getFullYear()
-                let hora = data.getHours()
-                let minuto = data.getMinutes()
-            return diaF+"/"+mesF+"/"+anoF+"  "+hora+":"+minuto;
+        moment: function (date) {
+            return moment(date).format('DD/MM/yy HH:mm:ss');
+        },
+        monthReadable: function(date) {
+            return moment(date).locale('pt-br').format('MMMM/YYYY');
         }
     },
     watch: {
@@ -176,6 +192,7 @@ export default {
         // },
         async searchDonations(){
             this.donations = ( await Admin.getDonationsByMonth(this.select) ).data
+            console.log(this.donations)
             this.totalByMonth()
         },
         async updateDonation(id, data){
@@ -210,20 +227,23 @@ export default {
     }
 
     .listStyle{
-        margin-top: 10%;
-
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        /* flex-wrap: wrap; */
+        /* justify-content: center; */
+        width: 100%;
     }
 
     .listScroll{
-        height: 60%;
-        display:block;
+        width: 90vw;
+        height: 80vh;
+        display:flex;
+        flex: 1;
         overflow-y:scroll;
         position:fixed;
-        margin-top:5%;
+        margin-top:10px;
     }
+    
     .containerDashboard {
         width: 100% !important;
         display: flex;
@@ -240,18 +260,33 @@ export default {
         margin: 0 auto;
     }
 
+    .containerMenuMobile {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: inherit;
+    }
+
     .infobox {
         background-color: white;
         color: #485550;
         padding: 10px;
         border-radius: 10px;
-        margin-bottom: 20px;
-        margin-top: 20px;
+    }
+
+    .infoboxMobile {
+        background-color: white;
+        color: #485550;
+        padding: 5px;
+        border-radius: 10px;
+        margin-bottom: 5px !important;
+        margin-top: 5px !important;
     }
 
     .total{
-        width: 80%;
-        margin: 3rem auto;
+        width: 100%;
     }
 
     .totalCard {

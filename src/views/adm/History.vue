@@ -3,21 +3,19 @@
     <Sidebar />
 
     <div class="containerDashboard" justify="center">
-
-      <v-row justify="center">
-        <v-expansion-panels inset>
-          <v-expansion-panel v-for="item in months" :key="item" class="ms-5 mt-3 mb-2">
-            <v-expansion-panel-header>{{item}}</v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-list subheader>
-                <v-subheader>Doações</v-subheader>
-                <admin-display-donation 
-                :data="item"/>
-              </v-list>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </v-row>
+        <div style="width: 90%" class="pr-2">
+          <v-expansion-panels>
+            <v-expansion-panel v-for="(item, index) in months" :key="index" class="ms-5 mt-3 mb-2">
+              <v-expansion-panel-header>{{item | moment}}</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-list subheader>
+                  <v-subheader class="pl-0">Doações</v-subheader>
+                  <admin-display-donation :data="item"/>
+                </v-list>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </div>
     </div>
 
     <Nav />
@@ -28,6 +26,7 @@
 import VueScrollSnap from "vue-scroll-snap";
 import Sidebar from "../../components/Sidebar.vue";
 import Nav from "../../components/AdminNavigation.vue";
+import moment from 'moment'
 import { Administrator } from "../../functions/administrator";
 import AdminDisplayDonation from "../../components/AdminDisplayDonation.vue";
 // @ is an alias to /src
@@ -52,7 +51,10 @@ export default {
         style: "currency",
         currency: "BRL"
       });
-    }
+    },
+    moment: function (date) {
+        return moment(date).locale('pt-br').format('MMMM/YYYY');
+    },
   },
   watch: {
     group() {

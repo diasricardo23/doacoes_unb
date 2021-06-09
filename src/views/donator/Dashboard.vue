@@ -1,6 +1,6 @@
 <template>
   <div class="containerPage">
-    <SidebarDonator />
+    <!-- <SidebarDonator /> -->
     <div class="containerDashboard">
         <div class="donations mt-2">
             <b>Olá, {{user.name}}</b>
@@ -24,7 +24,7 @@
         <v-card color="#C4C4C4" class="infobox total" >
             <b>TOTAL DOADO</b>
             <v-row>
-                <v-col offset-md="5"><h1><span>{{ data.collected_amount | toReal }}</span></h1></v-col>
+                <v-col offset-md="5"><h1><span>{{ collected_amount | toReal}}</span></h1></v-col>
             </v-row>
         </v-card>
 
@@ -33,13 +33,13 @@
             <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Doadores
                 <div>
-                    <h1>{{data.donator_amount}}</h1>
+                    <h1>{{donator_amount}}</h1>
                 </div>
             </v-card>
             <v-card contain color="#f2f2f2" class="infobox infoNumbers grey--text text--darken-1 ">
                 Quantidade de Beneficiários
                 <div>
-                    <h1>{{data.beneficiary_amount}}</h1>
+                    <h1>{{beneficiary_amount}}</h1>
                 </div>
             </v-card>
         </div>
@@ -48,9 +48,9 @@
           ---------------------------------------ALA DOS BOTÕES----------------------------------------          
          -->
 
-        <div> 
-          <template>            
-            <v-row align="center" justify="space-around">              
+        <div style="width: 80%"> 
+          <!-- <template>             -->
+            <div :class="windowWidth > 540 ? 'd-flex justify-space-around' : 'flex-column'">              
               <div class="button">
                 <v-dialog
                   v-model="dialog"
@@ -91,14 +91,14 @@
                       </v-dialog>
                     </div>
             
-              <div class="ms-16 posicao">
+              <div class="button">
                 <v-btn block x-large class="imglink" to="/donation"><img alt="Vue logo" src="../../assets/money.png" width="40" class="mr-4" />
                  Nova Doação    
                 </v-btn>
               </div>
-            </v-row>
+            </div>
 
-          </template>
+          <!-- </template> -->
         </div>
 
 
@@ -126,8 +126,15 @@ export default {
       drawer: false,
       group: null,
       dialog: false,
+      loaded: false,
       user: JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData')) : { name: "Txt default" },
-      data: {}
+      data: {},
+      collected_amount: 0,
+      donator_amount: 0,
+      beneficiary_amount: 0,
+      info: {},
+      windowHeight: window.innerHeight,
+      windowWidth: window.innerWidth,
     }),
     filters: {
         toReal: function(value){
@@ -140,7 +147,7 @@ export default {
       },
     },
     async mounted(){
-        this.getPublicInfo()
+      await this.getPublicInfo()
     },
     methods: {
       logout(){
@@ -148,8 +155,25 @@ export default {
         this.$router.push('/');
       },
       async getPublicInfo(){
-        this.data = ( (await Admin.public_info()).data )
-        console.log(data);
+        this.loaded = false;
+        // await this.getPublicInfo()
+        try {
+            this.info = ( (await Admin.public_info()).data )
+            // this.data = {test: 'oi', valu: 'eitcha'}
+            console.log(this.data);
+
+            this.info.map(inf => {
+              this.collected_amount += inf.collected_amount
+              this.donator_amount += inf.donator_amount
+              this.beneficiary_amount += inf.beneficiary_amount
+            })
+          } catch (e) {
+            console.error(e)
+          }
+
+        this.loaded = true;
+        
+        
       },
     }
   }
@@ -196,8 +220,8 @@ export default {
         color: #485550;
         padding: 10px;
         border-radius: 10px;
-        margin-bottom: 20px;
-        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
 
     .donations {
@@ -224,8 +248,8 @@ export default {
     }
 
     .button {
-        padding-bottom: 25px;
-        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-top: 10px;
     }
     
     .containerButtons {

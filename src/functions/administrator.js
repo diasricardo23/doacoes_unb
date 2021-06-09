@@ -386,6 +386,7 @@ export class Administrator {
     public_info(){
         return axios.get(`${api_url}/public`)
         .then(res => {
+            console.log(res)
             return res
         })
         .catch(err => {

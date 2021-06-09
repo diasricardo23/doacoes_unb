@@ -37,23 +37,23 @@
 
     </div>
 
-    <div style="display: flex; flex-direction: column; padding: 20px; justify-content: center; align-items: center">
+    <div style="display: flex; flex-direction: column; padding: 20px; justify-content: center; align-items: center;">
       <div v-if="loaded" :style="windowWidth > 700 ? { display: 'flex', marginBottom: 20 } : ''">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5" style="max-width: 90vw">
           <h5>Beneficiários Ativos</h5>
-          <doughnut-chart v-if="loaded" :data="doughnutData" :options="doughnutOptions"></doughnut-chart>
+          <doughnut-chart v-if="loaded" :data="doughnutData" ></doughnut-chart>
         </div>
 
-        <div class="text-center mb-5">
+        <div class="text-center mb-5" style="max-width: 90vw">
           <h5>Doadores Ativos</h5>
-          <bar-chart v-if="loaded" :data="barData" :options="barOptions"></bar-chart>
+          <bar-chart v-if="loaded" :data="barData" ></bar-chart>
         </div>
 
       </div>
 
-      <div v-if="loaded" class="text-center mb-5">
+      <div v-if="loaded" class="text-center mb-5" style="max-width: 90vw">
         <h5>Valores Coletados</h5>
-        <bar-chart v-if="loaded" :data="bar2Data" :options="bar2Options"></bar-chart>
+        <bar-chart v-if="loaded" :data="bar2Data" ></bar-chart>
       </div>
     </div>
     
@@ -70,31 +70,35 @@
 import DoughnutChart from '../components/DoughnutChart.js'
 import BarChart from '../components/BarChart.js'
 import { Administrator } from "../functions/administrator.js"
+import moment from 'moment'
+
 let Admin = new Administrator();
 
 export default {
   components: { DoughnutChart, BarChart },
   data: () => ({
     data: {},
-    test: [],
     loaded: false,
     drawer: false,
     group: null,
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
     doughnutOptions: {
-      hoverBorderWidth: 20,
+      // hoverBorderWidth: 20,
       responsive: true,
+      maintainAspectRatio: false
     },
     doughnutData: null,
     barOptions: {
-      hoverBorderWidth: 20,
+      // hoverBorderWidth: 20,
       responsive: true,
+      maintainAspectRatio: false
     },
     barData: null,
     bar2Options: {
-      hoverBorderWidth: 20,
+      // hoverBorderWidth: 20,
       responsive: true,
+      maintainAspectRatio: false
     },
     bar2Data: null
   }),
@@ -117,6 +121,8 @@ export default {
     } catch (e) {
       console.error(e)
     }
+
+    console.log(this.data)
     
     this.loaded = true
 
@@ -128,7 +134,7 @@ export default {
     let i;
 
     for(i = 0; i < this.data.length; i++) {
-      dates.push(this.data[i].date);
+      dates.push(moment(this.data[i].date).locale('pt-br').format('MMMM/YYYY'));
       beneficiaryAmounts.push(this.data[i].beneficiary_amount);
       donatorAmounts.push(this.data[i].donator_amount);
       collectedAmounts.push(this.data[i].collected_amount);
